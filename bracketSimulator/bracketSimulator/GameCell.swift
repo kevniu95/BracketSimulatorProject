@@ -16,8 +16,9 @@ class GameCell{
     private(set) var yPos: CGFloat
     private(set) var teamName: String
     private(set) var teamSeed: String
+    private(set) var gameLocations: [gameLocation]
     
-    init(idNum: Int, referenceScrollView: UIScrollView){
+    init(idNum: Int, referenceScrollView: UIScrollView, gameLocations: [gameLocation]){
         id = idNum
         cellImage = UIStackView()
         refScroll = referenceScrollView
@@ -25,50 +26,56 @@ class GameCell{
         yPos = 0
         teamName = ""
         teamSeed = ""
-        self.establishImageFrame()
+        self.gameLocations = gameLocations
+        self.initiatePosition()
+//        self.establishImageFrame()
         self.fillCellImage()
     }
     
-    func fillCellImage(){
-        cellImage = initStackObject(teamName: "Virginia", teamSeed: "1")
-    }
-    
-    func switchTeamName(){
-        let teamLabel = self.cellImage.arrangedSubviews[1] as? UILabel
-        guard let teamLabel = teamLabel else {
-            return
+    func initiatePosition(){
+        for gameLocation in self.gameLocations{
+            if self.id == gameLocation.id{
+                self.xPos = CGFloat(gameLocation.x)
+                self.yPos = CGFloat(gameLocation.y)
+            }
         }
-        teamLabel.text = "University of Virginia"
     }
     
-    func establishImageFrame(){
-        xPos = self.determineX()
-        yPos = self.determineY()
-//        self.cellImage.frame = CGRect(x: 40, y: 40, width: 240,
-//                                      height: 25 )
-//        print(self.cellImage.superview)
-//        for subView in self.cellImage.arrangedSubviews{
-//            ifSub
+    func fillCellImage(){
+        cellImage = initStackObject(teamName: "Unnamed", teamSeed: "17")
+    }
+    
+//    func switchTeamName(){
+//        let teamLabel = self.cellImage.arrangedSubviews[1] as? UILabel
+//        guard let teamLabel = teamLabel else {
+//            return
 //        }
-    }
+//        teamLabel.text = "University of Virginia"
+//    }
     
-    func determineX() -> CGFloat{
-        let returnX = self.refScroll.center.x * CGFloat(self.id)
-        return returnX
-    }
+//    func establishImageFrame(){
+//        xPos = self.determineX()
+//        yPos = self.determineY()
+////        self.cellImage.frame = CGRect(x: 40, y: 40, width: 240,
+////                                      height: 25 )
+////        print(self.cellImage.superview)
+////        for subView in self.cellImage.arrangedSubviews{
+////            ifSub
+////        }
+//    }
     
-    func determineY() -> CGFloat{
-        let returnY = self.refScroll.center.x * CGFloat(self.id)
-        return returnY
-    }
-     
+//    func pullGames(){
+//        let a = csv(data: "gameCellPositions.csv")
+//        print(a)
+//    }
+
     func initStackObject(teamName: String, teamSeed: String) -> UIStackView{
         let newStackView = UIStackView()
         let bars = initBarsImage()
         let teamName = initStackLabel(teamName: teamName)
         let teamSeed = initStackSeed(seed: teamSeed)
         
-        newStackView.frame.origin = CGPoint(x: 73.0, y: 369)
+        newStackView.frame.origin = CGPoint(x: self.xPos, y: self.yPos)
         newStackView.frame.size.width = CGFloat(210)
         newStackView.frame.size.height = CGFloat(30)
         newStackView.backgroundColor = UIColor.opaqueSeparator
@@ -83,7 +90,6 @@ class GameCell{
         return newStackView
     }
     
-    
     func initBarsImage()-> UIImageView{
         let bracketImageView = UIImageView()
         bracketImageView.frame.size.height = 5
@@ -92,7 +98,6 @@ class GameCell{
         bracketImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
         return bracketImageView
     }
-    
     
     func initStackLabel(teamName: String)-> UILabel{
         let bracketImageView = UILabel()
@@ -112,5 +117,37 @@ class GameCell{
         bracketImageView.font = UIFont(name:"HelveticaNeue-Bold", size: 16)
         return bracketImageView
     }
-    
 }
+
+//
+//private(set) var binaryId: String
+//
+//func determineX() -> CGFloat{
+//    let returnX = self.refScroll.center.x * CGFloat(self.id)
+//    return returnX
+//}
+//
+//func determineY() -> CGFloat{
+//    let returnY = self.refScroll.center.x * CGFloat(self.id)
+//    return returnY
+//}
+
+//
+//
+//func setBinaryId(){
+//    let tmpStr = String(id, radix: 2)
+//    self.binaryId = pad(string: tmpStr, toSize: 6)
+//}
+//
+//
+//
+//func pad(string : String, toSize: Int) -> String {
+//  var padded = string
+//  for _ in 0..<(toSize - string.count) {
+//    padded = "0" + padded
+//  }
+//    return padded
+//}
+
+//binaryId = ""
+//self.setBinaryId()

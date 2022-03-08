@@ -12,13 +12,14 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     let bracketFrameScaler = 3.0
     var gameCells = [GameCell]()
+    var gameLocations = [gameLocation]()
         
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         initiateScrollView()
-        
-        initiateGameCells()
+        gameLocations = convertGameLocations()
+        initiateGameCells(gameLocations: gameLocations)
     }
     
             
@@ -47,15 +48,18 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate {
         return bracketImageView
     }
 
-    func initiateGameCells(){
-        for ind in 1...1{
-            let currGameCell = GameCell(idNum: ind, referenceScrollView: scrollView)
+    func initiateGameCells(gameLocations: [gameLocation]){
+        for ind in 1...128{
+            let currGameCell = GameCell(idNum: ind, referenceScrollView: scrollView, gameLocations: gameLocations)
             gameCells.append(currGameCell)
         }
         for cell in gameCells{
-
             scrollView.addSubview(cell.cellImage)
-            print(cell.cellImage.frame.origin)
+            print(cell.cellImage.frame)
+            print(cell.xPos)
+//            print(cell.cellImage.frame.origin)
+//            print(cell.binaryId)
+//            cell.pullGames()
 //            print(cell.cellImage.frame)
 
 //            addSubview(cell.cellImage)
@@ -66,8 +70,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate {
         }
 
     }
-
-
+    
     func addBracketImage(bracketImageView: UIImageView){
         scrollView.addSubview(bracketImageView)
     }
