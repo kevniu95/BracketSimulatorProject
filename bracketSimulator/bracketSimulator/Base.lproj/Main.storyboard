@@ -18,45 +18,6 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" minimumZoomScale="0.10000000000000001" maximumZoomScale="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="6fz-vh-Hnk">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
-                                <subviews>
-                                    <stackView contentMode="scaleToFill" ambiguous="YES" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="zHj-MO-a3y">
-                                        <rect key="frame" x="73" y="339" width="240" height="25"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzw-wg-cDW">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="25" id="QKj-6s-yth"/>
-                                                </constraints>
-                                                <color key="tintColor" systemColor="secondaryLabelColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="line.3.horizontal" catalog="system"/>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="TeamName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOi-JO-yzp">
-                                                <rect key="frame" x="38" y="0.0" width="164" height="25"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="1" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwu-tY-mEB">
-                                                <rect key="frame" x="215" y="0.0" width="7.5" height="25"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1j-oL-QZj">
-                                                <rect key="frame" x="235.5" y="0.0" width="4.5" height="25"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="E1b-tG-lO7"/>
-                                            <constraint firstAttribute="height" constant="25" id="c2B-Dp-U6F"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
                                 <viewLayoutGuide key="contentLayoutGuide" id="PSr-3Y-cPp"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Jxj-9d-xMS"/>
                             </scrollView>
@@ -64,17 +25,15 @@
                         <viewLayoutGuide key="safeArea" id="T1a-H0-Wor"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6fz-vh-Hnk" firstAttribute="centerX" secondItem="L8V-e3-GoC" secondAttribute="centerX" id="8EW-CG-FHL"/>
-                            <constraint firstItem="6fz-vh-Hnk" firstAttribute="top" secondItem="T1a-H0-Wor" secondAttribute="top" id="CF0-iA-mh1"/>
-                            <constraint firstAttribute="bottom" secondItem="6fz-vh-Hnk" secondAttribute="bottom" id="QbG-wK-ULp"/>
-                            <constraint firstItem="6fz-vh-Hnk" firstAttribute="leading" secondItem="L8V-e3-GoC" secondAttribute="leading" id="USy-zM-lvn"/>
-                            <constraint firstAttribute="trailing" secondItem="6fz-vh-Hnk" secondAttribute="trailing" id="ht2-Po-MGF"/>
+                            <constraint firstItem="6fz-vh-Hnk" firstAttribute="leading" secondItem="L8V-e3-GoC" secondAttribute="leading" id="16W-e7-q4l"/>
+                            <constraint firstAttribute="trailing" secondItem="6fz-vh-Hnk" secondAttribute="trailing" id="2Hj-It-q4Y"/>
+                            <constraint firstAttribute="bottom" secondItem="6fz-vh-Hnk" secondAttribute="bottom" id="Es8-RM-KFB"/>
+                            <constraint firstItem="6fz-vh-Hnk" firstAttribute="top" secondItem="T1a-H0-Wor" secondAttribute="top" id="TB3-0P-aZQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="New Entry" id="DFN-pT-eRt"/>
                     <connections>
                         <outlet property="scrollView" destination="6fz-vh-Hnk" id="Qs8-eQ-Yat"/>
-                        <outlet property="teamCell" destination="zHj-MO-a3y" id="5yZ-YA-JiJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhQ-tb-z6E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -147,13 +106,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="line.3.horizontal" catalog="system" width="128" height="64"/>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56703CB727D724DF00E25D76 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CB627D724DF00E25D76 /* GameCell.swift */; };
+		56703CBB27D749B200E25D76 /* gameCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CBA27D749B200E25D76 /* gameCellStackView.swift */; };
 		56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38227D31C740096C142 /* EntryTableViewController.swift */; };
 		56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38427D31CB00096C142 /* NewEntryViewController.swift */; };
 		56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38927D353430096C142 /* PinchableViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56703CB627D724DF00E25D76 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		56703CBA27D749B200E25D76 /* gameCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameCellStackView.swift; sourceTree = "<group>"; };
 		56B9B38227D31C740096C142 /* EntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewController.swift; sourceTree = "<group>"; };
 		56B9B38427D31CB00096C142 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
 		56B9B38927D353430096C142 /* PinchableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchableViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 				56DEB65627D3181400B96D65 /* Main.storyboard */,
 				56DEB65927D3181500B96D65 /* Assets.xcassets */,
 				56DEB65B27D3181500B96D65 /* LaunchScreen.storyboard */,
+				56703CB627D724DF00E25D76 /* GameCell.swift */,
+				56703CBA27D749B200E25D76 /* gameCellStackView.swift */,
 				56B9B38627D31CB80096C142 /* View Controllers */,
 				56DEB65E27D3181500B96D65 /* Info.plist */,
 			);
@@ -153,9 +159,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */,
+				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
 				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
 				56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */,
 				56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */,
+				56703CBB27D749B200E25D76 /* gameCellStackView.swift in Sources */,
 				56DEB65327D3181400B96D65 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
