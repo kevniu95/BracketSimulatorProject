@@ -8,14 +8,14 @@
 import Foundation
 
 
-struct gameLocation {
+struct gamePosition {
     var id: Int
     var x: Float
     var y: Float
 }
 
-func convertGameLocations() -> [gameLocation] {
-    var gameLocations = [gameLocation]()
+func convertGamePositions() -> [gamePosition] {
+    var gamePositions = [gamePosition]()
 
     //locate the file you want to use
     guard let filepath = Bundle.main.path(forResource: "gameCellPositions", ofType: "csv") else {
@@ -46,11 +46,13 @@ func convertGameLocations() -> [gameLocation] {
                  let id = Int(columns[0]) ?? 0
                  let x = Float(columns[1]) ?? 0.0
                  let y = Float(String(columns[2].filter { !" \n\t\r".contains($0) })) ?? 0.0
-                 let gameLocation = gameLocation(id: id, x: x, y: y)
-                 gameLocations.append(gameLocation)
+                 let gamePosition = gamePosition(id: id, x: x, y: y)
+                 if id > 0{
+                     gamePositions.append(gamePosition)
+                 }
              }
          }
-    return gameLocations
+    return gamePositions
 }
 
 

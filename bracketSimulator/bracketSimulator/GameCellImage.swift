@@ -1,14 +1,13 @@
 //
-//  teamEntry.swift
+//  GameCellImage.swift
 //  bracketSimulator
 //
-//  Created by Kevin Niu on 3/7/22.
+//  Created by Kevin Niu on 3/9/22.
 //
 
-import Foundation
 import UIKit
 
-class GameCell{
+class GameCellImage: UIView {
     private (set) var id: Int
     private let refScroll: UIScrollView
     private(set) var cellImage: UIStackView
@@ -20,7 +19,7 @@ class GameCell{
     private(set) var cellOn: Bool
 
     
-    init(idNum: Int, referenceScrollView: UIScrollView, gamePos: gamePosition){
+    required init(idNum: Int, referenceScrollView: UIScrollView, gamePos: gamePosition){
         id = idNum
         cellImage = UIStackView()
         refScroll = referenceScrollView
@@ -29,11 +28,18 @@ class GameCell{
         team = Team(id: 0, binID: "", firstCellID: 0, name: "", seed: 0)
         binaryId = ""
         cellOn = false
-
+        
         self.gamePos = gamePos
+        super.init(frame: .zero)
+        
         self.initiatePosition()
         self.setBinaryId()
         self.fillCellImage()
+    }
+    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func getNextGames() -> [Int]{
