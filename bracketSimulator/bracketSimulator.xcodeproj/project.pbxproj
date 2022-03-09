@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		565561C827D87F1A00068103 /* 2021teams.csv in Resources */ = {isa = PBXBuildFile; fileRef = 565561C727D87F1A00068103 /* 2021teams.csv */; };
 		565561CB27D882DC00068103 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561CA27D882DC00068103 /* Teams.swift */; };
-		565561CF27D8C15600068103 /* GameCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561CE27D8C15600068103 /* GameCellImage.swift */; };
+		565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561D027D8CF4B00068103 /* GameCellDelegate.swift */; };
 		56703CB727D724DF00E25D76 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CB627D724DF00E25D76 /* GameCell.swift */; };
 		56703CBD27D767F600E25D76 /* gameCellPositions.csv in Resources */ = {isa = PBXBuildFile; fileRef = 56703CBC27D767F600E25D76 /* gameCellPositions.csv */; };
 		56703CC127D769F000E25D76 /* GameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CC027D769F000E25D76 /* GameCellView.swift */; };
@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		565561C727D87F1A00068103 /* 2021teams.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2021teams.csv; sourceTree = "<group>"; };
 		565561CA27D882DC00068103 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
-		565561CE27D8C15600068103 /* GameCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCellImage.swift; sourceTree = "<group>"; };
+		565561D027D8CF4B00068103 /* GameCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCellDelegate.swift; sourceTree = "<group>"; };
 		56703CB627D724DF00E25D76 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		56703CBC27D767F600E25D76 /* gameCellPositions.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gameCellPositions.csv; sourceTree = "<group>"; };
 		56703CC027D769F000E25D76 /* GameCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCellView.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				56DEB65927D3181500B96D65 /* Assets.xcassets */,
 				56DEB65B27D3181500B96D65 /* LaunchScreen.storyboard */,
 				56703CB627D724DF00E25D76 /* GameCell.swift */,
-				565561CE27D8C15600068103 /* GameCellImage.swift */,
+				565561D027D8CF4B00068103 /* GameCellDelegate.swift */,
 				56703CC227D76E8800E25D76 /* gameCellPositions.swift */,
 				565561CA27D882DC00068103 /* Teams.swift */,
 				56B9B38627D31CB80096C142 /* View Controllers */,
@@ -188,7 +188,7 @@
 				56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
 				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
-				565561CF27D8C15600068103 /* GameCellImage.swift in Sources */,
+				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,
 				56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */,
 				56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */,
 				56DEB65327D3181400B96D65 /* SceneDelegate.swift in Sources */,

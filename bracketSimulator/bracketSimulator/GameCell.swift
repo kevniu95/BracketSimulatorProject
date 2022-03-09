@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 class GameCell{
+    weak var delegate: GameCellDelegate?
     private (set) var id: Int
+    private (set) var vc: NewEntryViewController
     private let refScroll: UIScrollView
     private(set) var cellImage: UIStackView
     private(set) var xPos: CGFloat
@@ -20,7 +22,7 @@ class GameCell{
     private(set) var cellOn: Bool
 
     
-    init(idNum: Int, referenceScrollView: UIScrollView, gamePos: gamePosition){
+    init(idNum: Int, referenceScrollView: UIScrollView, gamePos: gamePosition, viewController: NewEntryViewController){
         id = idNum
         cellImage = UIStackView()
         refScroll = referenceScrollView
@@ -29,6 +31,7 @@ class GameCell{
         team = Team(id: 0, binID: "", firstCellID: 0, name: "", seed: 0)
         binaryId = ""
         cellOn = false
+        vc = viewController
 
         self.gamePos = gamePos
         self.initiatePosition()
@@ -43,9 +46,58 @@ class GameCell{
             tmpId = Int(Float(tmpId) / 2.0)
             gameIds.append(tmpId)
         }
+        initiateRecognizers()
         return gameIds
         
     }
+    
+    // MARK: Stack View Gestures
+    func initiateRecognizers(){
+        
+        let labelGestureRecognizer = UIPanGestureRecognizer(target: self,
+                                                action: #selector(handlePan(_:)))
+        labelGestureRecognizer.delegate = vc
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self,
+                                                               action: #selector(handleLongPress(_:)))
+        
+        longPressRecognizer.delegate = vc
+        
+        cellImage.addGestureRecognizer(labelGestureRecognizer)
+        cellImage.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
+        guard let labelView = gestureRecognizer.view else{
+            print ("gestureRecognizer doesn't have a view!")
+            return
+        }
+        let nextGames = getNextGames()
+        delegate?.highlightNextGames(nextGames)
+        if gestureRecognizer.state == .ended{
+            delegate?.unhighlightNextGames(nextGames)
+        }
+    }
+    
+    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer){
+        guard let labelView = gestureRecognizer.view else{
+            print ("gestureRecognizer doesn't have a view!")
+            return
+        }
+        
+        let translation = gestureRecognizer.translation(in: vc.view)
+        labelView.center = CGPoint(x: labelView.center.x + translation.x,
+                                  y: labelView.center.y + translation.y)
+        gestureRecognizer.setTranslation(CGPoint.zero, in: vc.view)
+        
+        let nextGames = getNextGames()
+        delegate?.highlightNextGames(nextGames)
+//        print(gestureStartPoint)
+        if gestureRecognizer.state == .ended{
+            delegate?.unhighlightNextGames(nextGames)
+        }
+    }
+    
     
     func setTeam(team: Team){
         self.team = team
@@ -84,6 +136,25 @@ class GameCell{
         cellImage = initStackObject()
     }
     
+    func darken(){
+        cellImage.isHidden = false
+//        cellImage.addArrangedSubview(imageCover())
+//        cellImage.bringSubviewToFront(cellImage.subviews[4])
+//        cellImage.bringSubviewToFront(cellImage[4])
+
+        cellImage.backgroundColor = UIColor.black
+    }
+    
+    func undarken(){
+        cellImage.isHidden = true
+//        cellImage.addArrangedSubview(imageCover())
+//        cellImage.bringSubviewToFront(cellImage.subviews[4])
+//        cellImage.bringSubviewToFront(cellImage[4])
+
+        cellImage.backgroundColor = UIColor.opaqueSeparator
+    }
+    
+    
     func initStackObject() -> UIStackView{
         let newStackView = UIStackView()
         let bars = initBarsImage()
@@ -104,6 +175,21 @@ class GameCell{
         newStackView.addArrangedSubview(bars)
         newStackView.addArrangedSubview(teamName)
         newStackView.addArrangedSubview(teamSeed)
+        return newStackView
+    }
+    
+    func imageCover() -> UIView{
+        print("a")
+        let newStackView = UIView()
+        newStackView.frame.origin = CGPoint(x: self.xPos, y: self.yPos)
+        newStackView.frame.size.width = CGFloat(210)
+        newStackView.frame.size.height = CGFloat(30)
+        newStackView.backgroundColor = UIColor.black
+        newStackView.layer.borderColor = UIColor.black.cgColor
+        newStackView.layer.borderWidth = 0.5
+        newStackView.layer.cornerRadius = 5
+        newStackView.layer.masksToBounds = true
+        
         return newStackView
     }
     
