@@ -14,6 +14,7 @@
 		56703CBD27D767F600E25D76 /* gameCellPositions.csv in Resources */ = {isa = PBXBuildFile; fileRef = 56703CBC27D767F600E25D76 /* gameCellPositions.csv */; };
 		56703CC127D769F000E25D76 /* GameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CC027D769F000E25D76 /* GameCellView.swift */; };
 		56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CC227D76E8800E25D76 /* gameCellPositions.swift */; };
+		567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */; };
 		56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38227D31C740096C142 /* EntryTableViewController.swift */; };
 		56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38427D31CB00096C142 /* NewEntryViewController.swift */; };
 		56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38927D353430096C142 /* PinchableViewController.swift */; };
@@ -32,6 +33,7 @@
 		56703CBC27D767F600E25D76 /* gameCellPositions.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gameCellPositions.csv; sourceTree = "<group>"; };
 		56703CC027D769F000E25D76 /* GameCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCellView.swift; sourceTree = "<group>"; };
 		56703CC227D76E8800E25D76 /* gameCellPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameCellPositions.swift; sourceTree = "<group>"; };
+		567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketEntryDataModel.swift; sourceTree = "<group>"; };
 		56B9B38227D31C740096C142 /* EntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewController.swift; sourceTree = "<group>"; };
 		56B9B38427D31CB00096C142 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
 		56B9B38927D353430096C142 /* PinchableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchableViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,24 @@
 				565561C727D87F1A00068103 /* 2021teams.csv */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		567C251D27D9E1B0007E3B54 /* Input Data */ = {
+			isa = PBXGroup;
+			children = (
+				565561CA27D882DC00068103 /* Teams.swift */,
+				56703CC227D76E8800E25D76 /* gameCellPositions.swift */,
+			);
+			path = "Input Data";
+			sourceTree = "<group>";
+		};
+		567C251E27D9E1C2007E3B54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				56703CB627D724DF00E25D76 /* GameCell.swift */,
+				565561D027D8CF4B00068103 /* GameCellDelegate.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		56B9B38627D31CB80096C142 /* View Controllers */ = {
@@ -99,10 +119,9 @@
 				56DEB65627D3181400B96D65 /* Main.storyboard */,
 				56DEB65927D3181500B96D65 /* Assets.xcassets */,
 				56DEB65B27D3181500B96D65 /* LaunchScreen.storyboard */,
-				56703CB627D724DF00E25D76 /* GameCell.swift */,
-				565561D027D8CF4B00068103 /* GameCellDelegate.swift */,
-				56703CC227D76E8800E25D76 /* gameCellPositions.swift */,
-				565561CA27D882DC00068103 /* Teams.swift */,
+				567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */,
+				567C251E27D9E1C2007E3B54 /* Views */,
+				567C251D27D9E1B0007E3B54 /* Input Data */,
 				56B9B38627D31CB80096C142 /* View Controllers */,
 				56DEB65E27D3181500B96D65 /* Info.plist */,
 				56703CC027D769F000E25D76 /* GameCellView.swift */,
@@ -186,6 +205,7 @@
 				565561CB27D882DC00068103 /* Teams.swift in Sources */,
 				56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */,
 				56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */,
+				567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
 				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
 				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,

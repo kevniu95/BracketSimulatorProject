@@ -8,10 +8,9 @@
 import UIKit
 
 class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-    
-    
     @IBOutlet weak var scrollView: UIScrollView!
     let bracketFrameScaler = 3.0
+    var bracketEntry = BracketEntry(id: -1, name: "None")
     var gameCells = [GameCell]()
     var gamePositions = [gamePosition]()
     var teams = [Team]()
@@ -21,14 +20,15 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         
+        // Always the same, no matter if new entry or saved
         initiateScrollView()
         gamePositions = convertGamePositions()
         teams = convertTeams()
         initiateGameCells(gamePositions: gamePositions)
-        fillFirstRoundTeam()
         
+        // Can vary based on whether or not entry is a loaded or new one
+        fillFirstRoundTeam()
     }
-    
     
 
     // MARK: Scroll View Functionality
@@ -65,7 +65,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     func initiateGameCells(gamePositions: [gamePosition]){
         for ind in 1...127{
             let gamePosition = gamePositions[ind - 1]
-            let currGameCell = GameCell(idNum: ind, referenceScrollView: scrollView, gamePos: gamePosition)
+            let currGameCell = GameCell(idNum: ind, gamePos: gamePosition)
             currGameCell.delegate = self
             gameCells.append(currGameCell)
             scrollView.addSubview(currGameCell.cellImage)
@@ -73,6 +73,12 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
     
     func fillFirstRoundTeam(){
+        for ind in 1...63{
+            let currGameCell = gameCells[ind - 1]
+            let currTeam = bracketEntry.chosenTeams[ind]
+            currGameCell.setTeam(team: currTeam)
+        }
+        
         for ind in 64...127{
             let currGameCell = gameCells[ind - 1]
             let currTeam = teams[ind - 64]
@@ -90,8 +96,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             gamesLeft -= 1
         }
     }
-
-    
 }
 
 extension NewEntryViewController: GameCellDelegate{
@@ -146,23 +150,5 @@ extension NewEntryViewController: GameCellDelegate{
         currGameCell.setTeam(team: team)
     }
     
-    func highlightNextGames(_ nextGames: [Int]) {
-        for gameCell in gameCells{
-            if nextGames.contains(gameCell.id)  {
-                print(gameCell.id)
-                gameCell.darken()
-                // Temporarily highlight game
-            }
-        }
-    }
-    func unhighlightNextGames(_ nextGames: [Int]) {
-        for gameCell in gameCells{
-            if nextGames.contains(gameCell.id)  {
-                print(gameCell.id)
-                gameCell.undarken()
-                // Temporarily highlight game
-            }
-        }
-    }
     
 }
