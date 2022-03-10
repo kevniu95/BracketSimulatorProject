@@ -65,7 +65,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     func initiateGameCells(gamePositions: [gamePosition]){
         for ind in 1...127{
             let gamePosition = gamePositions[ind - 1]
-            let currGameCell = GameCell(idNum: ind, referenceScrollView: scrollView, gamePos: gamePosition, viewController: self)
+            let currGameCell = GameCell(idNum: ind, referenceScrollView: scrollView, gamePos: gamePosition)
             currGameCell.delegate = self
             gameCells.append(currGameCell)
             scrollView.addSubview(currGameCell.cellImage)
@@ -77,7 +77,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             let currGameCell = gameCells[ind - 1]
             let currTeam = teams[ind - 64]
             currGameCell.setTeam(team: currTeam)
-            let nextGames = currGameCell.getNextGames()
         }
     }
 
@@ -85,6 +84,19 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
 }
 
 extension NewEntryViewController: GameCellDelegate{
+    func resetDownStreamCells(team: Team, nextGames: [Int]) {
+        for nextGameInd in nextGames{
+            let currGameCell = gameCells[nextGameInd - 1]
+            if currGameCell.cellOn && currGameCell.team.id != team.id{
+                currGameCell.resetCell()
+            }
+        }
+    }
+    func setNewTeam(team: Team, nextGame: Int){
+        let currGameCell = gameCells[nextGame - 1]
+        currGameCell.setTeam(team: team)
+    }
+    
     func highlightNextGames(_ nextGames: [Int]) {
         for gameCell in gameCells{
             if nextGames.contains(gameCell.id)  {
