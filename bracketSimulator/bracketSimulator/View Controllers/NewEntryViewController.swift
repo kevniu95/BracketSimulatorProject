@@ -73,12 +73,14 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
     
     func fillFirstRoundTeam(){
+        // Load with previous data from bracket entry if it is available
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]
             let currTeam = bracketEntry.chosenTeams[ind]
             currGameCell.setTeam(team: currTeam)
         }
-        
+        // Always instantiate first 64 teams (i.e. last 64 bracket entires)
+        // in the same way
         for ind in 64...127{
             let currGameCell = gameCells[ind - 1]
             let currTeam = teams[ind - 64]
@@ -92,6 +94,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             if gamesLeft > leaveGames{
                 let currGameCell = gameCells[nextGameInd - 1]
                 currGameCell.setTeam(team: team)
+                bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: team)
             }
             gamesLeft -= 1
         }
@@ -142,12 +145,14 @@ extension NewEntryViewController: GameCellDelegate{
             let currGameCell = gameCells[nextGameInd - 1]
             if currGameCell.cellOn && currGameCell.team.id != team.id{
                 currGameCell.resetCell()
+                bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: blankTeam())
             }
         }
     }
     func setNewTeam(team: Team, nextGame: Int){
         let currGameCell = gameCells[nextGame - 1]
         currGameCell.setTeam(team: team)
+        bracketEntry.updateTeams(gameID: nextGame - 1, newTeam: team)
     }
     
     

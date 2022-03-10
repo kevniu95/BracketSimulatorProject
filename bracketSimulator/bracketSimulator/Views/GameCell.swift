@@ -63,26 +63,7 @@ class GameCell{
         cellImage.addGestureRecognizer(longPressRecognizer)
     }
     
-    
-    // MARK: State Challenge Caller
-    func setTeam(team: Team){
-        let prevTeam = self.team
-        if team.id > -1{
-            self.team = team
-            self.cellOn = true
-            updateCellImage()
-        }
-        // Check to see if team name is changed from before
-        // If so, may need to update bracket downstream
-            // Ex. If I pick Norfolk State to make the championship then switch to
-            // Gonzaga to beat them in the first round, need to update bracket accordingly
-        
-        if self.team.id != prevTeam.id && prevTeam.id >= 0{
-            delegate?.resetDownstreamCells(team: team, nextGames: nextGames)
-        }
-    }
-            
-    // MARK: Stack View Gestures
+    // MARK: Stack View Gesture Recognizers
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer){
         let nextGame = nextGames[0]
         delegate?.setNewTeam(team: self.team, nextGame: nextGame)
@@ -92,11 +73,32 @@ class GameCell{
         delegate?.presentAlert(currCellTeam: self.team, currCellID: self.id, nextGames: self.nextGames)
     }
     
-    
+    // MARK: State Challenge Caller
+    func setTeam(team: Team){
+        let prevTeam = self.team
+        // Check to see if setTeam is a "real update"
+        // or filling out cells if it's a whole new bracket
+        // entry
+        if team.id > -1 {
+            self.team = team
+            self.cellOn = true
+            updateCellImage()
+        }
+        
+        // Check to see if team name is changed from before
+            // Ex. If I pick Norfolk State to make the championship then switch to
+            //      Gonzaga to beat them in the first round, need to update bracket
+        if self.team.id != prevTeam.id && prevTeam.id >= 0{
+            delegate?.resetDownstreamCells(team: team, nextGames: nextGames)
+        }
+    }
+            
     func resetCell(){
         self.cellImage.isHidden = true
         self.cellImage.isUserInteractionEnabled = false
+        self.team = Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
     }
+    
     func updateCellImage(){
         self.cellImage.isHidden = false
         self.cellImage.isUserInteractionEnabled = true
@@ -136,7 +138,6 @@ class GameCell{
         newStackView.addArrangedSubview(teamSeed)
         return newStackView
     }
-    
     
     func initBarsImage()-> UIImageView{
         let bracketImageView = UIImageView()

@@ -30,6 +30,10 @@ func pad(string : String, toSize: Int) -> String {
     return padded
 }
 
+func blankTeam() -> Team{
+    return Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
+}
+
 func convertTeams() -> [Team] {
     var teams = [Team]()
 

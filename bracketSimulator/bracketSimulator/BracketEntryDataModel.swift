@@ -25,7 +25,18 @@ class BracketEntry{
         for _ in 0...63{
             chosenTeams.append(initialTeam)
         }
-        
+    }
+    
+    func updateTeams(gameID: Int, newTeam: Team){
+        self.chosenTeams[gameID] = newTeam
+        var i = 0
+        for team in self.chosenTeams{
+            if team.id > -1{
+                print(String(i))
+                print(team)
+            }
+            i += 1
+        }
     }
     
 }
