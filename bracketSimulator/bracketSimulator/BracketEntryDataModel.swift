@@ -11,13 +11,21 @@ class BracketEntry{
     private (set) var id: Int
     private (set) var name: String
     private (set) var chosenTeams: [Team]
+    private (set) var winner: String
+    private (set) var scores: [Float]
     
     init(id : Int, name: String){
         self.id = id
         self.name = name
         self.chosenTeams = [Team]()
+        self.winner = ""
+        self.scores = [Float]()
         
         self.initiateTeams()
+    }
+    
+    func setName(name: String){
+        self.name = name        
     }
     
     func initiateTeams(){
@@ -36,6 +44,9 @@ class BracketEntry{
                 print(team)
             }
             i += 1
+        }
+        if gameID == 1{
+            self.winner = newTeam.name
         }
     }
     

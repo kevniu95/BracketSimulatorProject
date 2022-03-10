@@ -9,12 +9,13 @@ import UIKit
 
 class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    weak var delegate: EntryTableViewController?
     let bracketFrameScaler = 3.0
-    var bracketEntry = BracketEntry(id: -1, name: "None")
+    var bracketEntry = BracketEntry(id: -1, name: "-1")
     var gameCells = [GameCell]()
     var gamePositions = [gamePosition]()
     var teams = [Team]()
-    
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
@@ -28,9 +29,44 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         
         // Can vary based on whether or not entry is a loaded or new one
         fillFirstRoundTeam()
+        
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        saveCurrentModel()
+    }
+    
+    func saveCurrentModel(){
+        var thisOneIsNew = false
+        if bracketEntry.name == "-1"{
+            let saveName = askForName() // Use alert controller to start
+            bracketEntry.setName(name: saveName)
+            thisOneIsNew = true
+        }
+        delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry, new: thisOneIsNew)
     }
     
 
+    func askForName() -> String {
+        let ac = UIAlertController(title: "Give your bracket a name!", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        var finalAnswer = ""
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            let answer = ac.textFields![0]
+            guard let answer = answer.text else{
+                return
+            }
+            finalAnswer = answer
+        }
+
+        ac.addAction(submitAction)
+
+        self.present(ac, animated: true)
+        return finalAnswer
+    }
+    
     // MARK: Scroll View Functionality
     func initiateScrollView(){
         scrollView.delegate = self
