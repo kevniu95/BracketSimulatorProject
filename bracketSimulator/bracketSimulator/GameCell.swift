@@ -24,7 +24,7 @@ class GameCell{
         id = idNum
         cellImage = UIStackView()
         refScroll = referenceScrollView
-        team = Team(id: 0, binID: "", firstCellID: 0, name: "", seed: 0)
+        team = Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
         binaryId = ""
         cellOn = false
         nextGames = [Int]()
@@ -58,21 +58,25 @@ class GameCell{
     // MARK: State Challenge Caller
     func setTeam(team: Team){
         let prevTeam = self.team
+        print(prevTeam.name)
+        print(team.name)
         self.team = team
         self.cellOn = true
         updateCellImage()
-    
-        if prevTeam.id == 0{
+        
+        // Check to see if team name is changed from before
+        // If so, may need to update bracket downstream
+            // Ex. If I pick Norfolk State to make the championship then switch to
+            // Gonzaga to beat them in the first round, need to update bracket accordingly
+        if prevTeam.id == -1{
             initiateRecognizers()
         } else{
             if self.team.id != prevTeam.id{
-                delegate?.resetDownStreamCells(team: team, nextGames: nextGames)
+                delegate?.resetDownstreamCells(team: team, nextGames: nextGames)
             }
         }
-        
     }
-        
-    
+            
     // MARK: Stack View Gestures
     func initiateRecognizers(){
 
@@ -88,26 +92,24 @@ class GameCell{
     }
     
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer){
-        guard let labelView = gestureRecognizer.view else{
-            print("gestureRecognizer doesn't have a view!")
-            return
-        }
         let nextGame = nextGames[0]
         delegate?.setNewTeam(team: self.team, nextGame: nextGame)
-        
     }
     
+//    @IBAction func tapShowAlert(_ sender: UIButton) {
+//        let alert = UIAlertController(title: "Iam an alert",
+//                                      message: "How are you?:", preferredStyle: .alert)
+//
+//        alert.addAction(UIAlertAction(title: "Good", style: .default, handler: {action in
+//                                        print("You are good!")}
+//        ))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        self.present(alert, animated: true)
+//
+//    }
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
-        guard let labelView = gestureRecognizer.view else{
-            print ("gestureRecognizer doesn't have a view!")
-            return
-        }
-        let nextGames = getNextGames()
-        delegate?.highlightNextGames(nextGames)
-        if gestureRecognizer.state == .ended{
-            delegate?.unhighlightNextGames(nextGames)
-        }
+        delegate?.presentAlert(currCellTeam: self.team, currCellID: self.id, nextGames: self.nextGames)
     }
     
 //    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer){

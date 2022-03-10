@@ -79,12 +79,61 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             currGameCell.setTeam(team: currTeam)
         }
     }
+    
+    func setDownstreamCells(team: Team, nextGames: [Int], leaveGames: Int) {
+        var gamesLeft = nextGames.count
+        for nextGameInd in nextGames{
+            if gamesLeft > leaveGames{
+                let currGameCell = gameCells[nextGameInd - 1]
+                currGameCell.setTeam(team: team)
+            }
+            gamesLeft -= 1
+        }
+    }
 
     
 }
 
 extension NewEntryViewController: GameCellDelegate{
-    func resetDownStreamCells(team: Team, nextGames: [Int]) {
+    func presentAlert(currCellTeam: Team, currCellID: Int, nextGames: [Int]){
+        let id = currCellID
+        let alert = UIAlertController(title: "Advance to...", message: nil, preferredStyle: .actionSheet)
+        if id >= 64{
+            alert.addAction(UIAlertAction(title: "Second Round", style: .default, handler: {action in
+                self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 5)
+            }))
+        }
+        if id >= 32{
+            alert.addAction(UIAlertAction(title: "Sweet Sixteen", style: .default, handler: {action in
+                self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 4)
+            }))
+        }
+        if id >= 16{
+            alert.addAction(UIAlertAction(title: "Elite Eight", style: .default, handler: {action in
+                self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 3)
+            }))
+        }
+        if id >= 8{
+            alert.addAction(UIAlertAction(title: "Final Four", style: .default, handler: {action in
+                self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 2)
+            }))
+        }
+        if id >= 4{
+            alert.addAction(UIAlertAction(title: "Championship", style: .default, handler: {action in
+                self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 1)
+            }))
+        }
+        if id >= 2{
+            alert.addAction(UIAlertAction(title: "Champion", style: .default, handler: {action in
+                self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 0)
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    func resetDownstreamCells(team: Team, nextGames: [Int]) {
         for nextGameInd in nextGames{
             let currGameCell = gameCells[nextGameInd - 1]
             if currGameCell.cellOn && currGameCell.team.id != team.id{
