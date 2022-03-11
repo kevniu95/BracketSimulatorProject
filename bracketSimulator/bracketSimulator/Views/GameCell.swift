@@ -82,6 +82,7 @@ class GameCell{
         if team.id > -1 {
             self.team = team
             self.cellOn = true
+//            print("Updating cell image for \(self.team.name) at cell number \(self.id)")
             updateCellImage()
         }
         

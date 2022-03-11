@@ -18,7 +18,6 @@ class RequestNameViewController: UIViewController{
         super.viewDidLoad()
         
     }
-    
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         setupTextfield()
@@ -35,13 +34,12 @@ class RequestNameViewController: UIViewController{
         if bracketName.count == 0{
             return
         }
-        let bracketEntry = BracketEntry(id: -1, name: "-1")
+        let bracketEntry = BracketEntry(name: bracketName)
         delegate?.saveNewEntry(entryName: bracketName, entry: bracketEntry)
-        
-        exitFavoritesViewController()
+        exitRequestViewController()
     }
     
-    func exitFavoritesViewController(){
+    func exitRequestViewController(){
         dismiss(animated: true, completion: nil)
     }
     

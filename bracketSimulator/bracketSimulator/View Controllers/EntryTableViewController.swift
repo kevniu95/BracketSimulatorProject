@@ -10,14 +10,15 @@ import UIKit
 class EntryTableViewController: UITableViewController {
     var entryDict: [String: BracketEntry] = [:]
     var entryArray = [BracketEntry]()
+    var currentEntry: BracketEntry?
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        setEntryArray()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
+        setEntryArray()
         if entryArray.count == 0{
             initSheet()
         }
@@ -25,6 +26,7 @@ class EntryTableViewController: UITableViewController {
 
     func setEntryArray(){
         entryArray = Array(entryDict.values)
+        self.tableView.reloadData()
     }
     
     func initSheet(){
@@ -50,87 +52,46 @@ class EntryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryTableViewCell", for: indexPath) as? EntryTableViewCell
-        
         // Configure the cell...
         cell?.bracketName.text = entryArray[indexPath.row].name
         cell?.winnerSelected.text = entryArray[indexPath.row].winner
-        
-        guard let cell = cell else {
-            return UITableViewCell()
-        }
-        return cell
+        return cell!
     }
     
-    
-    // Create new bracket entry from CREATE NEW button
-//    func
-    
+
     // Load already-saved bracket entry from table cell
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fillBracketSegue"{
-            let svc = segue.destination as! NewEntryViewController;
-            svc.delegate = self
-            svc.bracketEntry = entryArray[tableView.indexPathForSelectedRow!.row]
+            let bracketEntry =  entryArray[tableView.indexPathForSelectedRow!.row]
+            if let newEntryVC = segue.destination as? NewEntryViewController{
+                newEntryVC.inputBracketEntry = bracketEntry
+                newEntryVC.delegate = self
+            }
         }
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 
 extension EntryTableViewController: NewEntryVCDelegate{
-    func saveEntry(entryName: String, entry: BracketEntry, new: Bool) {
-        print("HERE")
+    func saveEntry(entryName: String, entry: BracketEntry) {
+        print("Trying to save this damn thing")
+        print(entryName)
         if entryDict.keys.contains(entryName) {
-            print("A")
             entryDict[entryName] = entry
         } else{
-            print("B")
             entryDict[entryName] = entry
+        }
+        print("I have saved the entry, here is what it looks like right now")
+        for team in entryDict[entryName]!.chosenTeams{
+            if team.id > -1{
+                print(team.name)
+            }
         }
     }
 }
@@ -143,7 +104,12 @@ extension EntryTableViewController: RequestNameVCDelegate{
             entryDict[entryName] = entry
         }
         setEntryArray()
+        self.tableView.reloadData()
     }
+    
+//    func pushEntry(entry: BracketEntry){
+//        currentEntry = entry
+//    }
 }
 
 
@@ -155,3 +121,14 @@ extension EntryTableViewController: RequestNameVCDelegate{
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+
+//
+//func moveToEntryVC() {
+////        let newEntryVC = self.storyboard?.instantiateViewController(withIdentifier: "NewEntryViewController") as! NewEntryViewController
+////        newEntryVC.delegate = self
+////        if let currentEntry = currentEntry{
+////            print(currentEntry.name)
+////            newEntryVC.inputBracketEntry = currentEntry
+////        }
+////        self.navigationController?.pushViewController(newEntryVC, animated: true)
+//}

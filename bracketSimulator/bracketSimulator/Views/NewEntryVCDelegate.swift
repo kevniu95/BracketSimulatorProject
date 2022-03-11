@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NewEntryVCDelegate: AnyObject{
-    func saveEntry(entryName: String, entry: BracketEntry, new: Bool)
+    func saveEntry(entryName: String, entry: BracketEntry)
 }

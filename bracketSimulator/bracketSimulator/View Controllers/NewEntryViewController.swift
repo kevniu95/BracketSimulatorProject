@@ -11,8 +11,9 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     @IBOutlet weak var scrollView: UIScrollView!
     
     weak var delegate: EntryTableViewController?
+    weak var inputBracketEntry: BracketEntry?
+    var bracketEntry = BracketEntry(name: "")
     let bracketFrameScaler = 3.0
-    var bracketEntry = BracketEntry(id: -1, name: "-1")
     var gameCells = [GameCell]()
     var gamePositions = [gamePosition]()
     var teams = [Team]()
@@ -29,42 +30,24 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         
         // Can vary based on whether or not entry is a loaded or new one
         fillFirstRoundTeam()
-        
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        saveCurrentModel()
     }
     
     func saveCurrentModel(){
-        var thisOneIsNew = false
-        if bracketEntry.name == "-1"{
-            let saveName = askForName() // Use alert controller to start
-            bracketEntry.setName(name: saveName)
-            thisOneIsNew = true
-        }
-        delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry, new: thisOneIsNew)
-    }
-    
-
-    func askForName() -> String {
-        let ac = UIAlertController(title: "Give your bracket a name!", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        var finalAnswer = ""
-        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
-            let answer = ac.textFields![0]
-            guard let answer = answer.text else{
-                return
+        print("Bracket entry is being saved out to table VC:")
+        var i = 0
+        for team in bracketEntry.chosenTeams{
+            if team.id > -1{
+                let gameid = i + 1
+                print("Game ID \(gameid) has been filled with \(team.name)")
             }
-            finalAnswer = answer
+            i += 1
         }
-
-        ac.addAction(submitAction)
-
-        self.present(ac, animated: true)
-        return finalAnswer
+        delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
     }
     
     // MARK: Scroll View Functionality
@@ -109,10 +92,14 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
     
     func fillFirstRoundTeam(){
+        if let inputBracketEntry = inputBracketEntry{
+            bracketEntry = inputBracketEntry
+        }
+        
         // Load with previous data from bracket entry if it is available
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]
-            let currTeam = bracketEntry.chosenTeams[ind]
+            let currTeam = bracketEntry.chosenTeams[ind - 1]
             currGameCell.setTeam(team: currTeam)
         }
         // Always instantiate first 64 teams (i.e. last 64 bracket entires)
@@ -134,6 +121,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             }
             gamesLeft -= 1
         }
+        saveCurrentModel()
     }
 }
 
@@ -184,12 +172,12 @@ extension NewEntryViewController: GameCellDelegate{
                 bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: blankTeam())
             }
         }
+        saveCurrentModel()
     }
     func setNewTeam(team: Team, nextGame: Int){
         let currGameCell = gameCells[nextGame - 1]
         currGameCell.setTeam(team: team)
         bracketEntry.updateTeams(gameID: nextGame - 1, newTeam: team)
+        saveCurrentModel()
     }
-    
-    
 }

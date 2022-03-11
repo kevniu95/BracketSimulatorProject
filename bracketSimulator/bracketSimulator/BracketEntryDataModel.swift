@@ -8,17 +8,19 @@
 import Foundation
 
 class BracketEntry{
-    private (set) var id: Int
+//    private (set) var id: Int
     private (set) var name: String
     private (set) var chosenTeams: [Team]
     private (set) var winner: String
     private (set) var scores: [Float]
+    private (set) var recentScore: Float
     
-    init(id : Int, name: String){
-        self.id = id
+    init(name: String){
+//        self.id = id
         self.name = name
         self.chosenTeams = [Team]()
         self.winner = ""
+        self.recentScore = 0
         self.scores = [Float]()
         
         self.initiateTeams()
@@ -38,10 +40,11 @@ class BracketEntry{
     func updateTeams(gameID: Int, newTeam: Team){
         self.chosenTeams[gameID] = newTeam
         var i = 0
+        print("\nBracket Entry chosen teams have been updated:")
         for team in self.chosenTeams{
             if team.id > -1{
-                print(String(i))
-                print(team)
+                let gameid = i + 1
+                print("Game ID \(gameid) has been filled with \(team.name)")
             }
             i += 1
         }

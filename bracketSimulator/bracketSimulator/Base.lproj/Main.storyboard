@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Entry-->
+        <!--NewEntryViewController-->
         <scene sceneID="vHA-zq-4We">
             <objects>
-                <viewController id="AP7-Tp-ECs" customClass="NewEntryViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewEntryViewController" title="NewEntryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AP7-Tp-ECs" customClass="NewEntryViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L8V-e3-GoC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,49 +126,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EntryTableViewCell" rowHeight="68" id="9z3-6o-VFC" customClass="EntryTableViewCell" customModule="bracketSimulator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="68"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EntryTableViewCell" rowHeight="80" id="9z3-6o-VFC" customClass="EntryTableViewCell" customModule="bracketSimulator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9z3-6o-VFC" id="FMm-Ex-vn5">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plB-TS-AQt" userLabel="Winner Image">
-                                            <rect key="frame" x="20" y="0.0" width="79" height="68"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plB-TS-AQt" userLabel="Winner Image">
+                                            <rect key="frame" x="20" y="0.0" width="50" height="68"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="BIi-2d-FAm"/>
+                                                <constraint firstAttribute="width" constant="50" id="TE2-KK-jHs"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bracket Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJv-H9-acc">
-                                            <rect key="frame" x="107" y="11" width="108" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Bracket Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJv-H9-acc">
+                                            <rect key="frame" x="78" y="11" width="108" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Winner:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-6j-Hce" userLabel="Winner Selected">
-                                            <rect key="frame" x="107" y="36" width="59" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Winner:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MX-6j-Hce" userLabel="Winner Selected">
+                                            <rect key="frame" x="78" y="36" width="59" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmv-vD-raH" userLabel="Last Points">
-                                            <rect key="frame" x="352" y="11" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBx-LO-yXj" userLabel="Avg Points">
-                                            <rect key="frame" x="358" y="35" width="36" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmv-vD-raH" userLabel="Last Points">
+                                            <rect key="frame" x="362" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3MX-6j-Hce" firstAttribute="top" secondItem="pJv-H9-acc" secondAttribute="bottom" constant="4" id="7Tt-nK-5Gt"/>
+                                        <constraint firstItem="3MX-6j-Hce" firstAttribute="leading" secondItem="plB-TS-AQt" secondAttribute="trailing" constant="8" id="Dy8-lR-wOU"/>
+                                        <constraint firstItem="pJv-H9-acc" firstAttribute="leading" secondItem="plB-TS-AQt" secondAttribute="trailing" constant="8" id="OH4-u8-8YR"/>
+                                        <constraint firstItem="Jmv-vD-raH" firstAttribute="trailing" secondItem="FMm-Ex-vn5" secondAttribute="trailingMargin" constant="10" id="Vru-Nr-I1Z"/>
+                                        <constraint firstItem="plB-TS-AQt" firstAttribute="leading" secondItem="FMm-Ex-vn5" secondAttribute="leading" constant="20" symbolic="YES" id="wfH-sB-01N"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="avgPts" destination="mBx-LO-yXj" id="0ER-I3-qia"/>
                                     <outlet property="bracketName" destination="pJv-H9-acc" id="u9H-mU-LdV"/>
                                     <outlet property="lastPts" destination="Jmv-vD-raH" id="nWX-iF-EyB"/>
                                     <outlet property="winnerImage" destination="plB-TS-AQt" id="g4U-cy-agG"/>
