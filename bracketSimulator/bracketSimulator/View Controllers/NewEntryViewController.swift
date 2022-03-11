@@ -38,15 +38,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
     
     func saveCurrentModel(){
-        print("Bracket entry is being saved out to table VC:")
-        var i = 0
-        for team in bracketEntry.chosenTeams{
-            if team.id > -1{
-                let gameid = i + 1
-                print("Game ID \(gameid) has been filled with \(team.name)")
-            }
-            i += 1
-        }
         delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
     }
     

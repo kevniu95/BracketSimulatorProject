@@ -30,6 +30,16 @@ func pad(string : String, toSize: Int) -> String {
     return padded
 }
 
+func initiateTeams(numTeams: Int) -> [Team]{
+    var chosenTeams = [Team]()
+    let index = numTeams - 1
+    for _ in 0...index{
+        let blankTeamEntry = blankTeam()
+        chosenTeams.append(blankTeamEntry)
+    }
+    return chosenTeams
+}
+
 func blankTeam() -> Team{
     return Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
 }

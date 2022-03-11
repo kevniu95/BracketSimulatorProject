@@ -14,6 +14,7 @@ class EntryTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        initNewButton()
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -22,6 +23,44 @@ class EntryTableViewController: UITableViewController {
         if entryArray.count == 0{
             initSheet()
         }
+    }
+    
+    
+    //https://www.hackingwithswift.com/books/ios-swiftui/writing-data-to-the-documents-directory
+    func archiveEntries(_ bracketEntries: [BracketEntry]) {
+        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let url = docDirectory.appendingPathComponent("bracketEntries.plist")
+        
+        do{
+            let data = try NSKeyedArchiver.archivedData(withRootObject: bracketEntries, requiringSecureCoding: false)
+            try data.write(to: url)
+        } catch (let error){
+            print("Error saing to file: \(error)")
+        }
+        
+    }
+    
+    func unArchiveEntries() -> [BracketEntry] {
+        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [] }
+        let url = docDirectory.appendingPathComponent("bracketEntries.plist")
+        
+        var entries: [BracketEntry]?
+        do{
+            let data = try Data(contentsOf: url)
+            entries = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [BracketEntry]
+        } catch (let error){
+            print("Error fetching from file: \(error)")
+        }
+        return entries ?? []
+    }
+    
+    func initNewButton(){
+        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(objcInitSheet))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @objc func objcInitSheet(){
+        initSheet()
     }
 
     func setEntryArray(){
@@ -40,16 +79,13 @@ class EntryTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return entryArray.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryTableViewCell", for: indexPath) as? EntryTableViewCell
         // Configure the cell...
@@ -70,28 +106,17 @@ class EntryTableViewController: UITableViewController {
         }
     }
 
-        
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-
 }
-
 
 extension EntryTableViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {
-        print("Trying to save this damn thing")
-        print(entryName)
         if entryDict.keys.contains(entryName) {
             entryDict[entryName] = entry
         } else{
             entryDict[entryName] = entry
-        }
-        print("I have saved the entry, here is what it looks like right now")
-        for team in entryDict[entryName]!.chosenTeams{
-            if team.id > -1{
-                print(team.name)
-            }
         }
     }
 }
@@ -111,24 +136,3 @@ extension EntryTableViewController: RequestNameVCDelegate{
 //        currentEntry = entry
 //    }
 }
-
-
-//        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(test))
-//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-
-//
-//func moveToEntryVC() {
-////        let newEntryVC = self.storyboard?.instantiateViewController(withIdentifier: "NewEntryViewController") as! NewEntryViewController
-////        newEntryVC.delegate = self
-////        if let currentEntry = currentEntry{
-////            print(currentEntry.name)
-////            newEntryVC.inputBracketEntry = currentEntry
-////        }
-////        self.navigationController?.pushViewController(newEntryVC, animated: true)
-//}

@@ -7,50 +7,60 @@
 
 import Foundation
 
-class BracketEntry{
-//    private (set) var id: Int
+class BracketEntry: NSObject, NSCoding{
     private (set) var name: String
     private (set) var chosenTeams: [Team]
     private (set) var winner: String
-    private (set) var scores: [Float]
-    private (set) var recentScore: Float
+    private (set) var scores: [Int]
+    private (set) var recentScore: Int
     
-    init(name: String){
-//        self.id = id
+    init(name: String, chosenTeams: [Team], winner: String, scores: [Int], recentScore: Int){
         self.name = name
-        self.chosenTeams = [Team]()
-        self.winner = ""
-        self.recentScore = 0
-        self.scores = [Float]()
-        
-        self.initiateTeams()
+        self.chosenTeams = chosenTeams
+        self.winner = winner
+        self.scores = scores
+        self.recentScore = recentScore
     }
+    
+    convenience init(name: String){
+        let thisName = name
+        let chosenTeams = initiateTeams(numTeams: 64)
+        let winner = ""
+        let scores = [Int]()
+        let recentScore = 0
+        
+        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, scores: scores, recentScore: recentScore)
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String,
+              let chosenTeams = aDecoder.decodeObject(forKey: "chosenTeams") as? [Team],
+              let winner = aDecoder.decodeObject(forKey: "winner") as? String,
+              let scores = aDecoder.decodeObject(forKey: "scores") as? [Int],
+              let recentScore = aDecoder.decodeObject(forKey: "recentScore") as? Int else{
+                  return nil
+              }
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, scores: scores, recentScore: recentScore)
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.name, forKey: "name")
+        coder.encode(self.chosenTeams, forKey: "chosenTeams")
+        coder.encode(self.winner, forKey: "winner")
+        coder.encode(self.scores, forKey: "score")
+        coder.encode(self.recentScore, forKey: "recentScore")
+    }
+    
+    
     
     func setName(name: String){
         self.name = name        
     }
-    
-    func initiateTeams(){
-        let initialTeam = Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
-        for _ in 0...63{
-            chosenTeams.append(initialTeam)
-        }
-    }
-    
+        
     func updateTeams(gameID: Int, newTeam: Team){
         self.chosenTeams[gameID] = newTeam
-        var i = 0
-        print("\nBracket Entry chosen teams have been updated:")
-        for team in self.chosenTeams{
-            if team.id > -1{
-                let gameid = i + 1
-                print("Game ID \(gameid) has been filled with \(team.name)")
-            }
-            i += 1
-        }
         if gameID == 1{
             self.winner = newTeam.name
         }
     }
-    
 }
