@@ -21,7 +21,7 @@ class EntryTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         instantiateBracketEntries()
-//        setEntryArray()
+        setEntryArray()
         if entryArray.count == 0{
             initSheet()
         }

@@ -38,7 +38,6 @@ class DataManager {
         print("Hey I just saved!")
     }
     
-//    "//Users/kniu91/Library/Developer/CoreSimulator/Devices/74A7AD40-7D35-43EE-8DCD-772AFA3588B9/data/Containers/Data/Application/D1B9577E-0314-476E-B0C4-1F66B92CAAF2/Documents/bracketEntries.plist"
     
     func unArchiveEntries() -> [String : BracketEntry] {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [:] }
@@ -62,8 +61,11 @@ class DataManager {
     func updateEntries(entryName: String, bracketEntry: BracketEntry){
         bracketEntries[entryName] = bracketEntry
         print("Updated set of entries. Entries are now")
-        for i in bracketEntries{
-            print(i)
+        for bracketEntry in Array(bracketEntries.values){
+            print(bracketEntry)
+            for j in bracketEntry.chosenTeams {
+                print(j)
+            }
         }
     }
     

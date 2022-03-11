@@ -64,11 +64,21 @@ func pad(string : String, toSize: Int) -> String {
     return padded
 }
 
-func initiateTeams(numTeams: Int) -> [Team]{
-    var chosenTeams = [Team]()
+//func initiateTeams(numTeams: Int) -> [Team]{
+//    var chosenTeams = [Team]()
+//    let index = numTeams - 1
+//    for _ in 0...index{
+//        let blankTeamEntry = blankTeam()
+//        chosenTeams.append(blankTeamEntry)
+//    }
+//    return chosenTeams
+//}
+//
+func initiateTeams(numTeams: Int) -> [Int]{
+    var chosenTeams = [Int]()
     let index = numTeams - 1
     for _ in 0...index{
-        let blankTeamEntry = blankTeam()
+        let blankTeamEntry = blankTeam().teamid
         chosenTeams.append(blankTeamEntry)
     }
     return chosenTeams
