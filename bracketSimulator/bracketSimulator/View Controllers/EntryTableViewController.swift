@@ -14,6 +14,7 @@ class EntryTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        entryArray = unArchiveEntries()
         initNewButton()
     }
     
@@ -25,39 +26,13 @@ class EntryTableViewController: UITableViewController {
         }
     }
     
-    
-    //https://www.hackingwithswift.com/books/ios-swiftui/writing-data-to-the-documents-directory
-    func archiveEntries(_ bracketEntries: [BracketEntry]) {
-        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        let url = docDirectory.appendingPathComponent("bracketEntries.plist")
-        
-        do{
-            let data = try NSKeyedArchiver.archivedData(withRootObject: bracketEntries, requiringSecureCoding: false)
-            try data.write(to: url)
-        } catch (let error){
-            print("Error saing to file: \(error)")
-        }
-        
-    }
-    
-    func unArchiveEntries() -> [BracketEntry] {
-        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [] }
-        let url = docDirectory.appendingPathComponent("bracketEntries.plist")
-        
-        var entries: [BracketEntry]?
-        do{
-            let data = try Data(contentsOf: url)
-            entries = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [BracketEntry]
-        } catch (let error){
-            print("Error fetching from file: \(error)")
-        }
-        return entries ?? []
-    }
-    
     func initNewButton(){
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(objcInitSheet))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
+    
+    
+//Users/kniu91/Library/Developer/CoreSimulator/Devices/74A7AD40-7D35-43EE-8DCD-772AFA3588B9/data/Containers/Data/Application/537C4461-DEBC-4294-94E0-07242D195A9B/Documents/bracketEntries.plist
     
     @objc func objcInitSheet(){
         initSheet()
@@ -66,6 +41,7 @@ class EntryTableViewController: UITableViewController {
     func setEntryArray(){
         entryArray = Array(entryDict.values)
         self.tableView.reloadData()
+        archiveEntries(entryArray)
     }
     
     func initSheet(){
@@ -129,10 +105,5 @@ extension EntryTableViewController: RequestNameVCDelegate{
             entryDict[entryName] = entry
         }
         setEntryArray()
-        self.tableView.reloadData()
     }
-    
-//    func pushEntry(entry: BracketEntry){
-//        currentEntry = entry
-//    }
 }

@@ -50,9 +50,7 @@ class BracketEntry: NSObject, NSCoding{
         coder.encode(self.scores, forKey: "score")
         coder.encode(self.recentScore, forKey: "recentScore")
     }
-    
-    
-    
+        
     func setName(name: String){
         self.name = name        
     }
@@ -64,3 +62,6 @@ class BracketEntry: NSObject, NSCoding{
         }
     }
 }
+
+
+

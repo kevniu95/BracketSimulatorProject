@@ -16,7 +16,7 @@ class RequestNameViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("NEW GUY!")
     }
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)

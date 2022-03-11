@@ -8,13 +8,41 @@
 import Foundation
 
 
-struct Team {
+class Team: NSObject, NSCoding {
     var id: Int
     var binID: String
     var firstCellID: Int
     var name: String
     var seed: Int
 //    var image: UIImage
+    
+    init(id: Int, binID: String, firstCellID: Int, name: String, seed: Int){
+        self.id = id
+        self.binID = binID
+        self.firstCellID = firstCellID
+        self.name = name
+        self.seed = seed
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let id = aDecoder.decodeObject(forKey: "id") as? Int,
+              let binID = aDecoder.decodeObject(forKey: "binID") as? String,
+              let firstCellID = aDecoder.decodeObject(forKey: "firstCellID") as? Int,
+              let name = aDecoder.decodeObject(forKey: "name") as? String,
+              let seed = aDecoder.decodeObject(forKey: "seed") as? Int else{
+                  return nil
+              }
+        self.init(id: id, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.id, forKey: "id")
+        coder.encode(self.binID, forKey: "binID")
+        coder.encode(self.firstCellID, forKey: "firstCellID")
+        coder.encode(self.name, forKey: "name")
+        coder.encode(self.seed, forKey: "seed")
+    }
+        
 }
 
 func convertToBin(num: Int, toSize: Int) -> String{
