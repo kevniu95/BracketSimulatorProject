@@ -8,16 +8,21 @@
 import Foundation
 
 
+
+enum Keys: String{
+    case teamid = "teamid"
+}
+
 class Team: NSObject, NSCoding {
-    var id: Int
+    var teamid: Int
     var binID: String
     var firstCellID: Int
     var name: String
     var seed: Int
 //    var image: UIImage
     
-    init(id: Int, binID: String, firstCellID: Int, name: String, seed: Int){
-        self.id = id
+    init(teamid: Int, binID: String, firstCellID: Int, name: String, seed: Int){
+        self.teamid = teamid
         self.binID = binID
         self.firstCellID = firstCellID
         self.name = name
@@ -25,18 +30,19 @@ class Team: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let id = aDecoder.decodeObject(forKey: "id") as? Int,
-              let binID = aDecoder.decodeObject(forKey: "binID") as? String,
+        guard
+            let binID = aDecoder.decodeObject(forKey: "binID") as? String,
+            let teamid = aDecoder.decodeObject(forKey: Keys.teamid.rawValue) as? Int,
               let firstCellID = aDecoder.decodeObject(forKey: "firstCellID") as? Int,
               let name = aDecoder.decodeObject(forKey: "name") as? String,
               let seed = aDecoder.decodeObject(forKey: "seed") as? Int else{
                   return nil
               }
-        self.init(id: id, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
+        self.init(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
     }
     
     func encode(with coder: NSCoder) {
-        coder.encode(self.id, forKey: "id")
+        coder.encode(self.teamid, forKey: Keys.teamid.rawValue)
         coder.encode(self.binID, forKey: "binID")
         coder.encode(self.firstCellID, forKey: "firstCellID")
         coder.encode(self.name, forKey: "name")
@@ -69,7 +75,7 @@ func initiateTeams(numTeams: Int) -> [Team]{
 }
 
 func blankTeam() -> Team{
-    return Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
+    return Team(teamid: -1, binID: "-1", firstCellID: -1, name: "-1", seed: 0)
 }
 
 func convertTeams() -> [Team] {
@@ -101,12 +107,12 @@ func convertTeams() -> [Team] {
 
              //check that we have enough columns
              if columns.count == 5 {
-                 let id = Int(columns[0]) ?? 0
+                 let teamid = Int(columns[0]) ?? 0
                  let binID = pad(string: columns[1], toSize: 7)
                  let firstCellID = Int(columns[2]) ?? 0
                  let name = String(columns[3].filter{!"\n\t\r".contains($0)})
                  let seed = Int(String(columns[4].filter{!"\n\t\r".contains($0)})) ?? 0
-                 let team = Team(id: id, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
+                 let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
                  teams.append(team)
                  
              }

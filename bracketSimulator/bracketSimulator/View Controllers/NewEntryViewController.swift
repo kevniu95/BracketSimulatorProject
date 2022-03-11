@@ -91,6 +91,8 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]
             let currTeam = bracketEntry.chosenTeams[ind - 1]
+            // What if we tried converting ID to team right here?
+            // Then, what's saved in bracket entry can be a list of IDs rather than a list of teams
             currGameCell.setTeam(team: currTeam)
         }
         // Always instantiate first 64 teams (i.e. last 64 bracket entires)
@@ -158,7 +160,7 @@ extension NewEntryViewController: GameCellDelegate{
     func resetDownstreamCells(team: Team, nextGames: [Int]) {
         for nextGameInd in nextGames{
             let currGameCell = gameCells[nextGameInd - 1]
-            if currGameCell.cellOn && currGameCell.team.id != team.id{
+            if currGameCell.cellOn && currGameCell.team.teamid != team.teamid{
                 currGameCell.resetCell()
                 bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: blankTeam())
             }

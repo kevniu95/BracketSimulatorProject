@@ -27,7 +27,7 @@
 		56DEB65D27D3181500B96D65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56DEB65B27D3181500B96D65 /* LaunchScreen.storyboard */; };
 		56FAEA1227DAE218006E6DB5 /* RequestNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */; };
 		56FAEA1427DAF921006E6DB5 /* RequestNameVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */; };
-		56FAEA1627DB49F6006E6DB5 /* diskReadWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FAEA1527DB49F6006E6DB5 /* diskReadWrite.swift */; };
+		56FAEA1827DB60CF006E6DB5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FAEA1727DB60CF006E6DB5 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,7 @@
 		56DEB65E27D3181500B96D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameViewController.swift; sourceTree = "<group>"; };
 		56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameVCDelegate.swift; sourceTree = "<group>"; };
-		56FAEA1527DB49F6006E6DB5 /* diskReadWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diskReadWrite.swift; sourceTree = "<group>"; };
+		56FAEA1727DB60CF006E6DB5 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +133,7 @@
 				56DEB65927D3181500B96D65 /* Assets.xcassets */,
 				56DEB65B27D3181500B96D65 /* LaunchScreen.storyboard */,
 				56DEB65627D3181400B96D65 /* Main.storyboard */,
-				567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */,
-				56FAEA1527DB49F6006E6DB5 /* diskReadWrite.swift */,
+				56FAEA1927DB7222006E6DB5 /* Data Model */,
 				567C251E27D9E1C2007E3B54 /* Views */,
 				567C251D27D9E1B0007E3B54 /* Input Data */,
 				56B9B38627D31CB80096C142 /* View Controllers */,
@@ -142,6 +141,15 @@
 				56703CC027D769F000E25D76 /* GameCellView.swift */,
 			);
 			path = bracketSimulator;
+			sourceTree = "<group>";
+		};
+		56FAEA1927DB7222006E6DB5 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */,
+				56FAEA1727DB60CF006E6DB5 /* DataManager.swift */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +225,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56FAEA1627DB49F6006E6DB5 /* diskReadWrite.swift in Sources */,
 				567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */,
 				565561CB27D882DC00068103 /* Teams.swift in Sources */,
 				56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */,
@@ -226,6 +233,7 @@
 				567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
 				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
+				56FAEA1827DB60CF006E6DB5 /* DataManager.swift in Sources */,
 				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,
 				56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */,
 				56FAEA1227DAE218006E6DB5 /* RequestNameViewController.swift in Sources */,

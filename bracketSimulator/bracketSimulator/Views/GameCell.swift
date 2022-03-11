@@ -24,7 +24,7 @@ class GameCell{
     init(idNum: Int, gamePos: gamePosition){
         id = idNum
         cellImage = UIStackView()
-        team = Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
+        team = Team(teamid: -1, binID: "", firstCellID: -1, name: "", seed: 0)
         binaryId = ""
         cellOn = false
         nextGames = [Int]()
@@ -65,8 +65,10 @@ class GameCell{
     
     // MARK: Stack View Gesture Recognizers
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer){
-        let nextGame = nextGames[0]
-        delegate?.setNewTeam(team: self.team, nextGame: nextGame)
+        if id > 1{
+            let nextGame = nextGames[0]
+            delegate?.setNewTeam(team: self.team, nextGame: nextGame)
+        }
     }
         
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
@@ -79,7 +81,7 @@ class GameCell{
         // Check to see if setTeam is a "real update"
         // or filling out cells if it's a whole new bracket
         // entry
-        if team.id > -1 {
+        if team.teamid > -1 {
             self.team = team
             self.cellOn = true
 //            print("Updating cell image for \(self.team.name) at cell number \(self.id)")
@@ -89,7 +91,7 @@ class GameCell{
         // Check to see if team name is changed from before
             // Ex. If I pick Norfolk State to make the championship then switch to
             //      Gonzaga to beat them in the first round, need to update bracket
-        if self.team.id != prevTeam.id && prevTeam.id >= 0{
+        if self.team.teamid != prevTeam.teamid && prevTeam.teamid >= 0{
             delegate?.resetDownstreamCells(team: team, nextGames: nextGames)
         }
     }
@@ -97,7 +99,7 @@ class GameCell{
     func resetCell(){
         self.cellImage.isHidden = true
         self.cellImage.isUserInteractionEnabled = false
-        self.team = Team(id: -1, binID: "", firstCellID: -1, name: "", seed: 0)
+        self.team = blankTeam()
     }
     
     func updateCellImage(){

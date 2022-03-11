@@ -8,22 +8,30 @@
 import UIKit
 
 class EntryTableViewController: UITableViewController {
-    var entryDict: [String: BracketEntry] = [:]
+//    var entryDict: [String: BracketEntry] = [:]
     var entryArray = [BracketEntry]()
-    var currentEntry: BracketEntry?
+//    var currentEntry: BracketEntry?
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        entryArray = unArchiveEntries()
         initNewButton()
+//        instantiateBracketEntries()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        setEntryArray()
+        instantiateBracketEntries()
+//        setEntryArray()
         if entryArray.count == 0{
             initSheet()
         }
+    }
+    
+    //Users/kniu91/Library/Developer/CoreSimulator/Devices/74A7AD40-7D35-43EE-8DCD-772AFA3588B9/data/Containers/Data/Application/9DA6A2C0-5FA5-4259-9346-895DBE105730/Documents/bracketEntries.plist
+    
+    func instantiateBracketEntries(){
+        let bracketEntries = DataManager.sharedInstance.unArchiveEntries()
+        entryArray = Array(bracketEntries.values)
     }
     
     func initNewButton(){
@@ -31,17 +39,17 @@ class EntryTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    
-//Users/kniu91/Library/Developer/CoreSimulator/Devices/74A7AD40-7D35-43EE-8DCD-772AFA3588B9/data/Containers/Data/Application/537C4461-DEBC-4294-94E0-07242D195A9B/Documents/bracketEntries.plist
-    
+        
     @objc func objcInitSheet(){
         initSheet()
     }
 
     func setEntryArray(){
-        entryArray = Array(entryDict.values)
+        let bracketEntries = DataManager.sharedInstance.bracketEntries
+        entryArray = Array(bracketEntries.values)
+        print(entryArray)
         self.tableView.reloadData()
-        archiveEntries(entryArray)
+        DataManager.sharedInstance.archiveEntries()
     }
     
     func initSheet(){
@@ -89,21 +97,14 @@ class EntryTableViewController: UITableViewController {
 
 extension EntryTableViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {
-        if entryDict.keys.contains(entryName) {
-            entryDict[entryName] = entry
-        } else{
-            entryDict[entryName] = entry
-        }
+        DataManager.sharedInstance.updateEntries(entryName: entryName, bracketEntry: entry)
+        setEntryArray()
     }
 }
 
 extension EntryTableViewController: RequestNameVCDelegate{
     func saveNewEntry(entryName: String, entry: BracketEntry) {
-        if entryDict.keys.contains(entryName) {
-            entryDict[entryName] = entry
-        } else{
-            entryDict[entryName] = entry
-        }
+        DataManager.sharedInstance.updateEntries(entryName: entryName, bracketEntry: entry)
         setEntryArray()
     }
 }
