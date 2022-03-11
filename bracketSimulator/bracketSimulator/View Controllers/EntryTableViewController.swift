@@ -14,26 +14,29 @@ class EntryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setEntryArray()
-        
-//        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(test))
-//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        if entryArray.count == 0{
+            initSheet()
+        }
     }
 
-    @objc func test(){
-        
-    }
     func setEntryArray(){
         entryArray = Array(entryDict.values)
     }
-    // MARK: - Table view data source
-
     
+    func initSheet(){
+        let requestNameVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestNameViewController") as! RequestNameViewController
+        requestNameVC.delegate = self
+        if let sheet = requestNameVC.sheetPresentationController{
+            sheet.detents = [.large()]
+        }
+        present(requestNameVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -58,17 +61,18 @@ class EntryTableViewController: UITableViewController {
         return cell
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "segueClosedToDetail"{
-//            let svc = segue.destination as! IssueDetailViewController;
-//            let issue = issuesArray[tableView.indexPathForSelectedRow!.row]
-//            svc.labelTitle = issue.title
-//            svc.labelUsername = "@" + issue.user.login
-//            svc.labelDateInitial = issue.createdAt
-//            svc.textText = issue.body
-//            svc.statusImg = "Closed"
-//        }
-//    }
+    
+    // Create new bracket entry from CREATE NEW button
+//    func
+    
+    // Load already-saved bracket entry from table cell
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fillBracketSegue"{
+            let svc = segue.destination as! NewEntryViewController;
+            svc.delegate = self
+            svc.bracketEntry = entryArray[tableView.indexPathForSelectedRow!.row]
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -130,3 +134,24 @@ extension EntryTableViewController: NewEntryVCDelegate{
         }
     }
 }
+
+extension EntryTableViewController: RequestNameVCDelegate{
+    func saveNewEntry(entryName: String, entry: BracketEntry) {
+        if entryDict.keys.contains(entryName) {
+            entryDict[entryName] = entry
+        } else{
+            entryDict[entryName] = entry
+        }
+        setEntryArray()
+    }
+}
+
+
+//        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(test))
+//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem

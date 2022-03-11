@@ -25,6 +25,8 @@
 		56DEB65827D3181400B96D65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56DEB65627D3181400B96D65 /* Main.storyboard */; };
 		56DEB65A27D3181500B96D65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56DEB65927D3181500B96D65 /* Assets.xcassets */; };
 		56DEB65D27D3181500B96D65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56DEB65B27D3181500B96D65 /* LaunchScreen.storyboard */; };
+		56FAEA1227DAE218006E6DB5 /* RequestNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */; };
+		56FAEA1427DAF921006E6DB5 /* RequestNameVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		56DEB65927D3181500B96D65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56DEB65C27D3181500B96D65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56DEB65E27D3181500B96D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameViewController.swift; sourceTree = "<group>"; };
+		56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNameVCDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 				56703CB627D724DF00E25D76 /* GameCell.swift */,
 				565561D027D8CF4B00068103 /* GameCellDelegate.swift */,
 				567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */,
+				56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -96,6 +101,7 @@
 				56B9B38927D353430096C142 /* PinchableViewController.swift */,
 				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 				56B9B38227D31C740096C142 /* EntryTableViewController.swift */,
+				56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -211,12 +217,14 @@
 				567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */,
 				565561CB27D882DC00068103 /* Teams.swift in Sources */,
 				56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */,
+				56FAEA1427DAF921006E6DB5 /* RequestNameVCDelegate.swift in Sources */,
 				56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */,
 				567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
 				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
 				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,
 				56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */,
+				56FAEA1227DAE218006E6DB5 /* RequestNameViewController.swift in Sources */,
 				56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */,
 				567C252227D9F70F007E3B54 /* NewEntryVCDelegate.swift in Sources */,
 				56DEB65327D3181400B96D65 /* SceneDelegate.swift in Sources */,

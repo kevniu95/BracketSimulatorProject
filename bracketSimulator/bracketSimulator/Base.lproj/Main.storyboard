@@ -32,13 +32,73 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="New Entry" id="DFN-pT-eRt"/>
+                    <navigationItem key="navigationItem" id="FOr-NB-hKr"/>
                     <connections>
                         <outlet property="scrollView" destination="6fz-vh-Hnk" id="Qs8-eQ-Yat"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhQ-tb-z6E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="450.72463768115944" y="-340.17857142857139"/>
+            <point key="canvasLocation" x="2043" y="358"/>
+        </scene>
+        <!--RequestNameViewController-->
+        <scene sceneID="tbw-lK-bkk">
+            <objects>
+                <viewController storyboardIdentifier="RequestNameViewController" title="RequestNameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bwW-dh-aNv" customClass="RequestNameViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Uc-ql-SXq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give your new bracket entry a name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRl-x5-OIx" userLabel="Command">
+                                <rect key="frame" x="68" y="163" width="278" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="azP-cJ-Ica" userLabel="Input">
+                                <rect key="frame" x="75.5" y="192" width="263" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="263" id="2IE-EB-sZd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWQ-gC-Na7">
+                                <rect key="frame" x="168" y="256" width="78.5" height="35"/>
+                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Create">
+                                            <attributes>
+                                                <font key="NSFont" size="18" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rdS-DT-Uac"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="azP-cJ-Ica" firstAttribute="top" secondItem="DRl-x5-OIx" secondAttribute="bottom" constant="8" id="96Q-t3-85c"/>
+                            <constraint firstItem="DRl-x5-OIx" firstAttribute="centerX" secondItem="0Uc-ql-SXq" secondAttribute="centerX" id="B11-Bl-HMf"/>
+                            <constraint firstItem="PWQ-gC-Na7" firstAttribute="top" secondItem="azP-cJ-Ica" secondAttribute="bottom" constant="30" id="CeO-8f-u30"/>
+                            <constraint firstItem="PWQ-gC-Na7" firstAttribute="centerX" secondItem="0Uc-ql-SXq" secondAttribute="centerX" id="FD1-eb-6YW"/>
+                            <constraint firstItem="azP-cJ-Ica" firstAttribute="centerX" secondItem="0Uc-ql-SXq" secondAttribute="centerX" id="UoV-qH-8vG"/>
+                            <constraint firstItem="DRl-x5-OIx" firstAttribute="top" secondItem="rdS-DT-Uac" secondAttribute="top" constant="119" id="mq3-0M-nJw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="commandLabel" destination="DRl-x5-OIx" id="Ddp-ar-gMu"/>
+                        <outlet property="createButton" destination="PWQ-gC-Na7" id="GTN-9N-KKZ"/>
+                        <outlet property="inputText" destination="azP-cJ-Ica" id="whY-ta-X72"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DgA-h9-Abk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1251" y="1080"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fNb-aZ-xY8">
@@ -51,7 +111,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="EUK-4Z-Pyz" kind="relationship" relationship="viewControllers" id="3R2-EB-heV"/>
-                        <segue destination="AP7-Tp-ECs" kind="relationship" relationship="viewControllers" id="Lm3-PH-hnE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LrN-f8-ess" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -114,6 +173,7 @@
                                     <outlet property="lastPts" destination="Jmv-vD-raH" id="nWX-iF-EyB"/>
                                     <outlet property="winnerImage" destination="plB-TS-AQt" id="g4U-cy-agG"/>
                                     <outlet property="winnerSelected" destination="3MX-6j-Hce" id="fvu-l1-yAC"/>
+                                    <segue destination="AP7-Tp-ECs" kind="show" identifier="fillBracketSegue" id="T39-lo-g6L"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -148,6 +208,9 @@
     </scenes>
     <resources>
         <image name="lock" width="128" height="128"/>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
