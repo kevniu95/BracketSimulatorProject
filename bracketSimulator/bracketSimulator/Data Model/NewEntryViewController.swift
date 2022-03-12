@@ -32,11 +32,10 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         fillFirstRoundTeam()
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//    }
+
     func saveCurrentModel(){
         delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
     }
@@ -86,19 +85,12 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
         }
-        
-//        for i in bracketEntry.chosenTeams{
-//            print(i)
-//        }
-        
+                
         // Load with previous data from bracket entry if it is available
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]
             let currTeamInd = bracketEntry.chosenTeams[ind - 1]
-            
-            // What if we tried converting ID to team right here?
-            // Then, what's saved in bracket entry can be a list of IDs rather than a list of teams
-            
+
             var currTeam: Team
             if currTeamInd < 0 || currTeamInd >= 65{
                 currTeam = blankTeam()

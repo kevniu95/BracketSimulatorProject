@@ -15,6 +15,7 @@ class DataManager {
     fileprivate init() {}
   
     var bracketEntries: [String: BracketEntry] = [:]
+    var teams = [Team]()
   
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -38,6 +39,12 @@ class DataManager {
         print("Hey I just saved!")
     }
     
+    func createTeams() -> [Team]{
+        // Creates the list of 64 teams to be saved in singleton
+        // (So don't have to create every time in NewEntry VC)
+        self.teams = createTeams()
+    }
+    
     
     func unArchiveEntries() -> [String : BracketEntry] {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [:] }
@@ -58,15 +65,18 @@ class DataManager {
         return entries ?? [:]
     }
     
+    // Update entry from bracketEntries
+    // Save out the update as well everytime there is an update
     func updateEntries(entryName: String, bracketEntry: BracketEntry){
         bracketEntries[entryName] = bracketEntry
-        print("Updated set of entries. Entries are now")
-        for bracketEntry in Array(bracketEntries.values){
-            print(bracketEntry)
-            for j in bracketEntry.chosenTeams {
-                print(j)
-            }
-        }
+        print("Updated set of entries in DataManager and will save them out")
+//        for bracketEntry in Array(bracketEntries.values){
+//            print(bracketEntry)
+//            for j in bracketEntry.chosenTeams {
+//                print(j)
+//            }
+//        }
+        archiveEntries()
     }
     
     func removeFromEntries(_ bracketEntry: BracketEntry){

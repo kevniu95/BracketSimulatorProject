@@ -16,8 +16,6 @@ class RequestNameViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("NEW GUY!")
-
     }
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
@@ -33,7 +31,7 @@ class RequestNameViewController: UIViewController{
             return
         }
         if bracketName.count == 0{
-            return
+            return // Need to have entered some name
         }
         let bracketEntry = BracketEntry(name: bracketName)
         delegate?.saveNewEntry(entryName: bracketName, entry: bracketEntry)

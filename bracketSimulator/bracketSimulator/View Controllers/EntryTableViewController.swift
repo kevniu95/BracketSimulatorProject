@@ -15,41 +15,37 @@ class EntryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initNewButton()
-//        instantiateBracketEntries()
+        instantiateBracketEntries()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        instantiateBracketEntries()
-        setEntryArray()
+        updateArrayForTable()
         if entryArray.count == 0{
             initSheet()
         }
-    }
-    
-    //Users/kniu91/Library/Developer/CoreSimulator/Devices/74A7AD40-7D35-43EE-8DCD-772AFA3588B9/data/Containers/Data/Application/9DA6A2C0-5FA5-4259-9346-895DBE105730/Documents/bracketEntries.plist
-    
-    func instantiateBracketEntries(){
-        let bracketEntries = DataManager.sharedInstance.unArchiveEntries()
-        entryArray = Array(bracketEntries.values)
     }
     
     func initNewButton(){
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(objcInitSheet))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
-    
-        
-    @objc func objcInitSheet(){
-        initSheet()
-    }
 
-    func setEntryArray(){
+    func instantiateBracketEntries(){
+        let bracketEntries = DataManager.sharedInstance.unArchiveEntries()
+        entryArray = Array(bracketEntries.values)
+    }
+    
+    func updateArrayForTable(){
+        // Run to keep Table array up-to-date with "source-of-truth" stored
+        // in DataManger
         let bracketEntries = DataManager.sharedInstance.bracketEntries
         entryArray = Array(bracketEntries.values)
-        print(entryArray)
         self.tableView.reloadData()
-        DataManager.sharedInstance.archiveEntries()
+    }
+    
+    @objc func objcInitSheet(){
+        initSheet()
     }
     
     func initSheet(){
@@ -98,13 +94,13 @@ class EntryTableViewController: UITableViewController {
 extension EntryTableViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {
         DataManager.sharedInstance.updateEntries(entryName: entryName, bracketEntry: entry)
-        setEntryArray()
+        updateArrayForTable()
     }
 }
 
 extension EntryTableViewController: RequestNameVCDelegate{
     func saveNewEntry(entryName: String, entry: BracketEntry) {
         DataManager.sharedInstance.updateEntries(entryName: entryName, bracketEntry: entry)
-        setEntryArray()
+        updateArrayForTable()
     }
 }
