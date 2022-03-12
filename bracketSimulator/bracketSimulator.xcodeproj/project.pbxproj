@@ -18,6 +18,7 @@
 		567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */; };
 		567C252227D9F70F007E3B54 /* NewEntryVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */; };
 		56A936E627DC3F6B00EF0857 /* SimulationBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */; };
+		56A936E827DC905300EF0857 /* TeamImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A936E727DC905300EF0857 /* TeamImageClient.swift */; };
 		56B0E57827DC37E800B38055 /* SimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0E57727DC37E800B38055 /* SimulatorViewController.swift */; };
 		56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38227D31C740096C142 /* EntryTableViewController.swift */; };
 		56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38427D31CB00096C142 /* NewEntryViewController.swift */; };
@@ -44,6 +45,7 @@
 		567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewCell.swift; sourceTree = "<group>"; };
 		567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryVCDelegate.swift; sourceTree = "<group>"; };
 		56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationBasic.swift; sourceTree = "<group>"; };
+		56A936E727DC905300EF0857 /* TeamImageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamImageClient.swift; sourceTree = "<group>"; };
 		56B0E57727DC37E800B38055 /* SimulatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorViewController.swift; sourceTree = "<group>"; };
 		56B9B38227D31C740096C142 /* EntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewController.swift; sourceTree = "<group>"; };
 		56B9B38427D31CB00096C142 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		567C251D27D9E1B0007E3B54 /* Input Data */ = {
 			isa = PBXGroup;
 			children = (
+				56A936E727DC905300EF0857 /* TeamImageClient.swift */,
 				565561CA27D882DC00068103 /* Teams.swift */,
 				56703CC227D76E8800E25D76 /* gameCellPositions.swift */,
 			);
@@ -243,6 +246,7 @@
 				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
 				56FAEA1827DB60CF006E6DB5 /* DataManager.swift in Sources */,
 				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,
+				56A936E827DC905300EF0857 /* TeamImageClient.swift in Sources */,
 				56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */,
 				56FAEA1227DAE218006E6DB5 /* RequestNameViewController.swift in Sources */,
 				56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */,

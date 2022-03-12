@@ -15,6 +15,7 @@ class EntryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.sharedInstance.instantiateFixedData()
+        print(DataManager.sharedInstance.teams[0].image)
         initNewButton()
         instantiateBracketEntries()
     }
@@ -71,20 +72,31 @@ class EntryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryTableViewCell", for: indexPath) as? EntryTableViewCell
         // Configure the cell...
         cell?.bracketName.text = entryArray[indexPath.row].name
-
+        cell?.bracketName.textAlignment = .center
         
         var avg: String
         if entryArray[indexPath.row].simulations > 0{
             avg = String(entryArray[indexPath.row].aggScore / entryArray[indexPath.row].simulations)
         }
         else{avg = "--"}
-        cell?.completed.text = String(entryArray[indexPath.row].completed)
+//        
+        let winnerPosition = entryArray[indexPath.row].chosenTeams[0]
+        var winnerImg: UIImage
+        if winnerPosition > -1 {
+            winnerImg = DataManager.sharedInstance.teams[winnerPosition].image
+            print("I am priting a winner image")
+        }
+        else{
+            winnerImg = UIImage(systemName: "building.columns.circle")!
+        }
+        print(winnerImg)
+        cell?.winnerImage.image = winnerImg
+        
         cell?.winnerName.text = entryArray[indexPath.row].winner
         cell?.lastPts.text = "Average:\n" + avg + " / 1920"
         cell?.simulationCt.text = "\(entryArray[indexPath.row].simulations) simulations"
         return cell!
     }
-    
 
     // Load already-saved bracket entry from table cell
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

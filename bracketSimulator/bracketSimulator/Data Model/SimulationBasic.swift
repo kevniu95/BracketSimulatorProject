@@ -85,7 +85,7 @@ class SimulationBasic{
     var arrayToScore: [Int]
     
     init(){
-        self.teams = convertTeams()
+        self.teams = DataManager.sharedInstance.shareTeams()
         self.winner = blankTeam()
         self.arrayToScore = []
         //        for team in teams{
@@ -116,7 +116,6 @@ class SimulationBasic{
         var arrayToScore = [Int]()
         for ind in 0...62{
             arrayToScore.append(allGames[ind].winner.teamid)
-            print("\(ind): \(allGames[ind].winner.name)")
         }
         return arrayToScore
     }

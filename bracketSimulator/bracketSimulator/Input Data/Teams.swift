@@ -6,49 +6,30 @@
 //
 
 import Foundation
-
+import UIKit
 
 
 enum Keys: String{
     case teamid = "teamid"
 }
 
-class Team: NSObject, NSCoding {
+class Team {
     var teamid: Int
     var binID: String
     var firstCellID: Int
     var name: String
     var seed: Int
+    var image: UIImage
 //    var image: UIImage
     
-    init(teamid: Int, binID: String, firstCellID: Int, name: String, seed: Int){
+    init(teamid: Int, binID: String, firstCellID: Int, name: String, seed: Int, image: UIImage){
         self.teamid = teamid
         self.binID = binID
         self.firstCellID = firstCellID
         self.name = name
         self.seed = seed
+        self.image = image
     }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        guard
-            let binID = aDecoder.decodeObject(forKey: "binID") as? String,
-            let teamid = aDecoder.decodeObject(forKey: Keys.teamid.rawValue) as? Int,
-              let firstCellID = aDecoder.decodeObject(forKey: "firstCellID") as? Int,
-              let name = aDecoder.decodeObject(forKey: "name") as? String,
-              let seed = aDecoder.decodeObject(forKey: "seed") as? Int else{
-                  return nil
-              }
-        self.init(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
-    }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(self.teamid, forKey: Keys.teamid.rawValue)
-        coder.encode(self.binID, forKey: "binID")
-        coder.encode(self.firstCellID, forKey: "firstCellID")
-        coder.encode(self.name, forKey: "name")
-        coder.encode(self.seed, forKey: "seed")
-    }
-        
 }
 
 func convertToBin(num: Int, toSize: Int) -> String{
@@ -64,16 +45,6 @@ func pad(string : String, toSize: Int) -> String {
     return padded
 }
 
-//func initiateTeams(numTeams: Int) -> [Team]{
-//    var chosenTeams = [Team]()
-//    let index = numTeams - 1
-//    for _ in 0...index{
-//        let blankTeamEntry = blankTeam()
-//        chosenTeams.append(blankTeamEntry)
-//    }
-//    return chosenTeams
-//}
-//
 func initiateTeams(numTeams: Int) -> [Int]{
     var chosenTeams = [Int]()
     let index = numTeams - 1
@@ -85,7 +56,7 @@ func initiateTeams(numTeams: Int) -> [Int]{
 }
 
 func blankTeam() -> Team{
-    return Team(teamid: -1, binID: "-1", firstCellID: -1, name: "-1", seed: 0)
+    return Team(teamid: -1, binID: "-1", firstCellID: -1, name: "-1", seed: 0, image: UIImage())
 }
 
 func convertTeams() -> [Team] {
@@ -112,22 +83,33 @@ func convertTeams() -> [Team] {
     //if you have a header row, remove it here
     rows.removeFirst()
     //now loop around each row, and split it into each of its columns
-         for row in rows {
+        for row in rows {
              let columns = row.components(separatedBy: ",")
 
              //check that we have enough columns
-             if columns.count == 5 {
+             if columns.count == 6 {
                  let teamid = Int(columns[0]) ?? 0
                  let binID = pad(string: columns[1], toSize: 7)
                  let firstCellID = Int(columns[2]) ?? 0
                  let name = String(columns[3].filter{!"\n\t\r".contains($0)})
                  let seed = Int(String(columns[4].filter{!"\n\t\r".contains($0)})) ?? 0
-                 let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed)
-                 teams.append(team)
+                 let urlString = String(columns[5].filter{!"\n\t\r".contains($0)})
+                 
+                 let url = URL(string: urlString)!
+                 let data = try? Data(contentsOf: url)
+                
+                 if let imageData = data {
+                     let image = UIImage(data: imageData)!
+                     
+                     let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: image)
+                     teams.append(team)
+                 } else{
+                     let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: UIImage())
+                     teams.append(team)
+                 }
+                 
                  
              }
          }
     return teams
 }
-
-

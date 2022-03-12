@@ -19,6 +19,7 @@ class DataManager {
     var gamePositions = [gamePosition]()
     var gameCells = [GameCell]()
     var simulations = [SimulationBasic]()
+    var images = [UIImage]()
   
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -32,6 +33,10 @@ class DataManager {
         }
     }
     
+    func shareTeams() -> [Team]{
+        return self.teams
+    }
+
     func scoreSimulations(){
         for simulation in simulations{
             for (entryName, bracketEntry) in bracketEntries{

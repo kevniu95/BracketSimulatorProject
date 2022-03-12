@@ -24,7 +24,7 @@ class GameCell{
     init(idNum: Int, gamePos: gamePosition){
         id = idNum
         cellImage = UIStackView()
-        team = Team(teamid: -1, binID: "", firstCellID: -1, name: "", seed: 0)
+        team = Team(teamid: -1, binID: "", firstCellID: -1, name: "", seed: 0, image: UIImage())
         binaryId = ""
         cellOn = false
         nextGames = [Int]()
