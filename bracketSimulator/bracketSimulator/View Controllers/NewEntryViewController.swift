@@ -26,7 +26,40 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         initiateScrollView()
         initiateGameCells(gamePositions: gamePositions)
         fillFirstRoundTeam()
+        initLockButton()
+        print("\(bracketEntry.name) completed: \(bracketEntry.completed)")
+        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
     }
+    
+    func initLockButton(){
+        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "lock.open"), style: .done, target: self, action: #selector(setLockButton))
+        if bracketEntry.locked{
+            rightBarButtonItem.image = UIImage(systemName: "lock")
+            rightBarButtonItem.isEnabled = false
+        }
+        else if !bracketEntry.completed{
+            rightBarButtonItem.isEnabled = false
+        }
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @objc func setLockButton(){
+        print("I am here")
+        if !bracketEntry.completed || bracketEntry.locked{
+            print("This should not be happening, double check your shit")
+            return
+        }
+        let alert = UIAlertController(title: "Save Bracket", message: "Do you want to permanently lock this entry from editing?", preferredStyle: .actionSheet)
+            
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+            self.bracketEntry.lockBracket()
+            self.saveCurrentModel()
+            self.initLockButton()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -102,16 +135,19 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
     
     func setDownstreamCells(team: Team, nextGames: [Int], leaveGames: Int) {
-        var gamesLeft = nextGames.count
-        for nextGameInd in nextGames{
-            if gamesLeft > leaveGames{
-                let currGameCell = gameCells[nextGameInd - 1]
-                currGameCell.setTeam(team: team)
-                bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: team)
+        if !bracketEntry.locked{
+            var gamesLeft = nextGames.count
+            for nextGameInd in nextGames{
+                if gamesLeft > leaveGames{
+                    let currGameCell = gameCells[nextGameInd - 1]
+                    currGameCell.setTeam(team: team)
+                    bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: team)
+                }
+                gamesLeft -= 1
             }
-            gamesLeft -= 1
+            saveCurrentModel()
+            initLockButton()
         }
-        saveCurrentModel()
     }
 }
 
@@ -155,19 +191,25 @@ extension NewEntryViewController: GameCellDelegate{
     }
     
     func resetDownstreamCells(team: Team, nextGames: [Int], prevTeam: Team) {
-        for nextGameInd in nextGames{
-            let currGameCell = gameCells[nextGameInd - 1]
-            if currGameCell.cellOn && currGameCell.team.teamid == prevTeam.teamid{
-                currGameCell.resetCell()
-                bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: blankTeam())
+        if !bracketEntry.locked{
+            for nextGameInd in nextGames{
+                let currGameCell = gameCells[nextGameInd - 1]
+                if currGameCell.cellOn && currGameCell.team.teamid == prevTeam.teamid{
+                    currGameCell.resetCell()
+                    bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: blankTeam())
+                }
             }
+            saveCurrentModel()
+            initLockButton()
         }
-        saveCurrentModel()
     }
     func setNewTeam(team: Team, nextGame: Int){
-        let currGameCell = gameCells[nextGame - 1]
-        currGameCell.setTeam(team: team)
-        bracketEntry.updateTeams(gameID: nextGame - 1, newTeam: team)
-        saveCurrentModel()
+        if !bracketEntry.locked{
+            let currGameCell = gameCells[nextGame - 1]
+            currGameCell.setTeam(team: team)
+            bracketEntry.updateTeams(gameID: nextGame - 1, newTeam: team)
+            saveCurrentModel()
+            initLockButton()
+        }
     }
 }

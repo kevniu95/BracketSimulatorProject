@@ -12,16 +12,18 @@ class BracketEntry: NSObject, NSCoding{
     private (set) var chosenTeams: [Int] // Stores team IDs
     private (set) var winner: String
     var completed: Bool
+    private (set) var locked: Bool
     private (set) var simulations: Int
     private (set) var aggScore: Int
 //    private (set) var scores: [Int]
 //    private (set) var recentScore: Int
     
-    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, simulations: Int, aggScore: Int){
+    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, locked: Bool, simulations: Int, aggScore: Int){
         self.name = name
         self.chosenTeams = chosenTeams
         self.winner = winner
         self.completed = completed
+        self.locked = locked
         self.simulations = simulations
         self.aggScore = aggScore
     }
@@ -31,10 +33,11 @@ class BracketEntry: NSObject, NSCoding{
         let chosenTeams = initiateTeams(numTeams: 64)
         let winner = "<None Selected>"
         let completed = false
+        let locked = false
         let simulations = 0
         let aggScore = 0
         
-        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, simulations: simulations, aggScore: aggScore)
+        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -44,11 +47,12 @@ class BracketEntry: NSObject, NSCoding{
             else{
                   return nil
               }
+        let locked = aDecoder.decodeBool(forKey: "locked") as Bool
         let completed = aDecoder.decodeBool(forKey: "completed") as Bool
         let simulations = aDecoder.decodeInteger(forKey: "simulations")
         let aggScore = aDecoder.decodeInteger(forKey: "aggScore")
 
-        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, simulations: simulations, aggScore: aggScore)
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore)
     }
     
     func encode(with coder: NSCoder) {
@@ -56,6 +60,7 @@ class BracketEntry: NSObject, NSCoding{
         coder.encode(self.chosenTeams, forKey: "chosenTeams")
         coder.encode(self.winner, forKey: "winner")
         coder.encode(self.completed, forKey: "completed")
+        coder.encode(self.locked, forKey: "locked")
         coder.encode(self.simulations, forKey: "simulations")
         coder.encode(self.aggScore, forKey: "aggScore")
     }
@@ -127,12 +132,16 @@ class BracketEntry: NSObject, NSCoding{
     
     func getWinner() -> String{
         let winnerID = self.chosenTeams[0]
-        if winnerID > 0{
+        if winnerID >= 0{
             return DataManager.sharedInstance.teams[winnerID].name
         }
         else{ return "<None Selected>"}
     }
         
+    func lockBracket(){
+        self.locked = true
+    }
+    
     func updateTeams(gameID: Int, newTeam: Team){
         self.chosenTeams[gameID] = newTeam.teamid
         self.winner = getWinner()

@@ -76,12 +76,9 @@ class EntryTableViewController: UITableViewController {
         var avg: String
         if entryArray[indexPath.row].simulations > 0{
             avg = String(entryArray[indexPath.row].aggScore / entryArray[indexPath.row].simulations)
-            
-            
         }
-        else{
-            avg = "--"
-        }
+        else{avg = "--"}
+        cell?.completed.text = String(entryArray[indexPath.row].completed)
         cell?.winnerName.text = entryArray[indexPath.row].winner
         cell?.lastPts.text = "Average:\n" + avg + " / 1920"
         cell?.simulationCt.text = "\(entryArray[indexPath.row].simulations) simulations"

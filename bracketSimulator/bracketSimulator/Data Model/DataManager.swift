@@ -23,32 +23,20 @@ class DataManager {
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
-        print("I am about to save to this location: \(url)")
         do{
-//            for bracketEntry in Array(bracketEntries.values){
-//                for team in bracketEntry.chosenTeams{
-//                    if team.id > 0{
-//                        print(team.id)
-//                    }
-//                }
-//            }
-            
             let data = try NSKeyedArchiver.archivedData(withRootObject: bracketEntries, requiringSecureCoding: false)
             try data.write(to: url)
             print(data)
         } catch (let error){
             print("Error saving to file: \(error)")
         }
-        print("Hey I just saved!")
     }
-    
     
     func scoreSimulations(){
         for simulation in simulations{
             for (entryName, bracketEntry) in bracketEntries{
                 if bracketEntry.completed{
                     let thisScore = bracketEntry.getScore(simulationResults: simulation.arrayToScore)
-                    print(thisScore)
                     bracketEntry.includeNewSim(score: thisScore)
                 }
             }
@@ -113,12 +101,7 @@ class DataManager {
     func updateEntries(entryName: String, bracketEntry: BracketEntry){
         bracketEntries[entryName] = bracketEntry
         print("Updated set of entries in DataManager and will save them out")
-//        for bracketEntry in Array(bracketEntries.values){
-//            print(bracketEntry)
-//            for j in bracketEntry.chosenTeams {
-//                print(j)
-//            }
-//        }
+        print(bracketEntry.locked)
         archiveEntries()
     }
     
