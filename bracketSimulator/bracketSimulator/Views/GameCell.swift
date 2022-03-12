@@ -92,7 +92,7 @@ class GameCell{
             // Ex. If I pick Norfolk State to make the championship then switch to
             //      Gonzaga to beat them in the first round, need to update bracket
         if self.team.teamid != prevTeam.teamid && prevTeam.teamid >= 0{
-            delegate?.resetDownstreamCells(team: team, nextGames: nextGames)
+            delegate?.resetDownstreamCells(team: team, nextGames: nextGames, prevTeam: prevTeam)
         }
     }
             

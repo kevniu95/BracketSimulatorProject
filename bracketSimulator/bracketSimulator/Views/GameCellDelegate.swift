@@ -9,6 +9,6 @@ import Foundation
 
 protocol GameCellDelegate: AnyObject{
     func setNewTeam(team: Team, nextGame: Int)
-    func resetDownstreamCells(team: Team, nextGames: [Int])
+    func resetDownstreamCells(team: Team, nextGames: [Int], prevTeam: Team)
     func presentAlert(currCellTeam: Team, currCellID: Int, nextGames: [Int])
 }

@@ -18,6 +18,7 @@ class DataManager {
     var teams = [Team]()
     var gamePositions = [gamePosition]()
     var gameCells = [GameCell]()
+    var simulations = [SimulationBasic]()
   
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -39,6 +40,29 @@ class DataManager {
             print("Error saving to file: \(error)")
         }
         print("Hey I just saved!")
+    }
+    
+    
+    func scoreSimulations(){
+        for simulation in simulations{
+            for (entryName, bracketEntry) in bracketEntries{
+                if bracketEntry.completed{
+                    let thisScore = bracketEntry.getScore(simulationResults: simulation.arrayToScore)
+                    print(thisScore)
+                    bracketEntry.includeNewSim(score: thisScore)
+                }
+            }
+        }
+    }
+    func runSimulations(n: Int){
+        for _ in 1...n{
+            let sim = SimulationBasic()
+            sim.fillGames()
+            simulations.append(sim)
+        }
+        scoreSimulations()
+        archiveEntries()
+        
     }
     
     func instantiateFixedData(){

@@ -12,27 +12,29 @@ class BracketEntry: NSObject, NSCoding{
     private (set) var chosenTeams: [Int] // Stores team IDs
     private (set) var winner: String
     var completed: Bool
+    private (set) var simulations: Int
+    private (set) var aggScore: Int
 //    private (set) var scores: [Int]
 //    private (set) var recentScore: Int
     
-    init(name: String, chosenTeams: [Int], winner: String, completed: Bool){
+    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, simulations: Int, aggScore: Int){
         self.name = name
         self.chosenTeams = chosenTeams
         self.winner = winner
         self.completed = completed
-//        self.scores = scores
-//        self.recentScore = recentScore
+        self.simulations = simulations
+        self.aggScore = aggScore
     }
     
     convenience init(name: String){
         let thisName = name
         let chosenTeams = initiateTeams(numTeams: 64)
-        let winner = "<No winner selected>"
+        let winner = "<None Selected>"
         let completed = false
-//        let scores = [Int]()
-//        let recentScore = 0
+        let simulations = 0
+        let aggScore = 0
         
-        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed)
+        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, simulations: simulations, aggScore: aggScore)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -43,12 +45,10 @@ class BracketEntry: NSObject, NSCoding{
                   return nil
               }
         let completed = aDecoder.decodeBool(forKey: "completed") as Bool
-//              let recentScore = aDecoder.decodeObject(forKey: "recentScore") as? Int
-//        guard let scores = aDecoder.decodeObject(forKey: "scores") as? [Int] else{
-//            print("BBB")
-//            return nil
-//        }
-                self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed)
+        let simulations = aDecoder.decodeInteger(forKey: "simulations")
+        let aggScore = aDecoder.decodeInteger(forKey: "aggScore")
+
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, simulations: simulations, aggScore: aggScore)
     }
     
     func encode(with coder: NSCoder) {
@@ -56,16 +56,61 @@ class BracketEntry: NSObject, NSCoding{
         coder.encode(self.chosenTeams, forKey: "chosenTeams")
         coder.encode(self.winner, forKey: "winner")
         coder.encode(self.completed, forKey: "completed")
-//        coder.encode(self.scores, forKey: "score")
-//        coder.encode(self.recentScore, forKey: "recentScore")
+        coder.encode(self.simulations, forKey: "simulations")
+        coder.encode(self.aggScore, forKey: "aggScore")
     }
         
     func setName(name: String){
         self.name = name        
     }
     
-    func getScore(){
-        print(self.chosenTeams)
+    func includeNewSim(score: Int){
+        self.simulations += 1
+        self.aggScore += score
+    }
+    
+    func convertMatchToScore(placeInArray: Int) ->Int {
+        if placeInArray >= 31{
+            return 10
+        }
+        else if placeInArray >= 15{
+            return 20
+        }
+        else if placeInArray >= 7{
+            return 40
+        }
+        else if placeInArray >= 3{
+            return 80
+        }
+        else if placeInArray >= 1{
+            return 160
+        }
+        else if placeInArray == 0{
+            return 320
+        }
+        else{
+            print("Weird index passed. Check what's going on")
+            return 0
+        }
+    }
+    
+    func getScore(simulationResults: [Int]) -> Int {
+        var cumScore = 0
+        for ind in 0...62{
+            print("\nFor game id \(ind) we have:")
+            
+            print("Bracket entry with: \(DataManager.sharedInstance.teams[self.chosenTeams[ind]].name)")
+            print("Simulation with : \(DataManager.sharedInstance.teams[simulationResults[ind]].name)")
+            if self.chosenTeams[ind] == simulationResults[ind]{
+                cumScore += convertMatchToScore(placeInArray: ind)
+                print("This yields \(convertMatchToScore(placeInArray: ind)) points")
+            }
+            else{
+                print("This yields 0 points")
+            }
+            
+        }
+        return cumScore
     }
     
     func checkComplete() -> Bool{
@@ -85,7 +130,7 @@ class BracketEntry: NSObject, NSCoding{
         if winnerID > 0{
             return DataManager.sharedInstance.teams[winnerID].name
         }
-        else{ return "<No winner selected>"}
+        else{ return "<None Selected>"}
     }
         
     func updateTeams(gameID: Int, newTeam: Team){

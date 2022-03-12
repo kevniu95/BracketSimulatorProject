@@ -28,9 +28,9 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         fillFirstRoundTeam()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
     func saveCurrentModel(){
         delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
@@ -154,10 +154,10 @@ extension NewEntryViewController: GameCellDelegate{
         self.present(alert, animated: true)
     }
     
-    func resetDownstreamCells(team: Team, nextGames: [Int]) {
+    func resetDownstreamCells(team: Team, nextGames: [Int], prevTeam: Team) {
         for nextGameInd in nextGames{
             let currGameCell = gameCells[nextGameInd - 1]
-            if currGameCell.cellOn && currGameCell.team.teamid != team.teamid{
+            if currGameCell.cellOn && currGameCell.team.teamid == prevTeam.teamid{
                 currGameCell.resetCell()
                 bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: blankTeam())
             }

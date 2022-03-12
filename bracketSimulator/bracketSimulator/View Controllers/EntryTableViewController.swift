@@ -71,8 +71,20 @@ class EntryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryTableViewCell", for: indexPath) as? EntryTableViewCell
         // Configure the cell...
         cell?.bracketName.text = entryArray[indexPath.row].name
-        cell?.winnerSelected.text = entryArray[indexPath.row].winner
-        cell?.lastPts.text = String(entryArray[indexPath.row].completed)
+
+        
+        var avg: String
+        if entryArray[indexPath.row].simulations > 0{
+            avg = String(entryArray[indexPath.row].aggScore / entryArray[indexPath.row].simulations)
+            
+            
+        }
+        else{
+            avg = "--"
+        }
+        cell?.winnerName.text = entryArray[indexPath.row].winner
+        cell?.lastPts.text = "Average:\n" + avg + " / 1920"
+        cell?.simulationCt.text = "\(entryArray[indexPath.row].simulations) simulations"
         return cell!
     }
     
@@ -89,7 +101,7 @@ class EntryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 100
     }
 }
 
