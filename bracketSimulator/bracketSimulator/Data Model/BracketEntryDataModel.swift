@@ -31,7 +31,7 @@ class BracketEntry: NSObject, NSCoding{
     convenience init(name: String){
         let thisName = name
         let chosenTeams = initiateTeams(numTeams: 64)
-        let winner = "<None Selected>"
+        let winner = "<None>"
         let completed = false
         let locked = false
         let simulations = 0
@@ -135,7 +135,7 @@ class BracketEntry: NSObject, NSCoding{
         if winnerID >= 0{
             return DataManager.sharedInstance.teams[winnerID].name
         }
-        else{ return "<None Selected>"}
+        else{ return "<None>"}
     }
         
     func lockBracket(){

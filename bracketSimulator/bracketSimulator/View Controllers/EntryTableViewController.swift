@@ -72,7 +72,7 @@ class EntryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryTableViewCell", for: indexPath) as? EntryTableViewCell
         // Configure the cell...
         cell?.bracketName.text = entryArray[indexPath.row].name
-        cell?.bracketName.textAlignment = .center
+        cell?.bracketName.textAlignment = .left
         
         var avg: String
         if entryArray[indexPath.row].simulations > 0{
@@ -93,8 +93,13 @@ class EntryTableViewController: UITableViewController {
         cell?.winnerImage.image = winnerImg
         
         cell?.winnerName.text = entryArray[indexPath.row].winner
-        cell?.lastPts.text = "Average:\n" + avg + " / 1920"
-        cell?.simulationCt.text = "\(entryArray[indexPath.row].simulations) simulations"
+        cell?.lastPts.text = "Avg: " + avg + " / 1920"
+        
+        var simText: String
+        if (entryArray[indexPath.row].simulations) > 9999{
+            simText = ">9,999"
+        } else {simText = DataManager.sharedInstance.formatInt(val:entryArray[indexPath.row].simulations)}
+        cell?.simulationCt.text = "Simulations: \(simText)"
         return cell!
     }
 
@@ -110,8 +115,18 @@ class EntryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 80
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let theEntry = entryArray[indexPath.row]
+            DataManager.sharedInstance.removeFromEntries(bracketEntry: theEntry)
+            entryArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
 }
 
 extension EntryTableViewController: NewEntryVCDelegate{

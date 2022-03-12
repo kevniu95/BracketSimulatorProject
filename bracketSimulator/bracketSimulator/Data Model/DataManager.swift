@@ -110,11 +110,24 @@ class DataManager {
         archiveEntries()
     }
     
-    func removeFromEntries(_ bracketEntry: BracketEntry){
-//        if let index = bracketEntries.firstIndex(of: bracketEntry){
-//            bracketEntries.remove(at: index)
-//            print(userFavorites)
-//        }
+    func formatInt(val: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let formattedNumber = numberFormatter.string(from: NSNumber(value:val))
+        if let formattedNumber = formattedNumber{
+            return formattedNumber
+        }
+        else{
+            print("Woops, couldn't format number!")
+            return "???"
+        }
+        
+    }
+    
+    func removeFromEntries(bracketEntry: BracketEntry){
+        bracketEntries.removeValue(forKey: bracketEntry.name)
+        print("Updated entries by deleting \(bracketEntry.name). Saving out changes")
+        archiveEntries()
     }
 
 }
