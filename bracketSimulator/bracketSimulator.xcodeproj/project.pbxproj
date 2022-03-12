@@ -99,9 +99,10 @@
 		56B9B38627D31CB80096C142 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				56B9B38927D353430096C142 /* PinchableViewController.swift */,
-				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 				56B9B38227D31C740096C142 /* EntryTableViewController.swift */,
+				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 				56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */,
 			);
 			path = "View Controllers";
@@ -147,7 +148,6 @@
 			children = (
 				567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */,
 				56FAEA1727DB60CF006E6DB5 /* DataManager.swift */,
-				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";

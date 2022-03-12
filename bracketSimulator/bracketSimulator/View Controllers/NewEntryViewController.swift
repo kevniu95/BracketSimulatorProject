@@ -15,8 +15,8 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     var bracketEntry = BracketEntry(name: "")
     let bracketFrameScaler = 3.0
     var gameCells = [GameCell]()
-    var gamePositions = [gamePosition]()
-    var teams = [Team]()
+    var gamePositions = DataManager.sharedInstance.gamePositions
+    var teams = DataManager.sharedInstance.teams
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
@@ -24,11 +24,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         
         // Always the same, no matter if new entry or saved
         initiateScrollView()
-        gamePositions = convertGamePositions()
-        teams = convertTeams()
         initiateGameCells(gamePositions: gamePositions)
-        
-        // Can vary based on whether or not entry is a loaded or new one
         fillFirstRoundTeam()
     }
     
@@ -80,7 +76,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             scrollView.addSubview(currGameCell.cellImage)
         }
     }
-    
+
     func fillFirstRoundTeam(){
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
@@ -90,12 +86,10 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]
             let currTeamInd = bracketEntry.chosenTeams[ind - 1]
-
             var currTeam: Team
             if currTeamInd < 0 || currTeamInd >= 65{
                 currTeam = blankTeam()
-            } else {currTeam = teams[currTeamInd]
-                print(currTeam.teamid)}
+            } else {currTeam = teams[currTeamInd]}
             currGameCell.setTeam(team: currTeam)
         }
         // Always instantiate first 64 teams (i.e. last 64 bracket entires)

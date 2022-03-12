@@ -16,6 +16,8 @@ class DataManager {
   
     var bracketEntries: [String: BracketEntry] = [:]
     var teams = [Team]()
+    var gamePositions = [gamePosition]()
+    var gameCells = [GameCell]()
   
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -39,13 +41,30 @@ class DataManager {
         print("Hey I just saved!")
     }
     
-    func createTeams() -> [Team]{
-        // Creates the list of 64 teams to be saved in singleton
-        // (So don't have to create every time in NewEntry VC)
-        self.teams = createTeams()
+    func instantiateFixedData(){
+        createTeams()
+        createGamePositions()
+        createGameCells()
     }
     
+    func createTeams(){
+        // Creates the list of 64 teams to be saved in singleton
+        // (So don't have to create every time in NewEntry VC)
+        self.teams = convertTeams()
+    }
     
+    func createGamePositions(){
+        self.gamePositions = convertGamePositions()
+    }
+    
+    func createGameCells(){
+        for ind in 1...127{
+            let gamePosition = gamePositions[ind - 1]
+            let currGameCell = GameCell(idNum: ind, gamePos: gamePosition)
+            gameCells.append(currGameCell)
+        }
+    }
+        
     func unArchiveEntries() -> [String : BracketEntry] {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [:] }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")

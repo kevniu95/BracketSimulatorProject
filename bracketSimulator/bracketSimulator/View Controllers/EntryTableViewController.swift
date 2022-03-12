@@ -14,6 +14,7 @@ class EntryTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataManager.sharedInstance.instantiateFixedData()
         initNewButton()
         instantiateBracketEntries()
     }
@@ -71,6 +72,7 @@ class EntryTableViewController: UITableViewController {
         // Configure the cell...
         cell?.bracketName.text = entryArray[indexPath.row].name
         cell?.winnerSelected.text = entryArray[indexPath.row].winner
+        cell?.lastPts.text = String(entryArray[indexPath.row].completed)
         return cell!
     }
     
