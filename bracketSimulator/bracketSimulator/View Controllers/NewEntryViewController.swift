@@ -11,6 +11,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var navBarTitle: UINavigationItem!
+    var bracketImgView = UIImageView()
     weak var delegate: EntryTableViewController?
     weak var inputBracketEntry: BracketEntry?
     var bracketEntry = BracketEntry(name: "")
@@ -18,6 +19,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     var gameCells = [GameCell]()
     var gamePositions = DataManager.sharedInstance.gamePositions
     var teams = DataManager.sharedInstance.teams
+    var lastZoomScale: CGFloat = 0
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
@@ -30,18 +32,9 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         fillFirstRoundTeam()
         setNavBar()
         initLockButton()
-//        print("\(bracketEntry.name) completed: \(bracketEntry.completed)")
-//        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
+        print("\(bracketEntry.name) completed: \(bracketEntry.completed)")
+        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     // MARK: I. Nav Bar
     func setBracketEntry(){
@@ -89,17 +82,26 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     // MARK: B. Scroll View
     func initiateScrollView(){
         scrollView.delegate = self
+        
         guard let bracketImageView = initializeBracketImage() else{
             return
         }
+        
+        self.bracketImgView = bracketImageView
         
         addBracketImage(bracketImageView: bracketImageView)
         scrollView.contentSize = CGSize(width: bracketImageView.frame.size.width, height: bracketImageView.frame.size.height)
         scrollView.contentOffset = CGPoint(x:scrollView.contentSize.width * 0.39 ,
                                            y:scrollView.contentSize.height * 0.5)
-        
+        scrollView.setZoomScale(0.4, animated: false)
+        scrollView.minimumZoomScale = 0.3
+        scrollView.maximumZoomScale = 1.5
     }
-
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.bracketImgView
+    }
+    
     func initializeBracketImage()-> UIImageView?{
         let bracketImageView: UIImageView = UIImageView()
         guard let bracketImage = UIImage(named: "bracket2022") else {
@@ -123,8 +125,9 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             let currGameCell = GameCell(idNum: ind, gamePos: gamePosition)
             currGameCell.delegate = self
             gameCells.append(currGameCell)
-            scrollView.addSubview(currGameCell.cellImage)
+            scrollView.subviews[0].addSubview(currGameCell.cellImage)
         }
+        scrollView.subviews[0].isUserInteractionEnabled = true
     }
 
     func fillFirstRoundTeam(){

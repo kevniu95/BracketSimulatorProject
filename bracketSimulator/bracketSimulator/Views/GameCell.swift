@@ -65,6 +65,7 @@ class GameCell{
     
     // MARK: Stack View Gesture Recognizers
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer){
+        print("I was tapped!!!")
         if id > 1{
             let nextGame = nextGames[0]
             delegate?.setNewTeam(team: self.team, nextGame: nextGame)

@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" minimumZoomScale="0.10000000000000001" maximumZoomScale="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="6fz-vh-Hnk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" minimumZoomScale="0.10000000000000001" maximumZoomScale="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="6fz-vh-Hnk">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="PSr-3Y-cPp"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Jxj-9d-xMS"/>
@@ -40,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhQ-tb-z6E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2043" y="358"/>
+            <point key="canvasLocation" x="2049" y="383"/>
         </scene>
         <!--RequestNameViewController-->
         <scene sceneID="tbw-lK-bkk">
