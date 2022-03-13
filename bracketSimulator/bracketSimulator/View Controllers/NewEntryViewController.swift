@@ -34,6 +34,15 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
 //        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // MARK: I. Nav Bar
     func setBracketEntry(){
         if let inputBracketEntry = inputBracketEntry{
