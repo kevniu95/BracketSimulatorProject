@@ -69,6 +69,9 @@ class DataManager {
             simulations.append(sim)
         }
         scoreSimulations()
+        // Need to reset simulations array to be empty so not cumulatively
+        // counting them over and over
+        simulations = []
         archiveEntries()
     }
     

@@ -31,16 +31,6 @@ enum Status: Int{
     }
 }
 
-func getEntryStatus(entry: BracketEntry) -> Status {
-    if entry.locked{
-        return Status.locked
-    }
-    else if entry.completed{
-        return Status.ready
-    }
-    else{return Status.incomplete}
-}
-
 class EntryTableViewController: UITableViewController {
     var entryArray = [BracketEntry]()
     var sections = [StatusSection]()
@@ -54,6 +44,7 @@ class EntryTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
+        updateArrayAndSections()
         if entryArray.count == 0{
             initSheet(copy: false, copyOf: nil)
         }
@@ -73,7 +64,7 @@ class EntryTableViewController: UITableViewController {
         let bracketEntries = DataManager.sharedInstance.bracketEntries
         entryArray = Array(bracketEntries.values)
     }
-    
+
     func establishSections(){
         let groups = Dictionary(grouping: self.entryArray){ (entry) in
             return getEntryStatus(entry: entry)
@@ -83,6 +74,16 @@ class EntryTableViewController: UITableViewController {
         }
     }
     
+    func getEntryStatus(entry: BracketEntry) -> Status {
+        if entry.locked{
+            return Status.locked
+        }
+        else if entry.completed{
+            return Status.ready
+        }
+        else{return Status.incomplete}
+    }
+
     // Now add function that updates array as well as updates sections
     func updateArrayAndSections(){
         updateArrayForTable()

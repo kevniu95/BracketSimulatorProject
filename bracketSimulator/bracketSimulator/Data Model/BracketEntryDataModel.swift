@@ -109,17 +109,17 @@ class BracketEntry: NSObject, NSCoding{
     func getScore(simulationResults: [Int]) -> Int {
         var cumScore = 0
         for ind in 0...62{
-            print("\nFor game id \(ind) we have:")
+//            print("\nFor game id \(ind) we have:")
             
-            print("Bracket entry with: \(DataManager.sharedInstance.teams[self.chosenTeams[ind]].name)")
-            print("Simulation with : \(DataManager.sharedInstance.teams[simulationResults[ind]].name)")
+//            print("Bracket entry with: \(DataManager.sharedInstance.teams[self.chosenTeams[ind]].name)")
+//            print("Simulation with : \(DataManager.sharedInstance.teams[simulationResults[ind]].name)")
             if self.chosenTeams[ind] == simulationResults[ind]{
                 cumScore += convertMatchToScore(placeInArray: ind)
-                print("This yields \(convertMatchToScore(placeInArray: ind)) points")
+//                print("This yields \(convertMatchToScore(placeInArray: ind)) points")
             }
-            else{
-                print("This yields 0 points")
-            }
+//            else{
+//                print("This yields 0 points")
+//            }
             
         }
         return cumScore

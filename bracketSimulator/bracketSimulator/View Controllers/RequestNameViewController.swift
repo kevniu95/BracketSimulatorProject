@@ -49,6 +49,10 @@ class RequestNameViewController: UIViewController{
         if bracketName.count == 0{
             return // If no name given ,do nothing
         }
+        if Array(DataManager.sharedInstance.bracketEntries.keys).contains(bracketName){
+            commandLabel.text = "You already have an entry named '\(bracketName)'!\nTry another!"
+            return
+        }
         let bracketEntry = fillBracketEntry(bracketName: bracketName)
         delegate?.saveNewEntry(entryName: bracketName, entry: bracketEntry)
         exitRequestViewController()
