@@ -111,6 +111,7 @@ class DataManager {
     // Update entry from bracketEntries
     // Save out the update as well everytime there is an update
     func updateEntries(entryName: String, bracketEntry: BracketEntry){
+        bracketEntry.lastEdit = Date()
         bracketEntries[entryName] = bracketEntry
         print("Updated set of entries in DataManager and will save them out")
         print(bracketEntry.locked)

@@ -107,7 +107,7 @@ class EntryTableViewController: UITableViewController {
                 if self.sections[i].status.getString() == "Locked"{
                     self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.lockDate! > rhs.lockDate!}
                 } else{
-                    self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.initDate > rhs.initDate}
+                    self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.lastEdit > rhs.lastEdit}
                 }
             }
         }
@@ -188,8 +188,8 @@ class EntryTableViewController: UITableViewController {
             } else {cell?.lockButton.isEnabled = true}
         }
         else{
-            cell?.lockButton.setImage(UIImage(systemName: "lock.open"), for: .normal)
-            cell?.lockButton.isEnabled = false
+            cell?.lockButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+            cell?.lockButton.isEnabled = true
         }
         cell?.handleLock = {self.setLockButton(bracketEntry: thisBracketEntry)}
 
@@ -234,9 +234,11 @@ class EntryTableViewController: UITableViewController {
     
     // MARK: Define button functionality
     func setLockButton(bracketEntry: BracketEntry){
-        if !bracketEntry.completed || bracketEntry.locked{
-            print("This should not be happening, double check.")
-            return
+        if !bracketEntry.completed {
+            let newEntryVC = self.storyboard?.instantiateViewController(withIdentifier: "NewEntryViewController") as! NewEntryViewController
+            newEntryVC.delegate = self
+            newEntryVC.inputBracketEntry = bracketEntry
+            present(newEntryVC, animated: true, completion: nil)
         }
         let alert = UIAlertController(title: "Permanently lock this entry from editing?", message: "Only locked entries can be scored, but you can always make a new copy.", preferredStyle: .actionSheet)
             
@@ -257,7 +259,6 @@ extension EntryTableViewController: EntryDetailVCDelegate{
         updateArrayAndSections()
     }
 }
-
 
 extension EntryTableViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {

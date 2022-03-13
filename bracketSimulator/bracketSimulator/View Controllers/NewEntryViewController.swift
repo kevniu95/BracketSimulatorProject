@@ -12,7 +12,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     
     @IBOutlet weak var navBarTitle: UINavigationItem!
     var bracketImgView = UIImageView()
-    weak var delegate: EntryDetailViewController?
+    weak var delegate: NewEntryVCDelegate?
     weak var inputBracketEntry: BracketEntry?
     var bracketEntry = BracketEntry(name: "")
     let bracketFrameScaler = 3.0

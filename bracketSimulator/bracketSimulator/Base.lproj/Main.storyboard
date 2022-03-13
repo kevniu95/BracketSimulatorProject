@@ -197,7 +197,7 @@
             </objects>
             <point key="canvasLocation" x="473.91304347826093" y="-226.33928571428569"/>
         </scene>
-        <!--Entry Detail View Controller-->
+        <!--Entry Summary-->
         <scene sceneID="LIy-PR-w0H">
             <objects>
                 <viewController storyboardIdentifier="EntryDetailViewController" id="hGa-br-4Cn" customClass="EntryDetailViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
@@ -382,7 +382,7 @@
                             <constraint firstAttribute="trailing" secondItem="yX4-TG-n3I" secondAttribute="trailing" id="J2Q-LR-gQK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="5bJ-Uo-oEE"/>
+                    <navigationItem key="navigationItem" title="Entry Summary" id="5bJ-Uo-oEE"/>
                     <connections>
                         <outlet property="averageScore" destination="eyf-e9-N3h" id="foH-Z9-vJQ"/>
                         <outlet property="bottomLeft" destination="aBS-63-wKq" id="GbV-gk-TRP"/>
@@ -438,7 +438,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bracket Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJv-H9-acc">
-                                            <rect key="frame" x="90" y="11" width="242" height="27"/>
+                                            <rect key="frame" x="90" y="11" width="217" height="27"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -451,19 +451,19 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHI-tU-KJh">
-                                            <rect key="frame" x="352" y="28.5" width="25" height="25"/>
+                                            <rect key="frame" x="327" y="23.5" width="35" height="35"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="25" id="0d9-9J-KBg"/>
-                                                <constraint firstAttribute="width" constant="25" id="dFc-cO-o3I"/>
+                                                <constraint firstAttribute="height" constant="35" id="0d9-9J-KBg"/>
+                                                <constraint firstAttribute="width" constant="35" id="dFc-cO-o3I"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="lock" catalog="system"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1X-qp-Z2F">
-                                            <rect key="frame" x="379" y="28.5" width="25" height="25"/>
+                                            <rect key="frame" x="369" y="23.5" width="35" height="35"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="25" id="Jhv-sh-NTn"/>
-                                                <constraint firstAttribute="width" constant="25" id="Qy9-kh-CYe"/>
+                                                <constraint firstAttribute="height" constant="35" id="Jhv-sh-NTn"/>
+                                                <constraint firstAttribute="width" constant="35" id="Qy9-kh-CYe"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="doc.badge.plus" catalog="system"/>
@@ -476,7 +476,7 @@
                                         <constraint firstItem="VHI-tU-KJh" firstAttribute="centerY" secondItem="FMm-Ex-vn5" secondAttribute="centerY" id="Kbs-xX-QgZ"/>
                                         <constraint firstItem="pJv-H9-acc" firstAttribute="top" secondItem="FMm-Ex-vn5" secondAttribute="topMargin" id="MJY-0D-aR5"/>
                                         <constraint firstItem="pJv-H9-acc" firstAttribute="leading" secondItem="plB-TS-AQt" secondAttribute="trailing" constant="10" id="OpW-G8-rqV"/>
-                                        <constraint firstItem="n1X-qp-Z2F" firstAttribute="leadingMargin" secondItem="VHI-tU-KJh" secondAttribute="trailing" constant="10" id="YIO-hx-O6k"/>
+                                        <constraint firstItem="n1X-qp-Z2F" firstAttribute="leadingMargin" secondItem="VHI-tU-KJh" secondAttribute="trailing" constant="15" id="YIO-hx-O6k"/>
                                         <constraint firstItem="KF7-Dn-6El" firstAttribute="top" secondItem="Jmv-vD-raH" secondAttribute="bottom" id="YSQ-tf-r8G"/>
                                         <constraint firstItem="VHI-tU-KJh" firstAttribute="leading" secondItem="pJv-H9-acc" secondAttribute="trailing" constant="20" id="YhB-bD-PHM"/>
                                         <constraint firstItem="KF7-Dn-6El" firstAttribute="leading" secondItem="lKM-uT-xgq" secondAttribute="trailing" constant="10" id="dSK-KR-OAW"/>

@@ -94,18 +94,27 @@ class EntryDetailViewController: UIViewController {
         if bracketEntry.chosenTeams[4] > -1{
             bottomLeft.image = allTeams[bracketEntry.chosenTeams[4]].image
         }
-        if bracketEntry.chosenTeams[4] > -1{
+        if bracketEntry.chosenTeams[5] > -1{
             topRight.image = allTeams[bracketEntry.chosenTeams[5]].image
         }
-        if bracketEntry.chosenTeams[4] > -1{
+        if bracketEntry.chosenTeams[6] > -1{
             bottomRight.image = allTeams[bracketEntry.chosenTeams[6]].image
         }
+    }
+    
+    func reloadThisVC(entry: BracketEntry){
+        inputBracketEntry = entry
+        setBracketEntry()
+        setImages()
+        setText()
+        setUpButton()
     }
     
 }
 
 extension EntryDetailViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {
+        self.reloadThisVC(entry: entry)
         delegate?.saveDetailEntry(entryName: entryName, entry: entry)
     }
 }
