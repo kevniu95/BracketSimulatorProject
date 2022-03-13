@@ -102,13 +102,16 @@ class EntryTableViewController: UITableViewController {
     func sortEntriesInSection(){
         print("I am sorting the entries in each section")
         // If time alows, will come back and allow for sort by score
-        for i in 0...(self.sections.count - 1){
-            if self.sections[i].status.getString() == "Locked"{
-                self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.lockDate! > rhs.lockDate!}
-            } else{
-                self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.initDate > rhs.initDate}
+        if self.sections.count > 0{
+            for i in 0...(self.sections.count - 1){
+                if self.sections[i].status.getString() == "Locked"{
+                    self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.lockDate! > rhs.lockDate!}
+                } else{
+                    self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.initDate > rhs.initDate}
+                }
             }
         }
+        
     }
     
     // MARK: Handle initialization of new bracket entries
@@ -204,11 +207,17 @@ class EntryTableViewController: UITableViewController {
         let thisIndPath = tableView.indexPathForSelectedRow
         let section = self.sections[thisIndPath!.section]
         let thisBracketEntry = section.bracketEntries[thisIndPath!.row]
-        print(thisBracketEntry.initDate)
-        print(thisBracketEntry.lockDate)
         if segue.identifier == "fillBracketSegue"{
             let bracketEntry =  thisBracketEntry
             if let newEntryVC = segue.destination as? NewEntryViewController{
+                newEntryVC.inputBracketEntry = bracketEntry
+                newEntryVC.delegate = self
+            }
+        }
+        if segue.identifier == "detailViewSegue"{
+            let bracketEntry = thisBracketEntry
+            print(bracketEntry.winner)
+            if let newEntryVC = segue.destination as? EntryDetailViewController{
                 newEntryVC.inputBracketEntry = bracketEntry
                 newEntryVC.delegate = self
             }

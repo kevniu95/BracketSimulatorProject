@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5632953327DDEB6B0039B649 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */; };
 		565561C827D87F1A00068103 /* 2021teams.csv in Resources */ = {isa = PBXBuildFile; fileRef = 565561C727D87F1A00068103 /* 2021teams.csv */; };
 		565561CB27D882DC00068103 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561CA27D882DC00068103 /* Teams.swift */; };
 		565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561D027D8CF4B00068103 /* GameCellDelegate.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 		565561C727D87F1A00068103 /* 2021teams.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2021teams.csv; sourceTree = "<group>"; };
 		565561CA27D882DC00068103 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
 		565561D027D8CF4B00068103 /* GameCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCellDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				56B9B38927D353430096C142 /* PinchableViewController.swift */,
+				5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */,
 				56B9B38227D31C740096C142 /* EntryTableViewController.swift */,
 				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 				56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */,
@@ -252,6 +255,7 @@
 				56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */,
 				567C252227D9F70F007E3B54 /* NewEntryVCDelegate.swift in Sources */,
 				56DEB65327D3181400B96D65 /* SceneDelegate.swift in Sources */,
+				5632953327DDEB6B0039B649 /* EntryDetailViewController.swift in Sources */,
 				56703CC127D769F000E25D76 /* GameCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
