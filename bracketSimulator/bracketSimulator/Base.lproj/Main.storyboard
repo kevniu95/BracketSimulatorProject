@@ -32,8 +32,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="New Entry" id="DFN-pT-eRt"/>
-                    <navigationItem key="navigationItem" id="FOr-NB-hKr"/>
+                    <navigationItem key="navigationItem" title="Title" id="FOr-NB-hKr"/>
                     <connections>
+                        <outlet property="navBarTitle" destination="FOr-NB-hKr" id="wM9-Ou-C7a"/>
                         <outlet property="scrollView" destination="6fz-vh-Hnk" id="Qs8-eQ-Yat"/>
                     </connections>
                 </viewController>
@@ -61,7 +62,7 @@
                                     <constraint firstAttribute="width" constant="263" id="2IE-EB-sZd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWQ-gC-Na7">
                                 <rect key="frame" x="168" y="255.5" width="78.5" height="35"/>
@@ -118,7 +119,7 @@
             </objects>
             <point key="canvasLocation" x="-429" y="-98"/>
         </scene>
-        <!--Simulate-->
+        <!--Simulator-->
         <scene sceneID="Mhn-yQ-O4B">
             <objects>
                 <viewController id="zs0-Yb-YOC" customClass="SimulatorViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,18 +128,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many simulations?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aW-23-bs7">
-                                <rect key="frame" x="105.5" y="244" width="203.5" height="21.5"/>
+                                <rect key="frame" x="105.5" y="144" width="203.5" height="21.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXt-4s-ekd">
-                                <rect key="frame" x="165" y="361.5" width="84" height="31"/>
+                                <rect key="frame" x="165" y="261.5" width="84" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Simulate!"/>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="JZ9-wH-6gJ">
-                                <rect key="frame" x="114.5" y="324.5" width="185" height="31"/>
+                                <rect key="frame" x="114.5" y="224.5" width="185" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="181" id="Tr0-Pk-GRQ"/>
                                 </constraints>
@@ -147,7 +148,7 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDS-WJ-ewe">
-                                <rect key="frame" x="186" y="295.5" width="42" height="21"/>
+                                <rect key="frame" x="186" y="195.5" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="GVM-U4-wwa"/>
                                 </constraints>
@@ -161,15 +162,30 @@
                         <constraints>
                             <constraint firstItem="JZ9-wH-6gJ" firstAttribute="top" secondItem="lDS-WJ-ewe" secondAttribute="bottom" constant="8" id="1uX-q6-X8F"/>
                             <constraint firstItem="JZ9-wH-6gJ" firstAttribute="centerX" secondItem="QPa-xt-46a" secondAttribute="centerX" id="7iN-wj-Zpj"/>
-                            <constraint firstItem="7aW-23-bs7" firstAttribute="top" secondItem="QPa-xt-46a" secondAttribute="topMargin" constant="200" id="IVU-bo-IgJ"/>
+                            <constraint firstItem="7aW-23-bs7" firstAttribute="top" secondItem="QPa-xt-46a" secondAttribute="topMargin" constant="100" id="IVU-bo-IgJ"/>
                             <constraint firstItem="dXt-4s-ekd" firstAttribute="top" secondItem="JZ9-wH-6gJ" secondAttribute="bottom" constant="7" id="Jme-ft-yBp"/>
                             <constraint firstItem="lDS-WJ-ewe" firstAttribute="centerX" secondItem="QPa-xt-46a" secondAttribute="centerX" id="ODS-tk-1nv"/>
                             <constraint firstItem="7aW-23-bs7" firstAttribute="centerX" secondItem="QPa-xt-46a" secondAttribute="centerX" id="YAM-4B-GrL"/>
                             <constraint firstItem="dXt-4s-ekd" firstAttribute="centerX" secondItem="QPa-xt-46a" secondAttribute="centerX" id="oJG-oG-KVS"/>
                             <constraint firstItem="lDS-WJ-ewe" firstAttribute="top" secondItem="7aW-23-bs7" secondAttribute="bottom" constant="30" id="vSf-Oo-2jW"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="IVU-bo-IgJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="IVU-bo-IgJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="IVU-bo-IgJ"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Simulate" id="NqQ-lA-pDf"/>
+                    <tabBarItem key="tabBarItem" title="Simulator" image="sportscourt.fill" catalog="system" id="NqQ-lA-pDf"/>
                     <connections>
                         <outlet property="instrLabel" destination="7aW-23-bs7" id="rn0-v3-fNC"/>
                         <outlet property="numLabel" destination="lDS-WJ-ewe" id="XWc-7a-7Mi"/>
@@ -181,7 +197,7 @@
             </objects>
             <point key="canvasLocation" x="473.91304347826093" y="-226.33928571428569"/>
         </scene>
-        <!--Entry Table View Controller-->
+        <!--My Bracket Entries-->
         <scene sceneID="n2R-2F-cKz">
             <objects>
                 <tableViewController id="ChU-zh-1NF" customClass="EntryTableViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
@@ -257,8 +273,8 @@
                                         <constraint firstItem="pJv-H9-acc" firstAttribute="top" secondItem="FMm-Ex-vn5" secondAttribute="topMargin" id="MJY-0D-aR5"/>
                                         <constraint firstItem="pJv-H9-acc" firstAttribute="leading" secondItem="plB-TS-AQt" secondAttribute="trailing" constant="10" id="OpW-G8-rqV"/>
                                         <constraint firstItem="n1X-qp-Z2F" firstAttribute="leadingMargin" secondItem="VHI-tU-KJh" secondAttribute="trailing" constant="10" id="YIO-hx-O6k"/>
-                                        <constraint firstItem="VHI-tU-KJh" firstAttribute="leading" secondItem="pJv-H9-acc" secondAttribute="trailing" constant="20" id="YIu-Cc-3pW"/>
                                         <constraint firstItem="KF7-Dn-6El" firstAttribute="top" secondItem="Jmv-vD-raH" secondAttribute="bottom" id="YSQ-tf-r8G"/>
+                                        <constraint firstItem="VHI-tU-KJh" firstAttribute="leading" secondItem="pJv-H9-acc" secondAttribute="trailing" constant="20" id="YhB-bD-PHM"/>
                                         <constraint firstItem="KF7-Dn-6El" firstAttribute="leading" secondItem="lKM-uT-xgq" secondAttribute="trailing" constant="10" id="dSK-KR-OAW"/>
                                         <constraint firstItem="plB-TS-AQt" firstAttribute="top" secondItem="FMm-Ex-vn5" secondAttribute="top" constant="5" id="fdz-Ob-QMC"/>
                                         <constraint firstItem="Jmv-vD-raH" firstAttribute="top" secondItem="pJv-H9-acc" secondAttribute="bottom" constant="5" id="hbl-hn-5Eb"/>
@@ -284,17 +300,17 @@
                             <outlet property="delegate" destination="ChU-zh-1NF" id="bbX-VM-GV0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eLg-oF-ySq"/>
+                    <navigationItem key="navigationItem" title="My Bracket Entries" id="eLg-oF-ySq"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFn-BX-ajO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1250.7246376811595" y="357.58928571428572"/>
         </scene>
-        <!--Entry History-->
+        <!--My Brackets-->
         <scene sceneID="cLi-zn-ewk">
             <objects>
                 <navigationController id="EUK-4Z-Pyz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Entry History" selectedImage="lock" id="4ae-R6-hMU"/>
+                    <tabBarItem key="tabBarItem" title="My Brackets" image="square.stack.3d.up.fill" catalog="system" id="4ae-R6-hMU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5zM-Nr-w9W">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -305,14 +321,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63f-wq-3HI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="451" y="358"/>
+            <point key="canvasLocation" x="451" y="408"/>
         </scene>
     </scenes>
     <resources>
         <image name="building.columns.circle" catalog="system" width="128" height="121"/>
         <image name="doc.badge.plus" catalog="system" width="119" height="128"/>
-        <image name="lock" width="128" height="128"/>
         <image name="lock" catalog="system" width="128" height="128"/>
+        <image name="sportscourt.fill" catalog="system" width="128" height="84"/>
+        <image name="square.stack.3d.up.fill" catalog="system" width="128" height="124"/>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -10,6 +10,7 @@ import UIKit
 class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var navBarTitle: UINavigationItem!
     weak var delegate: EntryTableViewController?
     weak var inputBracketEntry: BracketEntry?
     var bracketEntry = BracketEntry(name: "")
@@ -23,12 +24,25 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         super.viewDidLoad()
         
         // Always the same, no matter if new entry or saved
+        setBracketEntry()
         initiateScrollView()
         initiateGameCells(gamePositions: gamePositions)
         fillFirstRoundTeam()
+        setNavBar()
         initLockButton()
 //        print("\(bracketEntry.name) completed: \(bracketEntry.completed)")
 //        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
+    }
+    
+    // MARK: I. Nav Bar
+    func setBracketEntry(){
+        if let inputBracketEntry = inputBracketEntry{
+            bracketEntry = inputBracketEntry
+        }
+    }
+    
+    func setNavBar(){
+        navBarTitle.title = bracketEntry.name
     }
     
     // MARK: A. Lock Button
@@ -105,10 +119,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
 
     func fillFirstRoundTeam(){
-        if let inputBracketEntry = inputBracketEntry{
-            bracketEntry = inputBracketEntry
-        }
-                
         // Load with previous data from bracket entry if it is available
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]

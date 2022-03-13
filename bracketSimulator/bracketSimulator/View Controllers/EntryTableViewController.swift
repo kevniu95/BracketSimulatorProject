@@ -31,6 +31,7 @@ enum Status: Int{
     }
 }
 
+
 class EntryTableViewController: UITableViewController {
     var entryArray = [BracketEntry]()
     var sections = [StatusSection]()
@@ -42,9 +43,14 @@ class EntryTableViewController: UITableViewController {
         updateArrayAndSections()
     }
     
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        updateArrayAndSections()
+//        setNavBar()
+    }
+    
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        updateArrayAndSections()
         if entryArray.count == 0{
             initSheet(copy: false, copyOf: nil)
         }
@@ -89,7 +95,20 @@ class EntryTableViewController: UITableViewController {
         updateArrayForTable()
         establishSections()
         self.sections.sort{(lhs, rhs) in lhs.status.rawValue < rhs.status.rawValue}
+        self.sortEntriesInSection()
         self.tableView.reloadData()
+    }
+    
+    func sortEntriesInSection(){
+        print("I am sorting the entries in each section")
+        // If time alows, will come back and allow for sort by score
+        for i in 0...(self.sections.count - 1){
+            if self.sections[i].status.getString() == "Locked"{
+                self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.lockDate! > rhs.lockDate!}
+            } else{
+                self.sections[i].bracketEntries.sort{(lhs, rhs) in lhs.initDate > rhs.initDate}
+            }
+        }
     }
     
     // MARK: Handle initialization of new bracket entries
