@@ -111,7 +111,6 @@ class EntryTableViewController: UITableViewController {
                 }
             }
         }
-        
     }
     
     // MARK: Handle initialization of new bracket entries
@@ -193,10 +192,10 @@ class EntryTableViewController: UITableViewController {
         }
         cell?.handleLock = {self.setLockButton(bracketEntry: thisBracketEntry)}
 
-        // 5. Simulation results
+        
         var simText: String
-        if (entryArray[indexPath.row].simulations) > 9999{
-            simText = ">9,999"
+        if (entryArray[indexPath.row].simulations) > 999999 {
+            simText = ">999,999"
         } else {simText = DataManager.sharedInstance.formatInt(val: thisBracketEntry.simulations)}
         cell?.simulationCt.text = "Simulations: \(simText)"
         return cell!

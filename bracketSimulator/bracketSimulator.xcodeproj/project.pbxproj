@@ -24,7 +24,6 @@
 		56B0E57827DC37E800B38055 /* SimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0E57727DC37E800B38055 /* SimulatorViewController.swift */; };
 		56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38227D31C740096C142 /* EntryTableViewController.swift */; };
 		56B9B38527D31CB00096C142 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38427D31CB00096C142 /* NewEntryViewController.swift */; };
-		56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9B38927D353430096C142 /* PinchableViewController.swift */; };
 		56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DEB65027D3181400B96D65 /* AppDelegate.swift */; };
 		56DEB65327D3181400B96D65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DEB65227D3181400B96D65 /* SceneDelegate.swift */; };
 		56DEB65827D3181400B96D65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56DEB65627D3181400B96D65 /* Main.storyboard */; };
@@ -53,7 +52,6 @@
 		56B0E57727DC37E800B38055 /* SimulatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorViewController.swift; sourceTree = "<group>"; };
 		56B9B38227D31C740096C142 /* EntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewController.swift; sourceTree = "<group>"; };
 		56B9B38427D31CB00096C142 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
-		56B9B38927D353430096C142 /* PinchableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchableViewController.swift; sourceTree = "<group>"; };
 		56DEB64D27D3181400B96D65 /* bracketSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bracketSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56DEB65027D3181400B96D65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56DEB65227D3181400B96D65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +102,7 @@
 				567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */,
 				5632953427DE0F560039B649 /* EntryDetailVCDelegate.swift */,
 				56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */,
+				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,10 +112,8 @@
 			children = (
 				56B0E57727DC37E800B38055 /* SimulatorViewController.swift */,
 				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
-				56B9B38927D353430096C142 /* PinchableViewController.swift */,
 				5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */,
 				56B9B38227D31C740096C142 /* EntryTableViewController.swift */,
-				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 				56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */,
 			);
 			path = "View Controllers";
@@ -249,7 +246,6 @@
 				56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */,
 				567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
-				56B9B38A27D353430096C142 /* PinchableViewController.swift in Sources */,
 				56FAEA1827DB60CF006E6DB5 /* DataManager.swift in Sources */,
 				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,
 				56A936E827DC905300EF0857 /* TeamImageClient.swift in Sources */,

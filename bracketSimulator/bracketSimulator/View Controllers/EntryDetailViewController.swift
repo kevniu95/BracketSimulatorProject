@@ -36,6 +36,9 @@ class EntryDetailViewController: UIViewController {
     
     func setUpButton(){
         goToBracket.titleLabel?.textAlignment = .center
+        if !bracketEntry.locked{
+            goToBracket.titleLabel?.text = "Edit Bracket"
+        } else {goToBracket.alpha = 0.7}
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
