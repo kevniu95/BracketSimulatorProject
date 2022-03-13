@@ -21,6 +21,8 @@ class DataManager {
     var simulations = [SimulationBasic]()
     var images = [UIImage]()
   
+    
+    // MARK: Read and write
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
@@ -32,14 +34,26 @@ class DataManager {
             print("Error saving to file: \(error)")
         }
     }
-    
-    func shareTeams() -> [Team]{
-        return self.teams
+    func unArchiveEntries(){
+        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let url = docDirectory.appendingPathComponent("bracketEntries.plist")
+        var entries: [String : BracketEntry]?
+        do{
+            let data = try Data(contentsOf: url)
+            entries = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String : BracketEntry]
+        } catch (let error){
+            print("Error fetching from file: \(error)")
+        }
+        if let entries = entries{
+            self.bracketEntries = entries
+        }
+        return
     }
-
+    
+    // MARK: Run and Score Simulations
     func scoreSimulations(){
         for simulation in simulations{
-            for (entryName, bracketEntry) in bracketEntries{
+            for (_, bracketEntry) in bracketEntries{
                 if bracketEntry.locked{
                     let thisScore = bracketEntry.getScore(simulationResults: simulation.arrayToScore)
                     bracketEntry.includeNewSim(score: thisScore)
@@ -47,6 +61,7 @@ class DataManager {
             }
         }
     }
+    
     func runSimulations(n: Int){
         for _ in 1...n{
             let sim = SimulationBasic()
@@ -55,13 +70,19 @@ class DataManager {
         }
         scoreSimulations()
         archiveEntries()
-        
+    }
+    
+    
+    // MARK: Instantiate and share DataManager info
+    func shareTeams() -> [Team]{
+        return self.teams
     }
     
     func instantiateFixedData(){
         createTeams()
         createGamePositions()
         createGameCells()
+        unArchiveEntries()
     }
     
     func createTeams(){
@@ -82,25 +103,8 @@ class DataManager {
         }
     }
         
-    func unArchiveEntries() -> [String : BracketEntry] {
-        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [:] }
-        let url = docDirectory.appendingPathComponent("bracketEntries.plist")
-        print("I am trying to load up the data and the url is \(url)")
-        var entries: [String : BracketEntry]?
-        do{
-            let data = try Data(contentsOf: url)
-            entries = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String : BracketEntry]
-            print("Hey look I just pulled up some files")
-            print(entries)
-        } catch (let error){
-            print("Error fetching from file: \(error)")
-        }
-        if let entries = entries{
-            self.bracketEntries = entries
-        }
-        return entries ?? [:]
-    }
     
+    // MARK: Manage updates to and from Data Manager - will be automatically archived
     // Update entry from bracketEntries
     // Save out the update as well everytime there is an update
     func updateEntries(entryName: String, bracketEntry: BracketEntry){
@@ -110,6 +114,13 @@ class DataManager {
         archiveEntries()
     }
     
+    func removeFromEntries(bracketEntry: BracketEntry){
+        bracketEntries.removeValue(forKey: bracketEntry.name)
+        print("Updated entries by deleting \(bracketEntry.name). Saving out changes")
+        archiveEntries()
+    }
+    
+    // MARK: Utility function
     func formatInt(val: Int) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -123,11 +134,4 @@ class DataManager {
         }
         
     }
-    
-    func removeFromEntries(bracketEntry: BracketEntry){
-        bracketEntries.removeValue(forKey: bracketEntry.name)
-        print("Updated entries by deleting \(bracketEntry.name). Saving out changes")
-        archiveEntries()
-    }
-
 }
