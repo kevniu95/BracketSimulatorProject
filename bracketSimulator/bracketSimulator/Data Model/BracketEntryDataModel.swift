@@ -15,10 +15,10 @@ class BracketEntry: NSObject, NSCoding{
     private (set) var locked: Bool
     private (set) var simulations: Int
     private (set) var aggScore: Int
-//    private (set) var scores: [Int]
-//    private (set) var recentScore: Int
+    private (set) var initDate: Date
+    private (set) var lockDate: Date?
     
-    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, locked: Bool, simulations: Int, aggScore: Int){
+    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, locked: Bool, simulations: Int, aggScore: Int, initDate: Date, lockDate: Date?){
         self.name = name
         self.chosenTeams = chosenTeams
         self.winner = winner
@@ -26,13 +26,18 @@ class BracketEntry: NSObject, NSCoding{
         self.locked = locked
         self.simulations = simulations
         self.aggScore = aggScore
+        self.initDate = initDate
+        self.lockDate = lockDate
     }
     
     convenience init(name: String, chosenTeams: [Int], winner: String, completed: Bool){
         let locked = false
         let simulations = 0
         let aggScore = 0
-        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore)
+        let initDate = Date()
+        var lockDate: Date?
+        lockDate = nil
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate)
     }
     
     convenience init(name: String){
@@ -43,8 +48,11 @@ class BracketEntry: NSObject, NSCoding{
         let locked = false
         let simulations = 0
         let aggScore = 0
+        let initDate = Date()
+        var lockDate: Date?
+        lockDate = nil
         
-        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore)
+        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -58,8 +66,13 @@ class BracketEntry: NSObject, NSCoding{
         let completed = aDecoder.decodeBool(forKey: "completed") as Bool
         let simulations = aDecoder.decodeInteger(forKey: "simulations")
         let aggScore = aDecoder.decodeInteger(forKey: "aggScore")
+        var initDate: Date
+        if let importDate = aDecoder.decodeObject(of: NSDate.self, forKey: "initDate"){
+            initDate = importDate as Date
+        } else {initDate = Date()}
+        let lockDate = aDecoder.decodeObject(of: NSDate.self, forKey: "lockDate") as Date?
 
-        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore)
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate)
     }
     
     func encode(with coder: NSCoder) {
@@ -70,6 +83,8 @@ class BracketEntry: NSObject, NSCoding{
         coder.encode(self.locked, forKey: "locked")
         coder.encode(self.simulations, forKey: "simulations")
         coder.encode(self.aggScore, forKey: "aggScore")
+        coder.encode(self.initDate, forKey: "initDate")
+        coder.encode(self.lockDate, forKey: "lockDate")
     }
         
     func setName(name: String){
@@ -147,6 +162,7 @@ class BracketEntry: NSObject, NSCoding{
         
     func lockBracket(){
         self.locked = true
+        self.lockDate = Date()
     }
     
     func updateTeams(gameID: Int, newTeam: Team){

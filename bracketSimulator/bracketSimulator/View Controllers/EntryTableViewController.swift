@@ -185,6 +185,8 @@ class EntryTableViewController: UITableViewController {
         let thisIndPath = tableView.indexPathForSelectedRow
         let section = self.sections[thisIndPath!.section]
         let thisBracketEntry = section.bracketEntries[thisIndPath!.row]
+        print(thisBracketEntry.initDate)
+        print(thisBracketEntry.lockDate)
         if segue.identifier == "fillBracketSegue"{
             let bracketEntry =  thisBracketEntry
             if let newEntryVC = segue.destination as? NewEntryViewController{
