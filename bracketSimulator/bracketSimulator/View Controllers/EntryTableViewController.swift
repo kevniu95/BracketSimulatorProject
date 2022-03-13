@@ -8,14 +8,11 @@
 import UIKit
 
 class EntryTableViewController: UITableViewController {
-//    var entryDict: [String: BracketEntry] = [:]
     var entryArray = [BracketEntry]()
-//    var currentEntry: BracketEntry?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.sharedInstance.instantiateFixedData()
-        print(DataManager.sharedInstance.teams[0].image)
         initNewButton()
         instantiateBracketEntries()
     }
@@ -24,7 +21,7 @@ class EntryTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         updateArrayForTable()
         if entryArray.count == 0{
-            initSheet()
+            initSheet(copy: false, copyOf: nil)
         }
     }
     
@@ -33,26 +30,33 @@ class EntryTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
+    
+    // MARK: Coordinate Table-Wide Data
+    // Create Bracket Entries at very start
     func instantiateBracketEntries(){
         let bracketEntries = DataManager.sharedInstance.unArchiveEntries()
         entryArray = Array(bracketEntries.values)
     }
     
+    // Keep table array updated
     func updateArrayForTable(){
-        // Run to keep Table array up-to-date with "source-of-truth" stored
-        // in DataManger
         let bracketEntries = DataManager.sharedInstance.bracketEntries
         entryArray = Array(bracketEntries.values)
         self.tableView.reloadData()
     }
     
-    @objc func objcInitSheet(){
-        initSheet()
+    // MARK: Handle initialization of new bracket entries
+    @objc func objcInitSheet(copy: Bool, copyOf: BracketEntry?){
+        initSheet(copy: copy, copyOf: copyOf)
     }
     
-    func initSheet(){
+    func initSheet(copy: Bool, copyOf: BracketEntry?){
         let requestNameVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestNameViewController") as! RequestNameViewController
         requestNameVC.delegate = self
+        if copy{
+            requestNameVC.copy = copy
+            requestNameVC.copyOf = copyOf
+        }
         if let sheet = requestNameVC.sheetPresentationController{
             sheet.detents = [.large()]
         }
@@ -70,31 +74,50 @@ class EntryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryTableViewCell", for: indexPath) as? EntryTableViewCell
-        // Configure the cell...
-        cell?.bracketName.text = entryArray[indexPath.row].name
+        
+        // 1. Bracket Name:
+        let thisBracketEntry = entryArray[indexPath.row]
+        cell?.bracketName.text = thisBracketEntry.name
         cell?.bracketName.textAlignment = .left
         
+        // 2. Average Score
         var avg: String
-        if entryArray[indexPath.row].simulations > 0{
-            avg = String(entryArray[indexPath.row].aggScore / entryArray[indexPath.row].simulations)
-        }
-        else{avg = "--"}
-//        
-        let winnerPosition = entryArray[indexPath.row].chosenTeams[0]
+        if thisBracketEntry.simulations > 0{
+            avg = String(thisBracketEntry.aggScore / thisBracketEntry.simulations)
+        } else{avg = "--"}
+        cell?.lastPts.text = "Avg: " + avg + " / 1920"
+        
+        // 3. Determine winner and winner image
+        let winnerIndex = thisBracketEntry.chosenTeams[0]
         var winnerImg: UIImage
-        if winnerPosition > -1 {
-            winnerImg = DataManager.sharedInstance.teams[winnerPosition].image
-            print("I am priting a winner image")
+        if winnerIndex > -1 {
+            winnerImg = DataManager.sharedInstance.teams[winnerIndex].image
         }
         else{
             winnerImg = UIImage(systemName: "building.columns.circle")!
         }
-        print(winnerImg)
         cell?.winnerImage.image = winnerImg
-        
         cell?.winnerName.text = entryArray[indexPath.row].winner
-        cell?.lastPts.text = "Avg: " + avg + " / 1920"
         
+        // 4. Function to run for copy button
+        cell?.getRequestNameVC = {
+            self.initSheet(copy: true, copyOf: self.entryArray[indexPath.row])
+        }
+        
+        // 5. Lock Status Button
+        if thisBracketEntry.completed{
+            cell?.lockButton.setImage(UIImage(systemName: "lock"), for: .normal)
+            if thisBracketEntry.locked{
+                cell?.lockButton.isEnabled = false
+            } else {cell?.lockButton.isEnabled = true}
+        }
+        else{
+            cell?.lockButton.setImage(UIImage(systemName: "lock.open"), for: .normal)
+            cell?.lockButton.isEnabled = false
+        }
+        cell?.handleLock = {self.setLockButton(bracketEntry: thisBracketEntry)}
+        
+        // 5. Simulation results
         var simText: String
         if (entryArray[indexPath.row].simulations) > 9999{
             simText = ">9,999"
@@ -102,7 +125,7 @@ class EntryTableViewController: UITableViewController {
         cell?.simulationCt.text = "Simulations: \(simText)"
         return cell!
     }
-
+    
     // Load already-saved bracket entry from table cell
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fillBracketSegue"{
@@ -113,7 +136,8 @@ class EntryTableViewController: UITableViewController {
             }
         }
     }
-
+    
+    // MARK: Other Table View stuff
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
@@ -126,6 +150,23 @@ class EntryTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    func setLockButton(bracketEntry: BracketEntry){
+        if !bracketEntry.completed || bracketEntry.locked{
+            print("This should not be happening, double check.")
+            return
+        }
+        let alert = UIAlertController(title: "Permanently lock this entry from editing?", message: "Only locked entries can be scored, but you can always make a new copy.", preferredStyle: .actionSheet)
+            
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+            bracketEntry.lockBracket()
+            DataManager.sharedInstance.updateEntries(entryName: bracketEntry.name, bracketEntry: bracketEntry)
+            self.updateArrayForTable()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
+        
     
 }
 

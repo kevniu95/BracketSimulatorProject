@@ -153,9 +153,9 @@
 		56FAEA1927DB7222006E6DB5 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */,
 				56FAEA1727DB60CF006E6DB5 /* DataManager.swift */,
 				56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */,
+				567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */,
 				56B0E57727DC37E800B38055 /* SimulatorViewController.swift */,
 			);
 			path = "Data Model";

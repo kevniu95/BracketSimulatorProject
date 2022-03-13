@@ -28,6 +28,13 @@ class BracketEntry: NSObject, NSCoding{
         self.aggScore = aggScore
     }
     
+    convenience init(name: String, chosenTeams: [Int], winner: String, completed: Bool){
+        let locked = false
+        let simulations = 0
+        let aggScore = 0
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore)
+    }
+    
     convenience init(name: String){
         let thisName = name
         let chosenTeams = initiateTeams(numTeams: 64)

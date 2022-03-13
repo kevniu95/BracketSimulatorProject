@@ -40,7 +40,7 @@ class DataManager {
     func scoreSimulations(){
         for simulation in simulations{
             for (entryName, bracketEntry) in bracketEntries{
-                if bracketEntry.completed{
+                if bracketEntry.locked{
                     let thisScore = bracketEntry.getScore(simulationResults: simulation.arrayToScore)
                     bracketEntry.includeNewSim(score: thisScore)
                 }

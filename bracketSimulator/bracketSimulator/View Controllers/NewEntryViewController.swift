@@ -33,23 +33,25 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     
     func initLockButton(){
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "lock.open"), style: .done, target: self, action: #selector(setLockButton))
-        if bracketEntry.locked{
+        if bracketEntry.completed{
             rightBarButtonItem.image = UIImage(systemName: "lock")
-            rightBarButtonItem.isEnabled = false
+            if bracketEntry.locked{
+                rightBarButtonItem.isEnabled = false
+            } else {rightBarButtonItem.isEnabled = true}
         }
-        else if !bracketEntry.completed{
+        else{
+            rightBarButtonItem.image = UIImage(systemName: "lock.open")
             rightBarButtonItem.isEnabled = false
         }
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     @objc func setLockButton(){
-        print("I am here")
         if !bracketEntry.completed || bracketEntry.locked{
-            print("This should not be happening, double check your shit")
+            print("This should not be happening, double check")
             return
         }
-        let alert = UIAlertController(title: "Save Bracket", message: "Do you want to permanently lock this entry from editing?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Permanently lock this entry from editing?", message: "Only locked entries can be scored, but you can always make a new copy.", preferredStyle: .actionSheet)
             
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
             self.bracketEntry.lockBracket()
