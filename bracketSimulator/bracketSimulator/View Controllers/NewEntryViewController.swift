@@ -27,10 +27,11 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         initiateGameCells(gamePositions: gamePositions)
         fillFirstRoundTeam()
         initLockButton()
-        print("\(bracketEntry.name) completed: \(bracketEntry.completed)")
-        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
+//        print("\(bracketEntry.name) completed: \(bracketEntry.completed)")
+//        print("\(bracketEntry.name) locked: \(bracketEntry.locked)")
     }
     
+    // MARK: A. Lock Button
     func initLockButton(){
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "lock.open"), style: .done, target: self, action: #selector(setLockButton))
         if bracketEntry.completed{
@@ -61,17 +62,8 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
-
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    func saveCurrentModel(){
-        delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
-    }
-    
-    // MARK: Scroll View Functionality
+    // MARK: B. Scroll View
     func initiateScrollView(){
         scrollView.delegate = self
         guard let bracketImageView = initializeBracketImage() else{
@@ -101,7 +93,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         scrollView.addSubview(bracketImageView)
     }
 
-    // MARK: Interact with data model
+    // MARK: C. Interact with (mostly) GameCell Objects
     func initiateGameCells(gamePositions: [gamePosition]){
         for ind in 1...127{
             let gamePosition = gamePositions[ind - 1]
@@ -135,6 +127,12 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             currGameCell.setTeam(team: currTeam)
         }
     }
+    
+    // MARK: Interact with (mostly) data model
+    func saveCurrentModel(){
+        delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
+    }
+    
     
     func setDownstreamCells(team: Team, nextGames: [Int], leaveGames: Int) {
         if !bracketEntry.locked{

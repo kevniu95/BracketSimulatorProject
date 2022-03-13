@@ -7,14 +7,36 @@
 
 import UIKit
 
+// Resource referenced for creating table sections
+// https://www.ralfebert.com/ios-examples/uikit/uitableviewcontroller/grouping-sections/
+
+struct StatusSection {
+    var status: String
+    var bracketEntries: [BracketEntry]
+}
+
+func getEntryStatus(entry: BracketEntry) -> String{
+    if entry.locked{
+        return "Locked"
+    }
+    else if entry.completed{
+        return "Ready to lock"
+    }
+    else{return "Incomplete"}
+}
+
+
 class EntryTableViewController: UITableViewController {
     var entryArray = [BracketEntry]()
+    var sections = [StatusSection]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
         DataManager.sharedInstance.instantiateFixedData()
         initNewButton()
         instantiateBracketEntries()
+        establishSections()
+
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -29,7 +51,15 @@ class EntryTableViewController: UITableViewController {
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(objcInitSheet))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
-
+    
+    func establishSections(){
+        let groups = Dictionary(grouping: self.entryArray){ (entry) in
+            return getEntryStatus(entry: entry)
+        }
+        self.sections = groups.map{(key, values) in
+            return StatusSection(status: key, bracketEntries: values)
+        }
+    }
     
     // MARK: Coordinate Table-Wide Data
     // Create Bracket Entries at very start
@@ -65,11 +95,17 @@ class EntryTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return self.sections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = self.sections[section]
+        return section.status
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entryArray.count
+        let section = self.sections[section]
+        return section.bracketEntries.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,6 +187,7 @@ class EntryTableViewController: UITableViewController {
         }
     }
     
+    // MARK: Define button functionality
     func setLockButton(bracketEntry: BracketEntry){
         if !bracketEntry.completed || bracketEntry.locked{
             print("This should not be happening, double check.")
