@@ -13,6 +13,7 @@ class EntryDetailViewController: UIViewController {
     weak var inputBracketEntry: BracketEntry?
     var bracketEntry = BracketEntry(name: "")
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topLeft: UIImageView!
     @IBOutlet weak var topRight: UIImageView!
     @IBOutlet weak var bottomLeft: UIImageView!
@@ -23,16 +24,32 @@ class EntryDetailViewController: UIViewController {
     @IBOutlet weak var averageScore: UILabel!
     @IBOutlet weak var createdOn: UILabel!
     @IBOutlet weak var lockedOn: UILabel!
-    
+    @IBOutlet weak var goToBracket: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         setBracketEntry()
         setImages()
         setText()
+        setUpButton()
         // Do any additional setup after loading the view.
     }
     
+    func setUpButton(){
+        goToBracket.titleLabel?.textAlignment = .center
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let thisBracketEntry = bracketEntry
+        print(thisBracketEntry.chosenTeams)
+        if segue.identifier == "showBracket"{
+            let bracketEntry =  thisBracketEntry
+            if let newEntryVC = segue.destination as? NewEntryViewController{
+                newEntryVC.inputBracketEntry = bracketEntry
+                newEntryVC.delegate = self
+            }
+        }
+    }
+        
     func setBracketEntry(){
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
@@ -85,15 +102,11 @@ class EntryDetailViewController: UIViewController {
         }
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension EntryDetailViewController: NewEntryVCDelegate{
+    func saveEntry(entryName: String, entry: BracketEntry) {
+        delegate?.saveDetailEntry(entryName: entryName, entry: entry)
+    }
+}
+

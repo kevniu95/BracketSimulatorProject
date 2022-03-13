@@ -207,13 +207,6 @@ class EntryTableViewController: UITableViewController {
         let thisIndPath = tableView.indexPathForSelectedRow
         let section = self.sections[thisIndPath!.section]
         let thisBracketEntry = section.bracketEntries[thisIndPath!.row]
-        if segue.identifier == "fillBracketSegue"{
-            let bracketEntry =  thisBracketEntry
-            if let newEntryVC = segue.destination as? NewEntryViewController{
-                newEntryVC.inputBracketEntry = bracketEntry
-                newEntryVC.delegate = self
-            }
-        }
         if segue.identifier == "detailViewSegue"{
             let bracketEntry = thisBracketEntry
             print(bracketEntry.winner)
@@ -257,6 +250,14 @@ class EntryTableViewController: UITableViewController {
     }
     
 }
+
+extension EntryTableViewController: EntryDetailVCDelegate{
+    func saveDetailEntry(entryName: String, entry: BracketEntry) {
+        DataManager.sharedInstance.updateEntries(entryName: entryName, bracketEntry: entry)
+        updateArrayAndSections()
+    }
+}
+
 
 extension EntryTableViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {
