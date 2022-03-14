@@ -27,18 +27,23 @@ class EntryDetailViewController: UIViewController {
     @IBOutlet weak var goToBracket: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBracketEntry()
-        setImages()
-        setText()
         setUpButton()
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        setBracketEntry()
+        setImages()
+        setText()
+        
+    }
+    
     func setUpButton(){
         goToBracket.titleLabel?.textAlignment = .center
-        if !bracketEntry.locked{
-            goToBracket.titleLabel?.text = "Edit Bracket"
-        } else {goToBracket.alpha = 0.7}
+        if bracketEntry.locked{
+            goToBracket.alpha = 0.7
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,6 +62,7 @@ class EntryDetailViewController: UIViewController {
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
         } else {print("uhoh!")}
+        DataManager.sharedInstance.setRecentDetailEntry(entry: bracketEntry)
     }
     
     func setText(){
@@ -104,20 +110,11 @@ class EntryDetailViewController: UIViewController {
             bottomRight.image = allTeams[bracketEntry.chosenTeams[6]].image
         }
     }
-    
-    func reloadThisVC(entry: BracketEntry){
-        inputBracketEntry = entry
-        setBracketEntry()
-        setImages()
-        setText()
-        setUpButton()
-    }
-    
+
 }
 
 extension EntryDetailViewController: NewEntryVCDelegate{
     func saveEntry(entryName: String, entry: BracketEntry) {
-        self.reloadThisVC(entry: entry)
         delegate?.saveDetailEntry(entryName: entryName, entry: entry)
     }
 }

@@ -20,7 +20,7 @@ class DataManager {
     var gameCells = [GameCell]()
     var simulations = [SimulationBasic]()
     var images = [UIImage]()
-  
+    var mostRecentDetailEntry = BracketEntry(name: "-1")
     
     // MARK: Read and write
     func archiveEntries() {
@@ -60,6 +60,14 @@ class DataManager {
                 }
             }
         }
+    }
+    
+    func setRecentDetailEntry(entry: BracketEntry){
+        self.mostRecentDetailEntry = entry
+    }
+    
+    func getRecentDetailEntry() -> BracketEntry{
+        return mostRecentDetailEntry
     }
     
     func runSimulations(n: Int){
