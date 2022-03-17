@@ -10,6 +10,16 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
+			<string>Developer</string>
+			<key>Key</key>
+			<string>developer</string>
+			<key>DefaultValue</key>
+			<string>Kevin Niu</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
 			<string>Version</string>
 			<key>Key</key>
 			<string>verison_no</string>

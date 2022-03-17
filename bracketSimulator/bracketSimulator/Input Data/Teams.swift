@@ -63,7 +63,7 @@ func convertTeams() -> [Team] {
     var teams = [Team]()
 
     //locate the file you want to use
-    guard let filepath = Bundle.main.path(forResource: "2021teams", ofType: "csv") else {
+    guard let filepath = Bundle.main.path(forResource: "2022teams", ofType: "csv") else {
         print("Didn't find csv")
         return []
     }

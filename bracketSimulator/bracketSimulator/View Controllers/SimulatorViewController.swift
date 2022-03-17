@@ -19,14 +19,29 @@ class SimulatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numLabel.text = "\(Int(slider.value))"
         simButton.addTarget(self, action: #selector(runSimulations), for: UIControl.Event.touchUpInside)
+        numLabel.text = "\(Int(slider.value))"
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resetForThisAppearance()
+    }
+    
+    func resetForThisAppearance(){
+        print("I am resetting")
+        instrLabel.text = "How many simulations would you like?"
+        simButton.isUserInteractionEnabled = true
+        simButton.alpha = 1
     }
     
     @objc func runSimulations() {
         let numberToRun = Int(slider.value)
         DataManager.sharedInstance.runSimulations(n: numberToRun)
+        instrLabel.text = "All done! Check out results in My Brackets!"
+        simButton.isUserInteractionEnabled = false
+        simButton.alpha = 0.5
     }
     
     //Attribution: https://www.youtube.com/watch?v=zTDUcwn6zyU

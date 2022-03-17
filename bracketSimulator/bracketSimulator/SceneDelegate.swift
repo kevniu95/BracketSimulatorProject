@@ -83,7 +83,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var timesOpened = defaults.integer(forKey: "timesOpened")
         print("Times opened: \(timesOpened)")
         if timesOpened == 0{
-            print("I am doing something about this")
+            let initDate = Date()
+            defaults.set(initDate, forKey: "initialLaunch")
         }
         timesOpened += 1
         defaults.set(timesOpened, forKey: "timesOpened")

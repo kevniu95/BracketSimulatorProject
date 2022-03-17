@@ -22,6 +22,7 @@
 		567FE59527E2E96F00D9111F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 567FE59427E2E96F00D9111F /* Settings.bundle */; };
 		567FE59927E317F900D9111F /* InstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567FE59827E317F900D9111F /* InstructionViewController.swift */; };
 		567FE59B27E31EC500D9111F /* UtilityFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567FE59A27E31EC500D9111F /* UtilityFunction.swift */; };
+		5696083A27E33C28008A6BDC /* 2022teams.csv in Resources */ = {isa = PBXBuildFile; fileRef = 5696083927E33C28008A6BDC /* 2022teams.csv */; };
 		569CA44A27E2C8B100EF48F9 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */; };
 		56A936E627DC3F6B00EF0857 /* SimulationBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */; };
 		56A936E827DC905300EF0857 /* TeamImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A936E727DC905300EF0857 /* TeamImageClient.swift */; };
@@ -54,6 +55,7 @@
 		567FE59427E2E96F00D9111F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		567FE59827E317F900D9111F /* InstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionViewController.swift; sourceTree = "<group>"; };
 		567FE59A27E31EC500D9111F /* UtilityFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityFunction.swift; sourceTree = "<group>"; };
+		5696083927E33C28008A6BDC /* 2022teams.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022teams.csv; sourceTree = "<group>"; };
 		569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationBasic.swift; sourceTree = "<group>"; };
 		56A936E727DC905300EF0857 /* TeamImageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamImageClient.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				56703CBC27D767F600E25D76 /* gameCellPositions.csv */,
 				565561C727D87F1A00068103 /* 2021teams.csv */,
+				5696083927E33C28008A6BDC /* 2022teams.csv */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56DEB65D27D3181500B96D65 /* LaunchScreen.storyboard in Resources */,
+				5696083A27E33C28008A6BDC /* 2022teams.csv in Resources */,
 				56703CBD27D767F600E25D76 /* gameCellPositions.csv in Resources */,
 				56DEB65A27D3181500B96D65 /* Assets.xcassets in Resources */,
 				56DEB65827D3181400B96D65 /* Main.storyboard in Resources */,
@@ -417,7 +421,7 @@
 		56DEB66227D3181500B96D65 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -445,7 +449,7 @@
 		56DEB66327D3181500B96D65 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

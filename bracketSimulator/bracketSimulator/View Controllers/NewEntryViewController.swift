@@ -191,7 +191,8 @@ extension NewEntryViewController: GameCellDelegate{
     // Long-pressing a team name allows you to choose how far you want team to go
     func presentAlert(currCellTeam: Team, currCellID: Int, nextGames: [Int]){
         let id = currCellID
-        let alert = UIAlertController(title: "Advance to...", message: nil, preferredStyle: .actionSheet)
+        let teamName = currCellTeam.name
+        let alert = UIAlertController(title: "Advance \(teamName) to...", message: nil, preferredStyle: .actionSheet)
         if id >= 64{
             alert.addAction(UIAlertAction(title: "Second Round", style: .default, handler: {action in
                 self.setDownstreamCells(team: currCellTeam, nextGames: nextGames, leaveGames: 5)
