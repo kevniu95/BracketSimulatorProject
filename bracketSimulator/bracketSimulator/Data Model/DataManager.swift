@@ -32,9 +32,10 @@ class DataManager {
     
     // MARK: Read and write
     func archiveTeamImages(){
-        print("I am archiving the team images right now")
+        print("I am archiving the team images right now to: ")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("teamImages.plist")
+        print(url)
         do{
             let data = try NSKeyedArchiver.archivedData(withRootObject: images, requiringSecureCoding: false)
             try data.write(to: url)
@@ -45,8 +46,10 @@ class DataManager {
     }
     
     func unarchiveTeamImages(){
+        print("I am pulling the team images from disk right now from:")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("teamImages.plist")
+        print(url)
         var entries: [Int : UIImage]?
         do{
             let data = try Data(contentsOf: url)
@@ -61,8 +64,10 @@ class DataManager {
     }
     
     func archiveEntries() {
+        print("I am saving bracket entries right now to:")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
+        print(url)
         do{
             let data = try NSKeyedArchiver.archivedData(withRootObject: bracketEntries, requiringSecureCoding: false)
             try data.write(to: url)
@@ -72,8 +77,10 @@ class DataManager {
         }
     }
     func unArchiveEntries(){
+        print("I am loading bracket entries right now from:")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
+        print(url)
         var entries: [String : BracketEntry]?
         do{
             let data = try Data(contentsOf: url)
