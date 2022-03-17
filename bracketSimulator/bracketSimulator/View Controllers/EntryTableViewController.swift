@@ -40,7 +40,7 @@ class EntryTableViewController: UITableViewController {
         super.viewDidLoad()
         DataManager.sharedInstance.instantiateFixedData()
         initNewButton()
-
+        initInstrButton()
     }
     
         
@@ -49,14 +49,25 @@ class EntryTableViewController: UITableViewController {
         updateArrayAndSections()
         
         updateArrayAndSections()
-//        setNavBar()
     }
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
+        manageTimesOpened(timesOpened: DataManager.sharedInstance.timesOpened)
+
         if entryArray.count == 0{
             initSheet(copy: false, copyOf: nil)
         }
+    }
+    
+    func manageTimesOpened(timesOpened: Int){
+        if timesOpened == 0{
+            initInstructions()
+        }
+        else if timesOpened == 3{
+            askForRating()
+        }
+        print("I am managing how many times this thing was opened, which was \(timesOpened)")
     }
     
     func initNewButton(){
@@ -64,6 +75,22 @@ class EntryTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
+    func initInstrButton(){
+        let leftBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "info.circle"), style: .done, target: self, action: #selector(objcInitInstructions))
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
+    }
+
+    @objc func objcInitInstructions() {
+        initInstructions()
+    }
+    
+    func initInstructions(){
+        let instructionVC = self.storyboard?.instantiateViewController(withIdentifier: "InstructionViewController") as! InstructionViewController
+        if let sheet = instructionVC.sheetPresentationController{
+            sheet.detents = [.large()]
+        }
+        present(instructionVC, animated: true, completion: nil)
+    }
     
     // MARK: Coordinate Table-Wide Data
     // Create Bracket Entries at very start
@@ -232,6 +259,20 @@ class EntryTableViewController: UITableViewController {
             self.sections[indexPath.section].bracketEntries.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    
+    // MARK: Managing Times Opened
+    func startInfo(){
+        
+    }
+    
+    func askForRating(){
+        let alert = UIAlertController(title: "Rate us on the App Store!", message: "If you're enjoying this app, please rate us on the App Store!", preferredStyle: .alert)
+            
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in}))
+        
+        self.present(alert, animated: true)
     }
     
     // MARK: Define button functionality

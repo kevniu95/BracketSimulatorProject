@@ -25,6 +25,7 @@ class EntryDetailViewController: UIViewController {
     @IBOutlet weak var createdOn: UILabel!
     @IBOutlet weak var lockedOn: UILabel!
     @IBOutlet weak var goToBracket: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()

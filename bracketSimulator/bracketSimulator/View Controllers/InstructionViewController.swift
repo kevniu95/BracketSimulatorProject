@@ -1,27 +1,32 @@
 //
-//  SplashScreenViewController.swift
+//  InstructionViewController.swift
 //  bracketSimulator
 //
-//  Created by Kevin Niu on 3/16/22.
+//  Created by Kevin Niu on 3/17/22.
 //
 
 import UIKit
 
-class SplashScreenViewController: UIViewController {
+class InstructionViewController: UIViewController {
 
-    @IBOutlet weak var splashImage: UIImageView!
-    @IBOutlet weak var splashLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let value  = UIInterfaceOrientation.portrait.rawValue
+        
+        UIDevice.current.setValue(value, forKey: "orientation")
+        UIViewController.attemptRotationToDeviceOrientation()
+        
+
+        AppUtility.lockOrientation(.portrait)
+
         // Do any additional setup after loading the view.
-        splashImage.image = UIImage(named: "march-madness")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        AppUtility.lockOrientation(.all)
     }
-    
-    
     
 
     /*

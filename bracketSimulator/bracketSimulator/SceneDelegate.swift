@@ -21,16 +21,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let splashVC = storyBoard.instantiateViewController(withIdentifier: "splash")
         window?.rootViewController = splashVC
         window?.makeKeyAndVisible()
-        
-        
-        let seconds = 0.25
+
+
+        let seconds = 0.05
         print("pausing before moving past splash screen...")
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            
+
             let tabVC = storyBoard.instantiateViewController(withIdentifier: "tabbar")
             self.window?.rootViewController = tabVC
             self.window?.makeKeyAndVisible()
         }
+
+        manageTimesOpened()
+    }
+
+    func manageTimesOpened(){
+        print("I am managing times opened")
+        let timesOpened = checkTimesOpened()
+        if timesOpened == 0{
+            print("I've never been opened!")
+        }
+        else if timesOpened == 3{
+            print("I have been opened three whole times!")
+        }
+        DataManager.sharedInstance.updateTimesOpened(timesOpened: timesOpened)
+    }
+
+    func checkTimesOpened() -> Int{
+        let defaults = UserDefaults.standard
+        var timesOpened = defaults.integer(forKey: "timesOpened")
+        print("Times opened: \(timesOpened)")
+        if timesOpened == 0{
+            print("I am doing something about this")
+        }
+        timesOpened += 1
+        defaults.set(timesOpened, forKey: "timesOpened")
+        defaults.register(defaults: ["timesOpened" : 0])
+        return timesOpened - 1
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
