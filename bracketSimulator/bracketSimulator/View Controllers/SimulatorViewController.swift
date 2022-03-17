@@ -29,7 +29,7 @@ class SimulatorViewController: UIViewController {
         DataManager.sharedInstance.runSimulations(n: numberToRun)
     }
     
-    //https://www.youtube.com/watch?v=zTDUcwn6zyU
+    //Attribution: https://www.youtube.com/watch?v=zTDUcwn6zyU
     @IBAction func sliderDidSlide(_ sender: UISlider){
         numLabel.text = "\(Int(slider.value))"
     }

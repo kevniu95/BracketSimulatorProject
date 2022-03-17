@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
 
 
-        let seconds = 0.05
+        let seconds = 0.5
         print("pausing before moving past splash screen...")
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
 
@@ -35,30 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         manageTimesOpened()
     }
 
-    func manageTimesOpened(){
-        print("I am managing times opened")
-        let timesOpened = checkTimesOpened()
-        if timesOpened == 0{
-            print("I've never been opened!")
-        }
-        else if timesOpened == 3{
-            print("I have been opened three whole times!")
-        }
-        DataManager.sharedInstance.updateTimesOpened(timesOpened: timesOpened)
-    }
-
-    func checkTimesOpened() -> Int{
-        let defaults = UserDefaults.standard
-        var timesOpened = defaults.integer(forKey: "timesOpened")
-        print("Times opened: \(timesOpened)")
-        if timesOpened == 0{
-            print("I am doing something about this")
-        }
-        timesOpened += 1
-        defaults.set(timesOpened, forKey: "timesOpened")
-        defaults.register(defaults: ["timesOpened" : 0])
-        return timesOpened - 1
-    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -88,6 +64,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
+    
+    // MARK: Manage times opened
+    func manageTimesOpened(){
+        print("I am managing times opened")
+        let timesOpened = checkTimesOpened()
+        if timesOpened == 0{
+            print("I've never been opened!")
+        }
+        else if timesOpened == 3{
+            print("I have been opened three whole times!")
+        }
+        DataManager.sharedInstance.updateTimesOpened(timesOpened: timesOpened)
+    }
+
+    func checkTimesOpened() -> Int{
+        let defaults = UserDefaults.standard
+        var timesOpened = defaults.integer(forKey: "timesOpened")
+        print("Times opened: \(timesOpened)")
+        if timesOpened == 0{
+            print("I am doing something about this")
+        }
+        timesOpened += 1
+        defaults.set(timesOpened, forKey: "timesOpened")
+        defaults.register(defaults: ["timesOpened" : 0])
+        return timesOpened - 1
+    }
     
 
 

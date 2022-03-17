@@ -29,7 +29,6 @@ class EntryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -37,35 +36,17 @@ class EntryDetailViewController: UIViewController {
         setBracketEntry()
         setImages()
         setText()
-        
     }
     
-    func setUpButton(){
-        goToBracket.titleLabel?.textAlignment = .center
-        if bracketEntry.locked{
-            goToBracket.alpha = 0.7
-        }
-    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let thisBracketEntry = bracketEntry
-        print(thisBracketEntry.chosenTeams)
-        if segue.identifier == "showBracket"{
-            let bracketEntry =  thisBracketEntry
-            if let newEntryVC = segue.destination as? NewEntryViewController{
-                newEntryVC.inputBracketEntry = bracketEntry
-                newEntryVC.delegate = self
-            }
-        }
-    }
-        
+    // MARK: Set up data for this bracket entry
     func setBracketEntry(){
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
         } else {print("uhoh!")}
         DataManager.sharedInstance.setRecentDetailEntry(entry: bracketEntry)
     }
-    
+
     func setText(){
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "MM/d/YY"
@@ -83,9 +64,7 @@ class EntryDetailViewController: UIViewController {
             averageScore.text = "Average Score: " + avgScoreText + " / 1960"
         }
         
-        print(bracketEntry.initDate)
-        print(type(of: bracketEntry.initDate))
-        print(dateformatter.string(from: bracketEntry.initDate))
+        print("Showing summary for bracket entry created \(bracketEntry.initDate)")
         createdOn.text = "Created: " + dateformatter.string(from: bracketEntry.initDate)
         
         if bracketEntry.locked{
@@ -95,7 +74,7 @@ class EntryDetailViewController: UIViewController {
             lockedOn.text = "Locked: --"
         }
     }
-    
+
     func setImages(){
         let allTeams = DataManager.sharedInstance.shareTeams()
         if bracketEntry.chosenTeams[3] > -1{
@@ -111,6 +90,26 @@ class EntryDetailViewController: UIViewController {
             bottomRight.image = allTeams[bracketEntry.chosenTeams[6]].image
         }
     }
+    
+    // MARK: Sets up go to bracket button
+    func setUpButton(){
+        goToBracket.titleLabel?.textAlignment = .center
+        if bracketEntry.locked{
+            goToBracket.alpha = 0.7
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let thisBracketEntry = bracketEntry
+        if segue.identifier == "showBracket"{
+            let bracketEntry =  thisBracketEntry
+            if let newEntryVC = segue.destination as? NewEntryViewController{
+                newEntryVC.inputBracketEntry = bracketEntry
+                newEntryVC.delegate = self
+            }
+        }
+    }
+        
 
 }
 

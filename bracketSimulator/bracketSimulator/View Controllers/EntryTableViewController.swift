@@ -10,6 +10,8 @@ import UIKit
 // Resource referenced for creating table sections
 // https://www.ralfebert.com/ios-examples/uikit/uitableviewcontroller/grouping-sections/
 
+
+// Create struct and enum to manage bracket status (sections in table)
 struct StatusSection {
     var status: Status
     var bracketEntries: [BracketEntry]
@@ -41,30 +43,25 @@ class EntryTableViewController: UITableViewController {
         DataManager.sharedInstance.instantiateFixedData()
         initNewButton()
         initInstrButton()
+        manageTimesOpened(timesOpened: DataManager.sharedInstance.timesOpened)
     }
     
-        
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
-        updateArrayAndSections()
-        
         updateArrayAndSections()
     }
     
     override func viewDidAppear(_ animated: Bool){
-        super.viewDidAppear(animated)
-        manageTimesOpened(timesOpened: DataManager.sharedInstance.timesOpened)
+        super.viewDidAppear(animated)        
 
         if entryArray.count == 0{
             initSheet(copy: false, copyOf: nil)
         }
     }
     
+    // MARK: Manage times opened and basic buttons
     func manageTimesOpened(timesOpened: Int){
-        if timesOpened == 0{
-            initInstructions()
-        }
-        else if timesOpened == 3{
+        if timesOpened == 3{
             askForRating()
         }
         print("I am managing how many times this thing was opened, which was \(timesOpened)")
@@ -93,8 +90,6 @@ class EntryTableViewController: UITableViewController {
     }
     
     // MARK: Coordinate Table-Wide Data
-    // Create Bracket Entries at very start
-    
     // Keep table array updated
     func updateArrayForTable(){
         let bracketEntries = DataManager.sharedInstance.bracketEntries
@@ -122,6 +117,7 @@ class EntryTableViewController: UITableViewController {
 
     // Now add function that updates array as well as updates sections
     func updateArrayAndSections(){
+        print("The entire table has undergone an update!")
         updateArrayForTable()
         establishSections()
         self.sections.sort{(lhs, rhs) in lhs.status.rawValue < rhs.status.rawValue}
@@ -131,7 +127,6 @@ class EntryTableViewController: UITableViewController {
     
     func sortEntriesInSection(){
         print("I am sorting the entries in each section")
-        // If time alows, will come back and allow for sort by score
         if self.sections.count > 0{
             for i in 0...(self.sections.count - 1){
                 if self.sections[i].status.getString() == "Locked"{
@@ -238,7 +233,8 @@ class EntryTableViewController: UITableViewController {
         let thisBracketEntry = section.bracketEntries[thisIndPath!.row]
         if segue.identifier == "detailViewSegue"{
             let bracketEntry = thisBracketEntry
-            print(bracketEntry.winner)
+            print("Going from table to detailed cell!")
+            print("The winner selected for the entry at this cell was: \(bracketEntry.winner)")
             if let newEntryVC = segue.destination as? EntryDetailViewController{
                 newEntryVC.inputBracketEntry = bracketEntry
                 newEntryVC.delegate = self
@@ -262,20 +258,19 @@ class EntryTableViewController: UITableViewController {
     }
     
     
-    // MARK: Managing Times Opened
-    func startInfo(){
-        
-    }
-    
+    // MARK: Misc
     func askForRating(){
         let alert = UIAlertController(title: "Rate us on the App Store!", message: "If you're enjoying this app, please rate us on the App Store!", preferredStyle: .alert)
             
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in}))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in
+            if (DataManager.sharedInstance.bracketEntries).count == 0{
+                self.initSheet(copy: false, copyOf: nil)
+            }}))
         
         self.present(alert, animated: true)
     }
     
-    // MARK: Define button functionality
+    // MARK: Define lock button functionality
     func setLockButton(bracketEntry: BracketEntry){
         if !bracketEntry.completed {
             let newEntryVC = self.storyboard?.instantiateViewController(withIdentifier: "NewEntryViewController") as! NewEntryViewController
@@ -292,17 +287,13 @@ class EntryTableViewController: UITableViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = self.view //to set the source of your alert
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
-            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
-        }
-
         self.present(alert, animated: true)
     }
     
 }
 
+
+// MARK: Act as Delegate
 extension EntryTableViewController: EntryDetailVCDelegate{
     func saveDetailEntry(entryName: String, entry: BracketEntry) {
         DataManager.sharedInstance.updateEntries(entryName: entryName, bracketEntry: entry)

@@ -203,52 +203,52 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yXU-1N-gzK">
-                                                <rect key="frame" x="154" y="107.5" width="250" height="213.5"/>
+                                                <rect key="frame" x="179" y="107.5" width="225" height="213.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lock Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-Z7-YWP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only &quot;locked&quot; entries will be scored." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hc-rq-8Yk">
-                                                        <rect key="frame" x="0.0" y="28.5" width="250" height="12"/>
+                                                        <rect key="frame" x="0.0" y="28.5" width="225" height="12"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Ready to lock&quot; entries can be locked or edited further. Press the blue button to lock these entries" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3w-58-5tg">
-                                                        <rect key="frame" x="0.0" y="48.5" width="250" height="24"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Ready to lock&quot; entries can be locked or edited further. Press the blue button to lock." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3w-58-5tg">
+                                                        <rect key="frame" x="0.0" y="48.5" width="225" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Incomplete&quot; brackets need to be filled out before they can be locked" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AS6-vR-hAH">
-                                                        <rect key="frame" x="0.0" y="80.5" width="250" height="24"/>
+                                                        <rect key="frame" x="0.0" y="80.5" width="225" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOP-K2-7Gc">
-                                                        <rect key="frame" x="0.0" y="112.5" width="250" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="112.5" width="225" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make a copy of any bracket by pressing this button" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rJ-Zk-j1D">
-                                                        <rect key="frame" x="0.0" y="141" width="250" height="12"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make a copy of any bracket." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rJ-Zk-j1D" userLabel="Make a copy of any bracket.">
+                                                        <rect key="frame" x="0.0" y="141" width="225" height="12"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entry Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1E-YY-RF0">
-                                                        <rect key="frame" x="0.0" y="161" width="250" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="161" width="225" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on the entry cell to get more information and to view/edit the bracket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDH-sV-yjK">
-                                                        <rect key="frame" x="0.0" y="189.5" width="250" height="24"/>
+                                                        <rect key="frame" x="0.0" y="189.5" width="225" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -256,7 +256,7 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="tpj-Z7-YWP" firstAttribute="top" secondItem="yXU-1N-gzK" secondAttribute="top" id="EhK-5v-kAp"/>
-                                                    <constraint firstAttribute="width" constant="250" id="Hoq-dz-Vxn"/>
+                                                    <constraint firstAttribute="width" constant="225" id="Hoq-dz-Vxn"/>
                                                     <constraint firstAttribute="height" constant="213.5" id="a5Y-X0-Pg2"/>
                                                 </constraints>
                                             </stackView>
@@ -303,23 +303,23 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KQ1-Ce-Yd6">
-                                                <rect key="frame" x="154" y="371" width="250" height="52.5"/>
+                                                <rect key="frame" x="179" y="371" width="225" height="52.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simulate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eng-Ai-LhA">
-                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is easy! Choose how many simulations you want to run and press Simulate!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97b-08-31r">
-                                                        <rect key="frame" x="0.0" y="28.5" width="250" height="24"/>
+                                                        <rect key="frame" x="0.0" y="28.5" width="225" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="3Yg-bB-q0e"/>
+                                                    <constraint firstAttribute="width" constant="225" id="3Yg-bB-q0e"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52.5" id="c6I-di-YAk"/>
                                                     <constraint firstAttribute="height" constant="52.5" id="h72-MN-D9b"/>
                                                 </constraints>
@@ -346,29 +346,29 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s81-OO-eAt">
-                                                <rect key="frame" x="154" y="473.5" width="250" height="96.5"/>
+                                                <rect key="frame" x="179" y="473.5" width="225" height="96.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get to Bracket" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ha-ms-oe2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click the pencil in the My Brackets tab to edit &quot;Incomplete&quot; brackets" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slo-i7-UsQ">
-                                                        <rect key="frame" x="0.0" y="28.5" width="250" height="24"/>
+                                                        <rect key="frame" x="0.0" y="28.5" width="225" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Otherwise, all brackets can be accessed by clicking on the entry cell in My Brackets, and then clicking View Bracket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSS-ak-OgX">
-                                                        <rect key="frame" x="0.0" y="60.5" width="250" height="36"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All brackets can be accessed by clicking on the entry cell in My Brackets, and then clicking View Bracket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSS-ak-OgX">
+                                                        <rect key="frame" x="0.0" y="60.5" width="225" height="36"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="8Pi-P1-y8A"/>
+                                                    <constraint firstAttribute="width" constant="225" id="8Pi-P1-y8A"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>

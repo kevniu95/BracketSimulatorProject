@@ -21,8 +21,6 @@ class SplashScreenViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    
-    
 
     /*
     // MARK: - Navigation

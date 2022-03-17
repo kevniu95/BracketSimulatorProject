@@ -76,7 +76,7 @@ class GameCell{
         delegate?.presentAlert(currCellTeam: self.team, currCellID: self.id, nextGames: self.nextGames)
     }
     
-    // MARK: State Challenge Caller
+    // MARK: State Change Caller
     func setTeam(team: Team){
         let prevTeam = self.team
         // Check to see if setTeam is a "real update"
@@ -96,13 +96,9 @@ class GameCell{
             delegate?.resetDownstreamCells(team: team, nextGames: nextGames, prevTeam: prevTeam)
         }
     }
-            
-    func resetCell(){
-        self.cellImage.isHidden = true
-        self.cellImage.isUserInteractionEnabled = false
-        self.team = blankTeam()
-    }
     
+    // Unhide and allow user interaction - update a hidden cell for previously
+    // unselected game
     func updateCellImage(){
         self.cellImage.isHidden = false
         self.cellImage.isUserInteractionEnabled = true
@@ -117,6 +113,14 @@ class GameCell{
         cellTeam.text = self.team.name
         cellSeed.text = String(self.team.seed)
     }
+    
+    // GO back to hiding and disablign user interaction on a cell
+    func resetCell(){
+        self.cellImage.isHidden = true
+        self.cellImage.isUserInteractionEnabled = false
+        self.team = blankTeam()
+    }
+    
     
     
     // MARK: Initial Cell Image

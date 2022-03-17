@@ -28,26 +28,6 @@ class DataManager {
         self.timesOpened = timesOpened
     }
     
-    struct AppUtility {
-
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
-        
-            if let delegate = UIApplication.shared.delegate as? AppDelegate {
-                delegate.orientationLock = orientation
-            }
-        }
-
-        /// OPTIONAL Added method to adjust lock and rotate to the desired orientation
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
-       
-            self.lockOrientation(orientation)
-        
-            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
-            UINavigationController.attemptRotationToDeviceOrientation()
-        }
-
-    }
-    
     
     // MARK: Read and write
     func archiveEntries() {
@@ -77,6 +57,36 @@ class DataManager {
         return
     }
     
+    // MARK: Instantiate and share DataManager info
+    func shareTeams() -> [Team]{
+        return self.teams
+    }
+    
+    func instantiateFixedData(){
+        createTeams()
+        createGamePositions()
+        createGameCells()
+        unArchiveEntries()
+    }
+    
+    func createTeams(){
+        // Creates the list of 64 teams to be saved in singleton
+        // (So don't have to create every time in NewEntry VC)
+        self.teams = convertTeams()
+    }
+    
+    func createGamePositions(){
+        self.gamePositions = convertGamePositions()
+    }
+    
+    func createGameCells(){
+        for ind in 1...127{
+            let gamePosition = gamePositions[ind - 1]
+            let currGameCell = GameCell(idNum: ind, gamePos: gamePosition)
+            gameCells.append(currGameCell)
+        }
+    }
+        
     // MARK: Run and Score Simulations
     func scoreSimulations(){
         for simulation in simulations{
@@ -110,37 +120,6 @@ class DataManager {
         archiveEntries()
     }
     
-    
-    // MARK: Instantiate and share DataManager info
-    func shareTeams() -> [Team]{
-        return self.teams
-    }
-    
-    func instantiateFixedData(){
-        createTeams()
-        createGamePositions()
-        createGameCells()
-        unArchiveEntries()
-    }
-    
-    func createTeams(){
-        // Creates the list of 64 teams to be saved in singleton
-        // (So don't have to create every time in NewEntry VC)
-        self.teams = convertTeams()
-    }
-    
-    func createGamePositions(){
-        self.gamePositions = convertGamePositions()
-    }
-    
-    func createGameCells(){
-        for ind in 1...127{
-            let gamePosition = gamePositions[ind - 1]
-            let currGameCell = GameCell(idNum: ind, gamePos: gamePosition)
-            gameCells.append(currGameCell)
-        }
-    }
-        
     
     // MARK: Manage updates to and from Data Manager - will be automatically archived
     // Update entry from bracketEntries

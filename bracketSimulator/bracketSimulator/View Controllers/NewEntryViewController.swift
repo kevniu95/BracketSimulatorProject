@@ -24,7 +24,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
-        
         // Always the same, no matter if new entry or saved
         setBracketEntry()
         initiateScrollView()
@@ -41,6 +40,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
         }
+        print("Looking at an actual bracket. Here is some information on whether it has been completed/locked:")
     }
     
     func setNavBar(){
@@ -82,17 +82,12 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             self.initLockButton()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = self.view //to set the source of your alert
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
-            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
-        }
 
         self.present(alert, animated: true)
     }
     
     // MARK: B. Scroll View
+    // Set scroll view parameters
     func initiateScrollView(){
         scrollView.delegate = self
         
@@ -111,10 +106,12 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         scrollView.maximumZoomScale = 1.5
     }
     
+    // Allow zooming in
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.bracketImgView
     }
     
+    // Get bracket image into scrollview
     func initializeBracketImage()-> UIImageView?{
         let bracketImageView: UIImageView = UIImageView()
         guard let bracketImage = UIImage(named: "bracket2022") else {
@@ -132,6 +129,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     }
 
     // MARK: C. Interact with (mostly) GameCell Objects
+    // Add game cells to bracket image
     func initiateGameCells(gamePositions: [gamePosition]){
         for ind in 1...127{
             let gamePosition = gamePositions[ind - 1]
@@ -142,7 +140,10 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         }
         scrollView.subviews[0].isUserInteractionEnabled = true
     }
-
+    
+    // Fill first round of teams (64 - 127) - this will always happen
+    // Then fill out "middle" 63 entries based on previously-filled data if available
+        // THis stored in bracketEntry.chosenTeams
     func fillFirstRoundTeam(){
         // Load with previous data from bracket entry if it is available
         for ind in 1...63{
@@ -168,7 +169,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         delegate?.saveEntry(entryName: bracketEntry.name, entry: bracketEntry)
     }
     
-    
+    // Allows filling of cells continuously down bracket as far as requested
     func setDownstreamCells(team: Team, nextGames: [Int], leaveGames: Int) {
         if !bracketEntry.locked{
             var gamesLeft = nextGames.count
@@ -187,6 +188,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
 }
 
 extension NewEntryViewController: GameCellDelegate{
+    // Long-pressing a team name allows you to choose how far you want team to go
     func presentAlert(currCellTeam: Team, currCellID: Int, nextGames: [Int]){
         let id = currCellID
         let alert = UIAlertController(title: "Advance to...", message: nil, preferredStyle: .actionSheet)
@@ -226,6 +228,7 @@ extension NewEntryViewController: GameCellDelegate{
         self.present(alert, animated: true)
     }
     
+    // Resolve conflicts based on a current bracket selection
     func resetDownstreamCells(team: Team, nextGames: [Int], prevTeam: Team) {
         if !bracketEntry.locked{
             for nextGameInd in nextGames{
