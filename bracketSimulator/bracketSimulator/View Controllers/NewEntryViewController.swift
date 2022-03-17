@@ -40,7 +40,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         if let inputBracketEntry = inputBracketEntry{
             bracketEntry = inputBracketEntry
         }
-        print("Looking at an actual bracket. Here is some information on whether it has been completed/locked:")
+        print("\nLooking at an actual bracket. Here is some information on whether it has been completed/locked:")
     }
     
     func setNavBar(){

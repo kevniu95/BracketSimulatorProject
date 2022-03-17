@@ -32,7 +32,7 @@ class DataManager {
     
     // MARK: Read and write
     func archiveTeamImages(){
-        print("I am archiving the team images right now to: ")
+        print("\nI am archiving the team images right now to: ")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("teamImages.plist")
         print(url)
@@ -46,7 +46,7 @@ class DataManager {
     }
     
     func unarchiveTeamImages(){
-        print("I am pulling the team images from disk right now from:")
+        print("\nI am pulling the team images from disk right now from:")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("teamImages.plist")
         print(url)
@@ -64,7 +64,7 @@ class DataManager {
     }
     
     func archiveEntries() {
-        print("I am saving bracket entries right now to:")
+        print("\nI am saving bracket entries right now to:")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
         print(url)
@@ -77,7 +77,7 @@ class DataManager {
         }
     }
     func unArchiveEntries(){
-        print("I am loading bracket entries right now from:")
+        print("\nI am loading bracket entries right now from:")
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
         print(url)
@@ -114,7 +114,6 @@ class DataManager {
         if hadToPullNewImage{
             self.archiveTeamImages()
         }
-        
     }
     
     func createGamePositions(){
@@ -156,6 +155,7 @@ class DataManager {
             simulations.append(sim)
         }
         scoreSimulations()
+        
         // Need to reset simulations array to be empty so not cumulatively
         // counting them over and over
         simulations = []

@@ -133,6 +133,7 @@ class BracketEntry: NSObject, NSCoding{
     func getScore(simulationResults: [Int]) -> Int {
         var cumScore = 0
         for ind in 0...62{
+            print("\nScoring bracket entry: \(self.name)")
 //            print("\nFor game id \(ind) we have:")
             
 //            print("Bracket entry with: \(DataManager.sharedInstance.teams[self.chosenTeams[ind]].name)")

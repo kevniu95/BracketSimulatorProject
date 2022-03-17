@@ -30,7 +30,7 @@ class SimulatorViewController: UIViewController {
     }
     
     func resetForThisAppearance(){
-        print("I am resetting")
+        print("I am resetting appearance of simulator VC")
         instrLabel.text = "How many simulations would you like?"
         simButton.isUserInteractionEnabled = true
         simButton.alpha = 1

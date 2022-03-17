@@ -64,7 +64,7 @@ class EntryTableViewController: UITableViewController {
         if timesOpened == 3{
             askForRating()
         }
-        print("I am managing how many times this thing was opened, which was \(timesOpened)")
+        print("I am managing how many times this thing was opened, which is \(timesOpened)")
     }
     
     func initNewButton(){
@@ -144,6 +144,7 @@ class EntryTableViewController: UITableViewController {
     }
     
     func initSheet(copy: Bool, copyOf: BracketEntry?){
+        print("\nLet's name this new entry shall we?")
         let requestNameVC = self.storyboard?.instantiateViewController(withIdentifier: "RequestNameViewController") as! RequestNameViewController
         requestNameVC.delegate = self
         if copy{
@@ -281,6 +282,7 @@ class EntryTableViewController: UITableViewController {
         let alert = UIAlertController(title: "Permanently lock this entry from editing?", message: "Only locked entries can be scored, but you can always make a new copy.", preferredStyle: .actionSheet)
             
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {action in
+            print("I am locking this bracket now!")
             bracketEntry.lockBracket()
             DataManager.sharedInstance.updateEntries(entryName: bracketEntry.name, bracketEntry: bracketEntry)
             self.updateArrayAndSections()

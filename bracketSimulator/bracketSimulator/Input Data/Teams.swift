@@ -96,8 +96,7 @@ func convertTeams() -> [Team] {
                  let urlString = String(columns[5].filter{!"\n\t\r".contains($0)})
                  
                  
-                 
-                 if DataManager.sharedInstance.images.count > 0{
+                 if DataManager.sharedInstance.images.keys.contains(teamid){
                      let savedImages = DataManager.sharedInstance.images
                      let image = savedImages[teamid]
                      if let image = image{
