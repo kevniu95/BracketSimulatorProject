@@ -19,6 +19,7 @@
 		567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */; };
 		567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */; };
 		567C252227D9F70F007E3B54 /* NewEntryVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */; };
+		569CA44A27E2C8B100EF48F9 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */; };
 		56A936E627DC3F6B00EF0857 /* SimulationBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */; };
 		56A936E827DC905300EF0857 /* TeamImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A936E727DC905300EF0857 /* TeamImageClient.swift */; };
 		56B0E57827DC37E800B38055 /* SimulatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0E57727DC37E800B38055 /* SimulatorViewController.swift */; };
@@ -47,6 +48,7 @@
 		567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketEntryDataModel.swift; sourceTree = "<group>"; };
 		567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewCell.swift; sourceTree = "<group>"; };
 		567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryVCDelegate.swift; sourceTree = "<group>"; };
+		569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		56A936E527DC3F6B00EF0857 /* SimulationBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationBasic.swift; sourceTree = "<group>"; };
 		56A936E727DC905300EF0857 /* TeamImageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamImageClient.swift; sourceTree = "<group>"; };
 		56B0E57727DC37E800B38055 /* SimulatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		56B9B38627D31CB80096C142 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */,
 				56B0E57727DC37E800B38055 /* SimulatorViewController.swift */,
 				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */,
@@ -239,6 +242,7 @@
 			files = (
 				567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */,
 				565561CB27D882DC00068103 /* Teams.swift in Sources */,
+				569CA44A27E2C8B100EF48F9 /* SplashScreenViewController.swift in Sources */,
 				56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */,
 				56A936E627DC3F6B00EF0857 /* SimulationBasic.swift in Sources */,
 				56FAEA1427DAF921006E6DB5 /* RequestNameVCDelegate.swift in Sources */,

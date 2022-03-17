@@ -104,7 +104,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="fNb-aZ-xY8">
             <objects>
-                <tabBarController id="8g4-8y-dbK" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabbar" id="8g4-8y-dbK" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y0o-Ki-txC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -196,6 +196,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="goI-jn-imk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="473.91304347826093" y="-226.33928571428569"/>
+        </scene>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="BPG-i9-HTo">
+            <objects>
+                <viewController storyboardIdentifier="splash" id="dcM-d2-sYx" customClass="SplashScreenViewController" customModule="bracketSimulator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="43D-U5-wLG" userLabel="View" customClass="viewcon">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fU0-i7-F1V">
+                                <rect key="frame" x="87" y="294.5" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="MzD-7D-RT8"/>
+                                    <constraint firstAttribute="width" constant="240" id="cNp-Tm-al7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTT-Xe-FxO">
+                                <rect key="frame" x="64.5" y="422.5" width="285.5" height="51"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Bracket Simulator">
+                                        <attributes>
+                                            <font key="NSFont" size="36" name="ChalkboardSE-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBz-tY-7Z4">
+                                <rect key="frame" x="157" y="468.5" width="100" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="xRb-x5-pVv"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Kevin Niu">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="ChalkboardSE-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ceh-SG-fJS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RBz-tY-7Z4" firstAttribute="centerX" secondItem="43D-U5-wLG" secondAttribute="centerX" id="1tk-p6-e0p"/>
+                            <constraint firstItem="CTT-Xe-FxO" firstAttribute="centerX" secondItem="43D-U5-wLG" secondAttribute="centerX" id="3V7-zp-HTR"/>
+                            <constraint firstItem="fU0-i7-F1V" firstAttribute="centerX" secondItem="43D-U5-wLG" secondAttribute="centerX" id="8s0-nq-AOa"/>
+                            <constraint firstItem="CTT-Xe-FxO" firstAttribute="centerY" secondItem="43D-U5-wLG" secondAttribute="centerY" id="PV5-8O-pR9"/>
+                            <constraint firstItem="RBz-tY-7Z4" firstAttribute="top" secondItem="CTT-Xe-FxO" secondAttribute="bottom" constant="-5" id="SNa-tE-IO6"/>
+                            <constraint firstItem="CTT-Xe-FxO" firstAttribute="top" secondItem="fU0-i7-F1V" secondAttribute="bottom" id="Wm1-No-VXx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="splashImage" destination="fU0-i7-F1V" id="UGh-9Z-FFr"/>
+                        <outlet property="splashLabel" destination="CTT-Xe-FxO" id="NKF-Yk-Od1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ou7-NL-lqa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1214.4927536231885" y="-98.4375"/>
         </scene>
         <!--Entry Summary-->
         <scene sceneID="LIy-PR-w0H">

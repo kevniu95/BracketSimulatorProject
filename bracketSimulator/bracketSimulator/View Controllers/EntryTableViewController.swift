@@ -40,11 +40,14 @@ class EntryTableViewController: UITableViewController {
         super.viewDidLoad()
         DataManager.sharedInstance.instantiateFixedData()
         initNewButton()
-        updateArrayAndSections()
+
     }
     
+        
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
+        updateArrayAndSections()
+        
         updateArrayAndSections()
 //        setNavBar()
     }
@@ -247,6 +250,13 @@ class EntryTableViewController: UITableViewController {
             self.updateArrayAndSections()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view //to set the source of your alert
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0) // you can set this as per your requirement.
+            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+        }
+
         self.present(alert, animated: true)
     }
     
