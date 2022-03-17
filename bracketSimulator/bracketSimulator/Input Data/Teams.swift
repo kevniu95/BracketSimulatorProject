@@ -95,20 +95,32 @@ func convertTeams() -> [Team] {
                  let seed = Int(String(columns[4].filter{!"\n\t\r".contains($0)})) ?? 0
                  let urlString = String(columns[5].filter{!"\n\t\r".contains($0)})
                  
-                 let url = URL(string: urlString)!
-                 let data = try? Data(contentsOf: url)
-                
-                 if let imageData = data {
-                     let image = UIImage(data: imageData)!
-                     
-                     let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: image)
-                     teams.append(team)
-                 } else{
-                     let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: UIImage())
-                     teams.append(team)
+                 
+                 
+                 if DataManager.sharedInstance.images.count > 0{
+                     let savedImages = DataManager.sharedInstance.images
+                     let image = savedImages[teamid]
+                     if let image = image{
+                         let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: image)
+                         teams.append(team)
+                     }
                  }
-                 
-                 
+                 else{
+                     DataManager.sharedInstance.hadToPullNewImage = true
+                     let url = URL(string: urlString)!
+                     let data = try? Data(contentsOf: url)
+                    
+                     if let imageData = data {
+                         let image = UIImage(data: imageData)!
+                         DataManager.sharedInstance.images[teamid] = image
+                         let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: image)
+                         teams.append(team)
+                     } else{
+                         let altImg = UIImage(systemName: "building.columns.circle")
+                         let team = Team(teamid: teamid, binID: binID, firstCellID: firstCellID, name: name, seed: seed, image: altImg!)
+                         teams.append(team)
+                     }
+                 }
              }
          }
     return teams

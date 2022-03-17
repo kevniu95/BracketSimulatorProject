@@ -19,8 +19,9 @@ class DataManager {
     var gamePositions = [gamePosition]()
     var gameCells = [GameCell]()
     var simulations = [SimulationBasic]()
-    var images = [UIImage]()
+    var images = [Int:UIImage]()
     var mostRecentDetailEntry = BracketEntry(name: "-1")
+    var hadToPullNewImage = false
     private(set) var timesOpened = -1
     
     // MARK: App metadata
@@ -30,6 +31,35 @@ class DataManager {
     
     
     // MARK: Read and write
+    func archiveTeamImages(){
+        print("I am archiving the team images right now")
+        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let url = docDirectory.appendingPathComponent("teamImages.plist")
+        do{
+            let data = try NSKeyedArchiver.archivedData(withRootObject: images, requiringSecureCoding: false)
+            try data.write(to: url)
+            print(data)
+        } catch (let error){
+            print("Error saving to file: \(error)")
+        }
+    }
+    
+    func unarchiveTeamImages(){
+        guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let url = docDirectory.appendingPathComponent("teamImages.plist")
+        var entries: [Int : UIImage]?
+        do{
+            let data = try Data(contentsOf: url)
+            entries = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Int : UIImage]
+        } catch (let error){
+            print("Error fetching from file: \(error)")
+        }
+        if let entries = entries{
+            self.images = entries
+        }
+        return
+    }
+    
     func archiveEntries() {
         guard let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = docDirectory.appendingPathComponent("bracketEntries.plist")
@@ -72,7 +102,12 @@ class DataManager {
     func createTeams(){
         // Creates the list of 64 teams to be saved in singleton
         // (So don't have to create every time in NewEntry VC)
+        self.unarchiveTeamImages()
         self.teams = convertTeams()
+        if hadToPullNewImage{
+            self.archiveTeamImages()
+        }
+        
     }
     
     func createGamePositions(){
