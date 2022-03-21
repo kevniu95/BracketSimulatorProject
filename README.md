@@ -1,1 +1,1 @@
-# mpcs51030-2022-winter-final-project-kevniu95
+# Project to simulate NCAA Tournament with various bracket entries
