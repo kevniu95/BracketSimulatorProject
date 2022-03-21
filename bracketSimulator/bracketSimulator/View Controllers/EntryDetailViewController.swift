@@ -13,6 +13,8 @@ class EntryDetailViewController: UIViewController {
     weak var inputBracketEntry: BracketEntry?
     var bracketEntry = BracketEntry(name: "")
     
+    @IBOutlet weak var frameContentViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var frameContentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topLeft: UIImageView!
     @IBOutlet weak var topRight: UIImageView!
@@ -32,6 +34,9 @@ class EntryDetailViewController: UIViewController {
         setUpButton()
         simTable.delegate = self
         simTable.dataSource = self
+        simTable.isScrollEnabled = false
+        scrollView.contentSize.height = CGFloat(500)
+        
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -39,6 +44,12 @@ class EntryDetailViewController: UIViewController {
         setBracketEntry()
         setImages()
         setText()
+        setScrollHeight()
+        
+    }
+    
+    func setScrollHeight(){
+        frameContentViewHeight.constant = CGFloat((bracketEntry.recentSims.count * 65) + 640)
     }
     
     // MARK: Set up data for this bracket entry
@@ -136,8 +147,83 @@ extension EntryDetailViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell?.simulationScore.text = "\(thisScore)"
         
+        let finalFourTeams = determineFinalFour(recentSims: bracketEntry.recentSims[indexPath.row])
+        assignPicsLabels(finalFourTeams: finalFourTeams, cell: cell)
+
+        
+        if thisScore > 650{
+            cell?.backgroundColor = .systemGreen.withAlphaComponent(0.25)
+            
+        }
+        else if thisScore < 350{
+            cell?.backgroundColor = .systemRed.withAlphaComponent(0.3)
+        }
+        else{
+            cell?.backgroundColor = .systemGray6
+        }
+        
         return cell!
     }
-
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65.0
+    }
+    
+    func determineFinalFour(recentSims: [Int]) -> [Int]{
+        var finalFourIndices = [Int]()
+        let winner = recentSims[0]
+        var runnerUp: Int
+        if recentSims[1] == winner{
+            runnerUp = recentSims[2]
+        } else{
+            runnerUp = recentSims[1]
+        }
+        finalFourIndices.append(winner)
+        finalFourIndices.append(runnerUp)
+        for i in 3...6{
+            if !finalFourIndices.contains(recentSims[i]){
+                finalFourIndices.append(recentSims[i])
+            }
+        }
+        return finalFourIndices
+    }
+    
+    func getImage(teamIndex: Int) -> UIImage{
+        var winnerImg: UIImage
+        if teamIndex > -1 {
+            winnerImg = DataManager.sharedInstance.teams[teamIndex].image
+        }
+        else{
+            winnerImg = UIImage(systemName: "building.columns.circle")!
+        }
+        return winnerImg
+    }
+    
+    func assignPicsLabels(finalFourTeams: [Int], cell: SimTableViewCell?){
+        let winner = getImage(teamIndex: finalFourTeams[0])
+        let runnerUp = getImage(teamIndex: finalFourTeams[1])
+        
+        let semi1 = getImage(teamIndex: finalFourTeams[2])
+        let semi2 = getImage(teamIndex: finalFourTeams[3])
+        
+        cell?.pic1.image = winner
+        cell?.pic2.image = runnerUp
+        cell?.pic3.image = semi1
+        cell?.pic4.image = semi2
+    
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if bracketEntry.locked {
+            let headerView = UILabel.init(frame: CGRect.init(x: 10, y: 0, width: tableView.frame.width, height: 50))
+            
+            headerView.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+            
+            headerView.text = "Last 50 Simulation Results"
+            
+            return headerView
+        }
+        else{ return nil }
+    
+}
 }
