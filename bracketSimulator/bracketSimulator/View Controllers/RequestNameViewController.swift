@@ -67,7 +67,7 @@ class RequestNameViewController: UIViewController{
             teams = copyOf.chosenTeams
             winner = copyOf.winner
             completed = copyOf.completed
-            return BracketEntry(name: bracketName, chosenTeams: teams, winner: winner, completed: completed)
+            return BracketEntry(name: bracketName, chosenTeams: teams, winner: winner, completed: completed, recentSims: [])
         } else {return BracketEntry(name: bracketName)}
         
     }

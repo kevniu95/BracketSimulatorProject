@@ -43,7 +43,7 @@ class EntryTableViewController: UITableViewController {
         DataManager.sharedInstance.instantiateFixedData()
         initNewButton()
         initInstrButton()
-        manageTimesOpened(timesOpened: DataManager.sharedInstance.timesOpened)
+//        manageTimesOpened(timesOpened: DataManager.sharedInstance.timesOpened)
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -60,12 +60,12 @@ class EntryTableViewController: UITableViewController {
     }
     
     // MARK: Manage times opened and basic buttons
-    func manageTimesOpened(timesOpened: Int){
-        if timesOpened == 3{
-            askForRating()
-        }
-        print("I am managing how many times this thing was opened, which is \(timesOpened)")
-    }
+//    func manageTimesOpened(timesOpened: Int){
+//        if timesOpened == 3{
+//            askForRating()
+//        }
+//        print("I am managing how many times this thing was opened, which is \(timesOpened)")
+//    }
     
     func initNewButton(){
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(objcInitSheet))

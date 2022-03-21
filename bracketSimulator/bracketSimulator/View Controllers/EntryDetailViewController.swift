@@ -26,9 +26,12 @@ class EntryDetailViewController: UIViewController {
     @IBOutlet weak var lockedOn: UILabel!
     @IBOutlet weak var goToBracket: UIButton!
     
+    @IBOutlet weak var simTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpButton()
+        simTable.delegate = self
+        simTable.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -37,7 +40,6 @@ class EntryDetailViewController: UIViewController {
         setImages()
         setText()
     }
-    
     
     // MARK: Set up data for this bracket entry
     func setBracketEntry(){
@@ -119,3 +121,23 @@ extension EntryDetailViewController: NewEntryVCDelegate{
     }
 }
 
+
+extension EntryDetailViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(bracketEntry.recentSims.count)
+        return bracketEntry.recentSims.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "simTableViewCell", for: indexPath) as? SimTableViewCell
+        cell?.simulationName.text = "Simulation #\(indexPath.row + 1)"
+        let thisSimInfo = bracketEntry.recentSims[indexPath.row]
+        let thisScore = bracketEntry.justGetScores(simulationResultInts: thisSimInfo)
+        
+        cell?.simulationScore.text = "\(thisScore)"
+        
+        return cell!
+    }
+
+    
+}

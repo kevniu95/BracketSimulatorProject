@@ -617,12 +617,49 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-OT-dzp">
-                                                <rect key="frame" x="3" y="592" width="414" height="534"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-OT-dzp">
+                                                <rect key="frame" x="0.0" y="592" width="414" height="534"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="534" id="Cf2-FG-Isw"/>
                                                 </constraints>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="simTableViewCell" id="jIQ-Ks-ecH" customClass="SimTableViewCell" customModule="bracketSimulator" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jIQ-Ks-ecH" id="yh1-s0-qAG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkm-7w-5Ye">
+                                                                    <rect key="frame" x="352" y="10" width="42" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-i9-giM">
+                                                                    <rect key="frame" x="22" y="11" width="150" height="21"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="150" id="DHb-hX-3GH"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="0JJ-i9-giM" firstAttribute="leading" secondItem="yh1-s0-qAG" secondAttribute="leadingMargin" constant="2" id="3yk-bM-cZn"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="0JJ-i9-giM" secondAttribute="bottom" id="4aA-Kd-KLI"/>
+                                                                <constraint firstItem="0JJ-i9-giM" firstAttribute="top" secondItem="yh1-s0-qAG" secondAttribute="topMargin" id="yn4-XR-r2G"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="simulationName" destination="0JJ-i9-giM" id="mcT-JM-van"/>
+                                                            <outlet property="simulationScore" destination="pkm-7w-5Ye" id="V1s-Tf-NDO"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4g1-ZB-Jny">
                                                 <rect key="frame" x="153" y="541" width="108.5" height="31"/>
@@ -645,6 +682,7 @@
                                             <constraint firstItem="9oC-WM-qxc" firstAttribute="leading" secondItem="eyf-e9-N3h" secondAttribute="leading" id="MqG-3b-R5u"/>
                                             <constraint firstItem="QBm-7f-VJz" firstAttribute="centerX" secondItem="Q6R-RY-VJX" secondAttribute="centerX" id="PVp-zF-XCr"/>
                                             <constraint firstItem="QBm-7f-VJz" firstAttribute="top" secondItem="TDM-bM-ZZG" secondAttribute="bottom" id="Tha-13-Pg0"/>
+                                            <constraint firstItem="S8M-OT-dzp" firstAttribute="centerX" secondItem="Q6R-RY-VJX" secondAttribute="centerX" id="WcN-n2-HhX"/>
                                             <constraint firstItem="X7M-jc-xIb" firstAttribute="leading" secondItem="Q6R-RY-VJX" secondAttribute="leading" constant="10" id="YFb-L6-Pl7">
                                                 <variation key="heightClass=compact-widthClass=regular" constant="60"/>
                                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -658,7 +696,7 @@
                                             <constraint firstItem="9oC-WM-qxc" firstAttribute="top" secondItem="eyf-e9-N3h" secondAttribute="bottom" constant="5" id="uTj-SV-rsd"/>
                                             <constraint firstItem="X7M-jc-xIb" firstAttribute="top" secondItem="QBm-7f-VJz" secondAttribute="bottom" id="vBc-ar-igb"/>
                                             <constraint firstItem="TDM-bM-ZZG" firstAttribute="top" secondItem="Q6R-RY-VJX" secondAttribute="top" id="vU5-BH-BfL"/>
-                                            <constraint firstItem="S8M-OT-dzp" firstAttribute="top" secondItem="9oC-WM-qxc" secondAttribute="bottom" id="weM-ng-JgK"/>
+                                            <constraint firstItem="S8M-OT-dzp" firstAttribute="top" secondItem="4g1-ZB-Jny" secondAttribute="bottom" constant="20" id="weM-ng-JgK"/>
                                             <constraint firstItem="sWZ-P1-qmD" firstAttribute="top" secondItem="qTN-hK-aPx" secondAttribute="bottom" constant="5" id="wk8-7A-7PC"/>
                                             <constraint firstItem="eyf-e9-N3h" firstAttribute="top" secondItem="X7M-jc-xIb" secondAttribute="bottom" constant="10" id="zvq-vA-9TC"/>
                                         </constraints>
@@ -699,6 +737,7 @@
                         <outlet property="goToBracket" destination="4g1-ZB-Jny" id="64i-Dh-NQe"/>
                         <outlet property="lockedOn" destination="qTN-hK-aPx" id="e9a-xu-6M9"/>
                         <outlet property="scrollView" destination="yX4-TG-n3I" id="QBW-Is-GGQ"/>
+                        <outlet property="simTable" destination="S8M-OT-dzp" id="F2T-NW-Uku"/>
                         <outlet property="topLeft" destination="PK2-VC-mHa" id="vag-on-OTt"/>
                         <outlet property="topRight" destination="BjD-KD-NOA" id="yyy-9Z-zpQ"/>
                         <outlet property="totalSimulations" destination="9oC-WM-qxc" id="4nF-Ql-Shy"/>

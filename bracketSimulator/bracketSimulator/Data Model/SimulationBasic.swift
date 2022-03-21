@@ -92,13 +92,14 @@ class SimulationBasic{
     var winner: Team
     var arrayToScore: [Int]
     
-    init(){
+    init(arrayToScore: [Int] = []){
         self.teams = DataManager.sharedInstance.shareTeams()
         self.winner = blankTeam()
-        self.arrayToScore = []
+        self.arrayToScore = arrayToScore
         //        for team in teams{
 //            print("\(team.name) \(team.teamid)")
 //        }
+        
     }
     
     // Creates an array to be scored
@@ -116,15 +117,17 @@ class SimulationBasic{
     // Then passes winner on to next game
     func fillGames(){
         createBlankGames()
-        var ind = 62
-        while ind >= 0 {
-            let tm1 = allGames[ind * 2 + 1].winner
-            let tm2 = allGames[ind * 2 + 2].winner
-            allGames[ind].fillTeams(team1: tm1, team2: tm2)
-            ind -= 1
+        if self.arrayToScore.count == 0{
+            var ind = 62
+            while ind >= 0 {
+                let tm1 = allGames[ind * 2 + 1].winner
+                let tm2 = allGames[ind * 2 + 2].winner
+                allGames[ind].fillTeams(team1: tm1, team2: tm2)
+                ind -= 1
+            }
+            self.winner = allGames[0].winner
+            self.arrayToScore = genArrayForScoring()
         }
-        self.winner = allGames[0].winner
-        self.arrayToScore = genArrayForScoring()
     }
     
     // Instantiates an array to be scored

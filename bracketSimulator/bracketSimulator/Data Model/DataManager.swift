@@ -133,7 +133,8 @@ class DataManager {
         for simulation in simulations{
             for (_, bracketEntry) in bracketEntries{
                 if bracketEntry.locked{
-                    let thisScore = bracketEntry.getScore(simulationResults: simulation.arrayToScore)
+                    print("I am scoring")
+                    let thisScore = bracketEntry.getScore(simulationResults: simulation)
                     bracketEntry.includeNewSim(score: thisScore)
                 }
             }

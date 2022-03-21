@@ -18,8 +18,10 @@ class BracketEntry: NSObject, NSCoding{
     private (set) var initDate: Date
     private (set) var lockDate: Date?
     var lastEdit: Date
+    private (set) var recentSims = [[Int]]()
+    private (set) var recentScores = [Int]()
     
-    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, locked: Bool, simulations: Int, aggScore: Int, initDate: Date, lockDate: Date?, lastEdit: Date){
+    init(name: String, chosenTeams: [Int], winner: String, completed: Bool, locked: Bool, simulations: Int, aggScore: Int, initDate: Date, lockDate: Date?, lastEdit: Date, recentSims: [[Int]], recentScores: [Int]){
         self.name = name
         self.chosenTeams = chosenTeams
         self.winner = winner
@@ -30,9 +32,11 @@ class BracketEntry: NSObject, NSCoding{
         self.initDate = initDate
         self.lockDate = lockDate
         self.lastEdit = lastEdit
+        self.recentSims = recentSims
+        self.recentScores = recentScores
     }
     
-    convenience init(name: String, chosenTeams: [Int], winner: String, completed: Bool){
+    convenience init(name: String, chosenTeams: [Int], winner: String, completed: Bool, recentSims: [[Int]]){
         let locked = false
         let simulations = 0
         let aggScore = 0
@@ -40,7 +44,8 @@ class BracketEntry: NSObject, NSCoding{
         var lockDate: Date?
         lockDate = nil
         let lastEdit = Date()
-        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate, lastEdit: lastEdit)
+        let recentScores = [Int]()
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate, lastEdit: lastEdit, recentSims: recentSims, recentScores: recentScores)
     }
     
     convenience init(name: String){
@@ -55,8 +60,9 @@ class BracketEntry: NSObject, NSCoding{
         var lockDate: Date?
         lockDate = nil
         let lastEdit = Date()
-        
-        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate, lastEdit: lastEdit)
+        let recentSims = [[Int]]()
+        let recentScores = [Int]()
+        self.init(name: thisName, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate, lastEdit: lastEdit, recentSims: recentSims, recentScores: recentScores)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -79,8 +85,13 @@ class BracketEntry: NSObject, NSCoding{
         if let importLastEdit = aDecoder.decodeObject(of: NSDate.self, forKey: "lastEdit"){
             lastEdit = importLastEdit as Date
         } else {lastEdit = Date()}
+        
+        var recentSims: [[Int]]
+        if let mostRecentSims = aDecoder.decodeObject(forKey: "recentSims") as? [[Int]]{
+            recentSims = mostRecentSims
+        } else{recentSims = []}
 
-        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate, lastEdit: lastEdit)
+        self.init(name: name, chosenTeams: chosenTeams, winner: winner, completed: completed, locked: locked, simulations: simulations, aggScore: aggScore, initDate: initDate, lockDate: lockDate, lastEdit: lastEdit, recentSims: recentSims, recentScores: [Int]())
     }
     
     func encode(with coder: NSCoder) {
@@ -94,6 +105,7 @@ class BracketEntry: NSObject, NSCoding{
         coder.encode(self.initDate, forKey: "initDate")
         coder.encode(self.lockDate, forKey: "lockDate")
         coder.encode(self.lastEdit, forKey: "lastEdit")
+        coder.encode(self.recentSims, forKey: "recentSims")
     }
         
     func setName(name: String){
@@ -130,7 +142,7 @@ class BracketEntry: NSObject, NSCoding{
         }
     }
     
-    func getScore(simulationResults: [Int]) -> Int {
+    func getScore(simulationResults: SimulationBasic) -> Int {
         var cumScore = 0
         for ind in 0...62{
 //            print("\nScoring bracket entry: \(self.name)")
@@ -138,15 +150,28 @@ class BracketEntry: NSObject, NSCoding{
             
 //            print("Bracket entry with: \(DataManager.sharedInstance.teams[self.chosenTeams[ind]].name)")
 //            print("Simulation with : \(DataManager.sharedInstance.teams[simulationResults[ind]].name)")
-            if self.chosenTeams[ind] == simulationResults[ind]{
+            if self.chosenTeams[ind] == simulationResults.arrayToScore[ind]{
                 cumScore += convertMatchToScore(placeInArray: ind)
 //                print("This yields \(convertMatchToScore(placeInArray: ind)) points")
             }
 //            else{
 //                print("This yields 0 points")
 //            }
-            
+        
         }
+        recentSims.append(simulationResults.arrayToScore)
+        recentSims = recentSims.suffix(50)
+        return cumScore
+    }
+    
+    func justGetScores(simulationResultInts: [Int]) -> Int{
+        var cumScore = 0
+        for ind in 0...62{
+            if simulationResultInts[ind] == self.chosenTeams[ind]{
+                cumScore += convertMatchToScore(placeInArray: ind)
+            }
+        }
+        recentScores.append(cumScore)
         return cumScore
     }
     

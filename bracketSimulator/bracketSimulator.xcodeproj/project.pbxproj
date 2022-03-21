@@ -15,6 +15,7 @@
 		56703CB727D724DF00E25D76 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CB627D724DF00E25D76 /* GameCell.swift */; };
 		56703CBD27D767F600E25D76 /* gameCellPositions.csv in Resources */ = {isa = PBXBuildFile; fileRef = 56703CBC27D767F600E25D76 /* gameCellPositions.csv */; };
 		56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CC227D76E8800E25D76 /* gameCellPositions.swift */; };
+		567A948C27E831E900A60065 /* SimTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A948B27E831E900A60065 /* SimTableViewCell.swift */; };
 		567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */; };
 		567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */; };
 		567C252227D9F70F007E3B54 /* NewEntryVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */; };
@@ -47,6 +48,7 @@
 		56703CB627D724DF00E25D76 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		56703CBC27D767F600E25D76 /* gameCellPositions.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gameCellPositions.csv; sourceTree = "<group>"; };
 		56703CC227D76E8800E25D76 /* gameCellPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameCellPositions.swift; sourceTree = "<group>"; };
+		567A948B27E831E900A60065 /* SimTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimTableViewCell.swift; sourceTree = "<group>"; };
 		567C251B27D9DDD2007E3B54 /* BracketEntryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketEntryDataModel.swift; sourceTree = "<group>"; };
 		567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTableViewCell.swift; sourceTree = "<group>"; };
 		567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryVCDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				5632953427DE0F560039B649 /* EntryDetailVCDelegate.swift */,
 				56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */,
 				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
+				567A948B27E831E900A60065 /* SimTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				56FAEA1427DAF921006E6DB5 /* RequestNameVCDelegate.swift in Sources */,
 				56B0E57827DC37E800B38055 /* SimulatorViewController.swift in Sources */,
 				567FE59927E317F900D9111F /* InstructionViewController.swift in Sources */,
+				567A948C27E831E900A60065 /* SimTableViewCell.swift in Sources */,
 				56DEB65127D3181400B96D65 /* AppDelegate.swift in Sources */,
 				567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
