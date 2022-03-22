@@ -20,14 +20,16 @@ class GameCell{
     private(set) var cellOn: Bool
     // Filled out later
     private(set) var team: Team
+    private(set) var isScored: Bool
     
-    init(idNum: Int, gamePos: gamePosition){
+    init(idNum: Int, gamePos: gamePosition, isScored: Bool){
         id = idNum
         cellImage = UIStackView()
         team = Team(teamid: -1, binID: "", firstCellID: -1, name: "", seed: 0, image: UIImage())
         binaryId = ""
         cellOn = false
         nextGames = [Int]()
+        self.isScored = isScored
         
         self.gamePos = gamePos
         self.nextGames = getNextGames()
