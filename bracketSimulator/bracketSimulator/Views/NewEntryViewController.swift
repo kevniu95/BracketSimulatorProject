@@ -163,7 +163,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         }
         
     }
-    
 
     func initScoreLabels(){
         if isScored{
@@ -176,7 +175,6 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         }
         
     }
-    
     
     
     func compileScores() -> [(whichRound: Round, val: Int)]{
