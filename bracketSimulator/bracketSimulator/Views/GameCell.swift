@@ -20,6 +20,8 @@ class GameCell{
     private(set) var cellOn: Bool
     // Filled out later
     private(set) var team: Team
+    private(set) var selectedTeam: Team?
+    private(set) var correctionLabel: UILabel
 //    private(set) var isScored: Bool
     
     init(idNum: Int, gamePos: gamePosition){
@@ -29,6 +31,7 @@ class GameCell{
         binaryId = ""
         cellOn = false
         nextGames = [Int]()
+        correctionLabel = UILabel()
 //        self.isScored = isScored
         
         self.gamePos = gamePos
@@ -55,6 +58,7 @@ class GameCell{
     
     func initCellImage(){
         cellImage = initStackObject()
+        self.correctionLabel = initCorrection()
     }
     
     func initiateRecognizers(){
@@ -99,11 +103,9 @@ class GameCell{
         }
         
         if let selectedTeam = selectedTeam{
-            if bracketTeam.teamid != selectedTeam.teamid{
-                print("Oh no, you chose \(selectedTeam.name), but \(bracketTeam.name) is in this position instead!")
-            }
+            self.selectedTeam = selectedTeam
+            updateCellImage()
         }
-        
     }
     
     // Unhide and allow user interaction - update a hidden cell for previously
@@ -122,6 +124,15 @@ class GameCell{
         cellTeam.text = self.team.name
         cellSeed.text = String(self.team.seed)
         
+        if let selectedTeam = self.selectedTeam{
+            if selectedTeam.teamid != self.team.teamid{
+                self.cellImage.backgroundColor = .red.withAlphaComponent(0.25)
+                self.correctionLabel.text = "You chose: \(selectedTeam.name)"
+                self.correctionLabel.isHidden = false
+            } else {
+                self.cellImage.backgroundColor = .green.withAlphaComponent(0.25)
+            }
+        }
     }
     
     // GO back to hiding and disablign user interaction on a cell
@@ -175,6 +186,24 @@ class GameCell{
         bracketImageView.minimumScaleFactor = 0.8
         bracketImageView.adjustsFontSizeToFitWidth = true
         return bracketImageView
+    }
+    
+    func initCorrection() -> UILabel{
+        let correction = UILabel()
+        correction.isHidden = true
+        var newYPos: CGFloat
+        if self.id == 1{
+            newYPos = CGFloat(self.gamePos.y) - 40
+        } else {newYPos = CGFloat(self.gamePos.y) - 29}
+        
+        correction.frame.origin = CGPoint(x: CGFloat(self.gamePos.x), y: newYPos)
+        correction.frame.size.width = CGFloat(210)
+        correction.frame.size.height = CGFloat(30)
+        correction.font = UIFont(name:"HelveticaNeue-Bold", size: 16)
+        
+        correction.minimumScaleFactor = 0.8
+        correction.adjustsFontSizeToFitWidth = true
+        return correction
     }
     
     func initStackSeed()->UILabel{

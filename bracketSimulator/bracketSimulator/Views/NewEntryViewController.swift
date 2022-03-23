@@ -141,6 +141,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             currGameCell.delegate = self
             gameCells.append(currGameCell)
             scrollView.subviews[0].addSubview(currGameCell.cellImage)
+            scrollView.subviews[0].addSubview(currGameCell.correctionLabel)
         }
         scrollView.subviews[0].isUserInteractionEnabled = true
     }
