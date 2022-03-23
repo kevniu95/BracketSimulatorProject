@@ -134,7 +134,8 @@ class DataManager {
             for (_, bracketEntry) in bracketEntries{
                 if bracketEntry.locked{
                     print("I am scoring")
-                    let thisScore = bracketEntry.getScore(simulationResults: simulation)
+                    let simArray = simulation.arrayToScore
+                    let thisScore = bracketEntry.getScore(simulationResults: simArray, saveMe: true)
                     bracketEntry.includeNewSim(score: thisScore)
                 }
             }
@@ -162,6 +163,46 @@ class DataManager {
         simulations = []
         archiveEntries()
     }
+    
+    // Score Simulations
+    func convertMatchToScore(placeInArray: Int) ->Int {
+        if placeInArray >= 31{
+            return 10
+        }
+        else if placeInArray >= 15{
+            return 20
+        }
+        else if placeInArray >= 7{
+            return 40
+        }
+        else if placeInArray >= 3{
+            return 80
+        }
+        else if placeInArray >= 1{
+            return 160
+        }
+        else if placeInArray == 0{
+            return 320
+        }
+        else{
+            print("Weird index passed. Check what's going on")
+            return 0
+        }
+    }
+    
+    func getScoreGeneral(chosenTeamSet: [Int], simulationTeamSet: [Int]) -> [Int]{
+        var correctSelectionMask = [Int]()
+        for ind in 0...62{
+            if chosenTeamSet[ind] == simulationTeamSet[ind]{
+                correctSelectionMask.append(convertMatchToScore(placeInArray: ind))
+            }
+            else{ correctSelectionMask.append(0)}
+        }
+        print(correctSelectionMask)
+        return correctSelectionMask
+    }
+    
+    
     
     
     // MARK: Manage updates to and from Data Manager - will be automatically archived

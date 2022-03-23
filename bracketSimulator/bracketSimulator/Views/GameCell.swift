@@ -188,6 +188,8 @@ class GameCell{
         return bracketImageView
     }
     
+    
+    
     func initCorrection() -> UILabel{
         let correction = UILabel()
         correction.isHidden = true

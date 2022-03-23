@@ -117,64 +117,26 @@ class BracketEntry: NSObject, NSCoding{
         self.aggScore += score
     }
     
-    func convertMatchToScore(placeInArray: Int) ->Int {
-        if placeInArray >= 31{
-            return 10
-        }
-        else if placeInArray >= 15{
-            return 20
-        }
-        else if placeInArray >= 7{
-            return 40
-        }
-        else if placeInArray >= 3{
-            return 80
-        }
-        else if placeInArray >= 1{
-            return 160
-        }
-        else if placeInArray == 0{
-            return 320
-        }
-        else{
-            print("Weird index passed. Check what's going on")
-            return 0
-        }
-    }
     
-    func getScore(simulationResults: SimulationBasic) -> Int {
+    func getScore(simulationResults: [Int], saveMe: Bool) -> Int {
         var cumScore = 0
-        for ind in 0...62{
-//            print("\nScoring bracket entry: \(self.name)")
-//            print("\nFor game id \(ind) we have:")
-            
-//            print("Bracket entry with: \(DataManager.sharedInstance.teams[self.chosenTeams[ind]].name)")
-//            print("Simulation with : \(DataManager.sharedInstance.teams[simulationResults[ind]].name)")
-            if self.chosenTeams[ind] == simulationResults.arrayToScore[ind]{
-                cumScore += convertMatchToScore(placeInArray: ind)
-//                print("This yields \(convertMatchToScore(placeInArray: ind)) points")
-            }
-//            else{
-//                print("This yields 0 points")
-//            }
+
+        let chosenRes = self.chosenTeams
+        let scores = DataManager.sharedInstance.getScoreGeneral(chosenTeamSet: chosenRes, simulationTeamSet: simulationResults)
         
-        }
-        recentSims.append(simulationResults.arrayToScore)
-        recentSims = recentSims.suffix(50)
+        cumScore = scores.reduce(0, +)
+        
+        if saveMe{saveToRecentSims(simResultsIntList: simulationResults)}
+        
         return cumScore
     }
     
-    func justGetScores(simulationResultInts: [Int]) -> Int{
-        var cumScore = 0
-        for ind in 0...62{
-            if simulationResultInts[ind] == self.chosenTeams[ind]{
-                cumScore += convertMatchToScore(placeInArray: ind)
-            }
-        }
-        recentScores.append(cumScore)
-        return cumScore
+    func saveToRecentSims(simResultsIntList: [Int]){
+        self.recentSims.append(simResultsIntList)
+        self.recentSims = recentSims.suffix(50)
     }
     
+
     func checkComplete() -> Bool{
         var filledTeams = 0
         for teamid in chosenTeams{

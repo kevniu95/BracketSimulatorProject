@@ -166,7 +166,7 @@ extension EntryDetailViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "simTableViewCell", for: indexPath) as? SimTableViewCell
         cell?.simulationName.text = "Simulation #\(indexPath.row + 1)"
         let thisSimInfo = bracketEntry.recentSims[indexPath.row]
-        let thisScore = bracketEntry.justGetScores(simulationResultInts: thisSimInfo)
+        let thisScore = bracketEntry.getScore(simulationResults: thisSimInfo, saveMe: false)
         
         cell?.simulationScore.text = "\(thisScore)"
         

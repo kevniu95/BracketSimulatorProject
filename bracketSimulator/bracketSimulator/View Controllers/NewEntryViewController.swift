@@ -10,6 +10,9 @@ import UIKit
 class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var scoreLabelTitle: UILabel!
+    
+    @IBOutlet weak var scoreLabelScores: UILabel!
     @IBOutlet weak var navBarTitle: UINavigationItem!
     var bracketImgView = UIImageView()
     weak var delegate: NewEntryVCDelegate?
@@ -30,8 +33,8 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         // Always the same, no matter if new entry or saved
         setBracketEntry()
         initiateScrollView()
-        initiateGameCells(gamePositions: gamePositions)
         initBracketTeams()
+        initiateGameCells(gamePositions: gamePositions)
         fillFirstRoundTeam()
         setNavBar()
         initLockButton()
@@ -157,6 +160,19 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             self.bracketTeams = bracketEntry.chosenTeams
             self.isScored = false
         }
+        
+    }
+    
+    
+    func initScoreLabels(){
+        let scoreTableLabels = UILabel()
+        let scoreTableScores = UILabel()
+        
+        scoreTableLabels.font = UIFont(name:"HelveticaNeue-Bold", size: 16)
+        scoreTableScores.font = UIFont(name:"HelveticaNeue-Bold", size: 16)
+        
+        scoreTableLabels.text = "Round of 64\nRound of 32\nSweet Sixteen\nElite Eight\nFinal Four\n Championship"
+//        scoreTableScores.\
     }
     
     
@@ -180,6 +196,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             if isScored{
                 currSelectedTeam = teams[currSelectedTeamInd]
                 currGameCell.setTeam(bracketTeam: currBracketTeam, selectedTeam: currSelectedTeam)
+                
             }
             else{
                 currGameCell.setTeam(bracketTeam: currBracketTeam, selectedTeam: nil)
