@@ -109,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				56703CB627D724DF00E25D76 /* GameCell.swift */,
+				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				565561D027D8CF4B00068103 /* GameCellDelegate.swift */,
 				567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */,
 				5632953427DE0F560039B649 /* EntryDetailVCDelegate.swift */,
@@ -125,7 +126,6 @@
 				569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */,
 				567FE59827E317F900D9111F /* InstructionViewController.swift */,
 				56B0E57727DC37E800B38055 /* SimulatorViewController.swift */,
-				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */,
 				56B9B38227D31C740096C142 /* EntryTableViewController.swift */,
 				56FAEA1127DAE218006E6DB5 /* RequestNameViewController.swift */,

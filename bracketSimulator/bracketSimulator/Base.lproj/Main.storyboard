@@ -754,6 +754,7 @@
                                                             <outlet property="pic4" destination="hVe-Lf-Uxw" id="Cy4-sG-Yp9"/>
                                                             <outlet property="simulationName" destination="0JJ-i9-giM" id="mcT-JM-van"/>
                                                             <outlet property="simulationScore" destination="pkm-7w-5Ye" id="V1s-Tf-NDO"/>
+                                                            <segue destination="AP7-Tp-ECs" kind="show" identifier="showBracketFromSim" id="tPj-Nm-F7Y"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -976,6 +977,9 @@
             <point key="canvasLocation" x="451" y="408"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="tPj-Nm-F7Y"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="building.columns.circle" catalog="system" width="128" height="121"/>
         <image name="doc.badge.plus" catalog="system" width="119" height="128"/>

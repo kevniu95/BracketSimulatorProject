@@ -115,15 +115,38 @@ class EntryDetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let thisBracketEntry = bracketEntry
         if segue.identifier == "showBracket"{
+            print("I am entering from the actual entry")
             let bracketEntry =  thisBracketEntry
             if let newEntryVC = segue.destination as? NewEntryViewController{
                 newEntryVC.inputBracketEntry = bracketEntry
                 newEntryVC.delegate = self
             }
         }
+        if segue.identifier == "showBracketFromSim"{
+            print("I am entering from simulations")
+            let bracketEntry =  thisBracketEntry
+            guard let thisRow = simTable.indexPathForSelectedRow?.row else {
+                print("Couldn't find selected row in table!")
+                return
+            }
+            let thisSimInfo = bracketEntry.recentSims[thisRow]
+            if let newEntryVC = segue.destination as? NewEntryViewController{
+                newEntryVC.inputBracketEntry = bracketEntry
+                newEntryVC.delegate = self
+                newEntryVC.simulationResults = thisSimInfo
+            }
+        }
     }
-        
-
+//    let thisBracketEntry = section.bracketEntries[thisIndPath!.row]
+//    if segue.identifier == "detailViewSegue"{
+//        let bracketEntry = thisBracketEntry
+//        print("Going from table to detailed cell!")
+//        print("The winner selected for the entry at this cell was: \(bracketEntry.winner)")
+//        if let newEntryVC = segue.destination as? EntryDetailViewController{
+//            newEntryVC.inputBracketEntry = bracketEntry
+//            newEntryVC.delegate = self
+    
+    
 }
 
 extension EntryDetailViewController: NewEntryVCDelegate{
@@ -147,7 +170,7 @@ extension EntryDetailViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell?.simulationScore.text = "\(thisScore)"
         
-        let finalFourTeams = determineFinalFour(recentSims: bracketEntry.recentSims[indexPath.row])
+        let finalFourTeams = determineFinalFour(recentSimResults: bracketEntry.recentSims[indexPath.row])
         assignPicsLabels(finalFourTeams: finalFourTeams, cell: cell)
 
         
@@ -169,20 +192,21 @@ extension EntryDetailViewController: UITableViewDelegate, UITableViewDataSource{
         return 65.0
     }
     
-    func determineFinalFour(recentSims: [Int]) -> [Int]{
+    
+    func determineFinalFour(recentSimResults: [Int]) -> [Int]{
         var finalFourIndices = [Int]()
-        let winner = recentSims[0]
+        let winner = recentSimResults[0]
         var runnerUp: Int
-        if recentSims[1] == winner{
-            runnerUp = recentSims[2]
+        if recentSimResults[1] == winner{
+            runnerUp = recentSimResults[2]
         } else{
-            runnerUp = recentSims[1]
+            runnerUp = recentSimResults[1]
         }
         finalFourIndices.append(winner)
         finalFourIndices.append(runnerUp)
         for i in 3...6{
-            if !finalFourIndices.contains(recentSims[i]){
-                finalFourIndices.append(recentSims[i])
+            if !finalFourIndices.contains(recentSimResults[i]){
+                finalFourIndices.append(recentSimResults[i])
             }
         }
         return finalFourIndices

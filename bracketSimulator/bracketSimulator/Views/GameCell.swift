@@ -20,16 +20,16 @@ class GameCell{
     private(set) var cellOn: Bool
     // Filled out later
     private(set) var team: Team
-    private(set) var isScored: Bool
+//    private(set) var isScored: Bool
     
-    init(idNum: Int, gamePos: gamePosition, isScored: Bool){
+    init(idNum: Int, gamePos: gamePosition){
         id = idNum
         cellImage = UIStackView()
         team = Team(teamid: -1, binID: "", firstCellID: -1, name: "", seed: 0, image: UIImage())
         binaryId = ""
         cellOn = false
         nextGames = [Int]()
-        self.isScored = isScored
+//        self.isScored = isScored
         
         self.gamePos = gamePos
         self.nextGames = getNextGames()
@@ -79,13 +79,13 @@ class GameCell{
     }
     
     // MARK: State Change Caller
-    func setTeam(team: Team){
+    func setTeam(bracketTeam: Team, selectedTeam: Team?){
         let prevTeam = self.team
         // Check to see if setTeam is a "real update"
         // or filling out cells if it's a whole new bracket
         // entry
-        if team.teamid > -1 {
-            self.team = team
+        if bracketTeam.teamid > -1 {
+            self.team = bracketTeam
             self.cellOn = true
 //            print("Updating cell image for \(self.team.name) at cell number \(self.id)")
             updateCellImage()
@@ -97,6 +97,13 @@ class GameCell{
         if self.team.teamid != prevTeam.teamid && prevTeam.teamid >= 0{
             delegate?.resetDownstreamCells(team: team, nextGames: nextGames, prevTeam: prevTeam)
         }
+        
+        if let selectedTeam = selectedTeam{
+            if bracketTeam.teamid != selectedTeam.teamid{
+                print("Oh no, you chose \(selectedTeam.name), but \(bracketTeam.name) is in this position instead!")
+            }
+        }
+        
     }
     
     // Unhide and allow user interaction - update a hidden cell for previously
@@ -114,6 +121,7 @@ class GameCell{
         }
         cellTeam.text = self.team.name
         cellSeed.text = String(self.team.seed)
+        
     }
     
     // GO back to hiding and disablign user interaction on a cell

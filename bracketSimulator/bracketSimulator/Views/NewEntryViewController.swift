@@ -20,6 +20,9 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
     var gamePositions = DataManager.sharedInstance.gamePositions
     var teams = DataManager.sharedInstance.teams
     var lastZoomScale: CGFloat = 0
+    var isScored: Bool = false
+    var simulationResults: [Int]?
+    var bracketTeams = [Int]()
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
@@ -28,6 +31,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         setBracketEntry()
         initiateScrollView()
         initiateGameCells(gamePositions: gamePositions)
+        initBracketTeams()
         fillFirstRoundTeam()
         setNavBar()
         initLockButton()
@@ -141,6 +145,20 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         scrollView.subviews[0].isUserInteractionEnabled = true
     }
     
+    func initBracketTeams(){
+        if let simResults = simulationResults{
+            print("I am using simulation results to fill out this bracket!")
+            self.bracketTeams = simResults
+            self.isScored = true
+        }
+        else {
+            print("I am using the bracket entry to fill out this bracket!")
+            self.bracketTeams = bracketEntry.chosenTeams
+            self.isScored = false
+        }
+    }
+    
+    
     // Fill first round of teams (64 - 127) - this will always happen
     // Then fill out "middle" 63 entries based on previously-filled data if available
         // THis stored in bracketEntry.chosenTeams
@@ -148,19 +166,31 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         // Load with previous data from bracket entry if it is available
         for ind in 1...63{
             let currGameCell = gameCells[ind - 1]
-            let currTeamInd = bracketEntry.chosenTeams[ind - 1]
-            var currTeam: Team
-            if currTeamInd < 0 || currTeamInd >= 65{
-                currTeam = blankTeam()
-            } else {currTeam = teams[currTeamInd]}
-            currGameCell.setTeam(team: currTeam)
+            
+            // Set team in bracket entry
+            let currBracketTeamInd = bracketTeams[ind - 1]
+            var currBracketTeam: Team
+            if currBracketTeamInd < 0 || currBracketTeamInd >= 65{
+                currBracketTeam = blankTeam()
+            } else {currBracketTeam = teams[currBracketTeamInd]}
+            // Set the team "selected" by the model, if this is a view of a simulation
+            var currSelectedTeam: Team?
+            let currSelectedTeamInd = bracketEntry.chosenTeams[ind - 1]
+            if isScored{
+                currSelectedTeam = teams[currSelectedTeamInd]
+                currGameCell.setTeam(bracketTeam: currBracketTeam, selectedTeam: currSelectedTeam)
+            }
+            else{
+                currGameCell.setTeam(bracketTeam: currBracketTeam, selectedTeam: nil)
+            }
+            
         }
         // Always instantiate first 64 teams (i.e. last 64 bracket entires)
         // in the same way
         for ind in 64...127{
             let currGameCell = gameCells[ind - 1]
             let currTeam = teams[ind - 64]
-            currGameCell.setTeam(team: currTeam)
+            currGameCell.setTeam(bracketTeam: currTeam, selectedTeam: nil)
         }
     }
     
@@ -176,7 +206,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
             for nextGameInd in nextGames{
                 if gamesLeft > leaveGames{
                     let currGameCell = gameCells[nextGameInd - 1]
-                    currGameCell.setTeam(team: team)
+                    currGameCell.setTeam(bracketTeam: team, selectedTeam: nil)
                     bracketEntry.updateTeams(gameID: nextGameInd - 1, newTeam: team)
                 }
                 gamesLeft -= 1
@@ -246,7 +276,7 @@ extension NewEntryViewController: GameCellDelegate{
     func setNewTeam(team: Team, nextGame: Int){
         if !bracketEntry.locked{
             let currGameCell = gameCells[nextGame - 1]
-            currGameCell.setTeam(team: team)
+            currGameCell.setTeam(bracketTeam: team, selectedTeam: nil)
             bracketEntry.updateTeams(gameID: nextGame - 1, newTeam: team)
             saveCurrentModel()
             initLockButton()
