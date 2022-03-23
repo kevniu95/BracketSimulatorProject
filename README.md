@@ -1,5 +1,5 @@
 # Project to simulate NCAA Tournament with various bracket entries
-Please view video preview ("simulatorPreview.mp4" ~ 50mb) for more information
+Please view video preview, "simulatorPreview.mp4" (~50mb), for more information
 
 What this project does right now:
 1. Allows users to fill out, save and copy NCAA Tournament Challenge bracket entries.
@@ -7,4 +7,4 @@ What this project does right now:
 3. For each saved bracket entry, allows users to view discrepancies between bracket entry and last 50 simulated outcomes.
 
  
-\*Simulations are currently conducted using a simple linear model based on seed differential (i.e., a team playinng another team with same seed has a 50% chance of winning)  
+\*Simulations are currently conducted using a simple linear model based on seed differential (i.e., a team playinng another team with same seed has a 50% chance of winning). Goal is to turn towards modeling/predictions after building out UI.
