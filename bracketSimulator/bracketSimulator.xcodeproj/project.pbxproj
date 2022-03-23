@@ -12,6 +12,8 @@
 		565561C827D87F1A00068103 /* 2021teams.csv in Resources */ = {isa = PBXBuildFile; fileRef = 565561C727D87F1A00068103 /* 2021teams.csv */; };
 		565561CB27D882DC00068103 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561CA27D882DC00068103 /* Teams.swift */; };
 		565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565561D027D8CF4B00068103 /* GameCellDelegate.swift */; };
+		5655EB1127EAD77C00B7DB13 /* customDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655EB1027EAD77C00B7DB13 /* customDataTypes.swift */; };
+		5655EB1327EADDF400B7DB13 /* ScoreTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5655EB1227EADDF400B7DB13 /* ScoreTable.swift */; };
 		56703CB727D724DF00E25D76 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CB627D724DF00E25D76 /* GameCell.swift */; };
 		56703CBD27D767F600E25D76 /* gameCellPositions.csv in Resources */ = {isa = PBXBuildFile; fileRef = 56703CBC27D767F600E25D76 /* gameCellPositions.csv */; };
 		56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56703CC227D76E8800E25D76 /* gameCellPositions.swift */; };
@@ -45,6 +47,8 @@
 		565561C727D87F1A00068103 /* 2021teams.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2021teams.csv; sourceTree = "<group>"; };
 		565561CA27D882DC00068103 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
 		565561D027D8CF4B00068103 /* GameCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCellDelegate.swift; sourceTree = "<group>"; };
+		5655EB1027EAD77C00B7DB13 /* customDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customDataTypes.swift; sourceTree = "<group>"; };
+		5655EB1227EADDF400B7DB13 /* ScoreTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTable.swift; sourceTree = "<group>"; };
 		56703CB627D724DF00E25D76 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		56703CBC27D767F600E25D76 /* gameCellPositions.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gameCellPositions.csv; sourceTree = "<group>"; };
 		56703CC227D76E8800E25D76 /* gameCellPositions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameCellPositions.swift; sourceTree = "<group>"; };
@@ -109,12 +113,15 @@
 			isa = PBXGroup;
 			children = (
 				56703CB627D724DF00E25D76 /* GameCell.swift */,
+				5655EB1227EADDF400B7DB13 /* ScoreTable.swift */,
+				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				565561D027D8CF4B00068103 /* GameCellDelegate.swift */,
 				567C252127D9F70F007E3B54 /* NewEntryVCDelegate.swift */,
 				5632953427DE0F560039B649 /* EntryDetailVCDelegate.swift */,
 				56FAEA1327DAF921006E6DB5 /* RequestNameVCDelegate.swift */,
 				567C251F27D9F15F007E3B54 /* EntryTableViewCell.swift */,
 				567A948B27E831E900A60065 /* SimTableViewCell.swift */,
+				5655EB1027EAD77C00B7DB13 /* customDataTypes.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,7 +129,6 @@
 		56B9B38627D31CB80096C142 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				56B9B38427D31CB00096C142 /* NewEntryViewController.swift */,
 				5632953227DDEB6B0039B649 /* EntryDetailViewController.swift */,
 				569CA44927E2C8B100EF48F9 /* SplashScreenViewController.swift */,
 				567FE59827E317F900D9111F /* InstructionViewController.swift */,
@@ -256,6 +262,7 @@
 			files = (
 				567C252027D9F15F007E3B54 /* EntryTableViewCell.swift in Sources */,
 				565561CB27D882DC00068103 /* Teams.swift in Sources */,
+				5655EB1127EAD77C00B7DB13 /* customDataTypes.swift in Sources */,
 				569CA44A27E2C8B100EF48F9 /* SplashScreenViewController.swift in Sources */,
 				56703CC327D76E8800E25D76 /* gameCellPositions.swift in Sources */,
 				56A936E627DC3F6B00EF0857 /* SimulationBasic.swift in Sources */,
@@ -267,6 +274,7 @@
 				567C251C27D9DDD2007E3B54 /* BracketEntryDataModel.swift in Sources */,
 				56703CB727D724DF00E25D76 /* GameCell.swift in Sources */,
 				56FAEA1827DB60CF006E6DB5 /* DataManager.swift in Sources */,
+				5655EB1327EADDF400B7DB13 /* ScoreTable.swift in Sources */,
 				565561D127D8CF4B00068103 /* GameCellDelegate.swift in Sources */,
 				56A936E827DC905300EF0857 /* TeamImageClient.swift in Sources */,
 				56B9B38327D31C740096C142 /* EntryTableViewController.swift in Sources */,

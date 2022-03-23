@@ -35,6 +35,7 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         initiateScrollView()
         initBracketTeams()
         initiateGameCells(gamePositions: gamePositions)
+        initScoreLabels()
         fillFirstRoundTeam()
         setNavBar()
         initLockButton()
@@ -163,18 +164,41 @@ class NewEntryViewController: UIViewController, UIScrollViewDelegate, UIGestureR
         
     }
     
-    
+
     func initScoreLabels(){
-        let scoreTableLabels = UILabel()
-        let scoreTableScores = UILabel()
+        if isScored{
+            let scoreDict = compileScores()
+            let currScoreTable = ScoreTable()
+            
+            currScoreTable.initTable(scoreDict: scoreDict)
+            currScoreTable.initLabels(scoreDict: scoreDict)
+            scrollView.subviews[0].addSubview(currScoreTable.vStackObject)
+        }
         
-        scoreTableLabels.font = UIFont(name:"HelveticaNeue-Bold", size: 16)
-        scoreTableScores.font = UIFont(name:"HelveticaNeue-Bold", size: 16)
-        
-        scoreTableLabels.text = "Round of 64\nRound of 32\nSweet Sixteen\nElite Eight\nFinal Four\n Championship"
-//        scoreTableScores.\
     }
     
+    
+    
+    func compileScores() -> [(whichRound: Round, val: Int)]{
+        if isScored{
+            let chosenTeams = bracketEntry.chosenTeams
+            let simRes = simulationResults!
+            let scoreArray = DataManager.sharedInstance.getScoreGeneral(chosenTeamSet: chosenTeams, simulationTeamSet: simRes)
+            var roundScores = [(whichRound: Round, val: Int)]()
+            
+            for round in Round.allCases{
+                let endpoints = round.getEndPoints()
+                var roundCumScore = 0
+                for i in endpoints[0]...endpoints[1]{
+                    roundCumScore += scoreArray[i]
+                }
+                let newEntry = (round, roundCumScore)
+                roundScores.append(newEntry)
+            }
+            return roundScores
+        }
+        else {return [(whichRound: Round, val: Int)]()}
+    }
     
     // Fill first round of teams (64 - 127) - this will always happen
     // Then fill out "middle" 63 entries based on previously-filled data if available
