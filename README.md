@@ -10,5 +10,5 @@ Please view video preview, "simulatorPreview.mp4" (~50mb), for more information
 \*Simulations are currently conducted using a simple linear model based on seed differential (i.e., a team playinng another team with same seed has a 50% chance of winning). Goal is to turn towards modeling/predictions after building out UI.
 
 ## Project Preview
-![alt text](https://github.com/kevniu95/BracketSimulatorProject/blob/main/fillme1.gif "Logo Title Text 1")
+![alt text](https://github.com/kevniu95/BracketSimulatorProject/blob/main/gifs/fillme1.gif "Logo Title Text 1")
 
