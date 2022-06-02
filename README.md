@@ -22,3 +22,7 @@
 ### 5. View performance against specific simulation
 
 ![alt text](https://github.com/kevniu95/BracketSimulatorProject/blob/main/gifs/viewSpecificSim.gif "5. View performance against specific simulation")
+
+### 6. Copy and delete bracket entry
+
+![alt text](https://github.com/kevniu95/BracketSimulatorProject/blob/main/gifs/copyDelete.gif "6. Copy and delete bracket entry")
